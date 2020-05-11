@@ -6,8 +6,6 @@
 * Email: ccua@uoguelph.ca
 * Student ID: 1046663
 
-
-
 ## How to operate your program
 
 ### Running from the command line (without maven)
