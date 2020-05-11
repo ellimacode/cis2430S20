@@ -13,7 +13,7 @@ public class Game{
 
         Game theGame = new Game();
         // 1. Print a welcome message to the user
-        System.out.println("Welcome User!");
+        System.out.println("WELCOME TO ADVENTURE!");
 
         // 2. Ask the user if they want to load a json file.
         System.out.println("Would you like to load a json file?");
