@@ -1,30 +1,10 @@
-# Getting Started
-Delete this section before you submit for grading.
-
-#### Starting your assignment
-
-* clone this repository to your computer
-* make an A1 branch
- * git branch A1
- * git checkout A1
-
-#### To use mvn from the command line
-* clean:  mvn clean
-* checkstyle: mvn checkstyle:checkstyle  (results show up in target/site)
-* compile : mvn compile
-* execute: 'mvn exec:java'
-
-#### Checkstyle
- * results will show up in a nice html format in target/site
- * uses the file checks.xml that is in the config directory
- 
 # README info to submit
 
 ## Author Information
 
-* Name:
-* Email:
-* Student ID:
+* Name: Camille Cua
+* Email: ccua@uoguelph.ca
+* Student ID: 1046663
 
 
 
