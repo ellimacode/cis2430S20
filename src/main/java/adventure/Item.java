@@ -1,21 +1,12 @@
 package adventure;
 
+
 public class Item{
     /* you will need to add some private member variables */
 
     private String itemName;
     private String description;
     private Room room = new Room();
-
-    // /**
-    //  *
-    //  * @param name item's name
-    //  * @param description item's description 
-    //  */
-    // public Item(String name, String description) {
-    //     this.itemName = name;
-    //     this.description = description;
-    // }
 
     /* required public methods */
 

@@ -1,10 +1,12 @@
 package adventure;
 
 import org.json.simple.JSONObject;
+import org.json.simple.JSONArray; 
+
 import java.util.Scanner;
 import java.io.FileReader;
-// import java.io.File;
-
+import java.io.Files;
+import java.io.Paths;
 
 public class Game{
 
@@ -22,7 +24,7 @@ public class Game{
         System.out.println("WELCOME TO COLOSSAL CASTLE ADVENTURE!");
 
         // 2. Ask the user if they want to load a json file.
-        System.out.println("Would you like to load a json file?");
+        System.out.println("Would you like to load a json file? (Y or N");
 
         /* 3. Parse the file the user specified to create the
         adventure, or load your default adventure*/
@@ -34,12 +36,16 @@ public class Game{
 
         // 6. Get the user input. You'll need a Scanner
         Scanner scnr = new Scanner(System.in);
+        String inputLine = scnr.nextLine();
 
         /* 7+. Use a game instance method to parse the user
         input to learn what the user wishes to do*/
+        // game.loadAdventureJson(filename);
+
+        // game.generateAdventure(obj);
 
         //use a game instance method to execute the users wishes*/
-   
+    
 
         /* if the user doesn't wish to quit,
         repeat the steps above*/
@@ -48,9 +54,9 @@ public class Game{
     /* you must have these instance methods and may need more*/
 
     public JSONObject loadAdventureJson(String filename){
-        // String content = new String(Files.readAllBytes(Paths.get(filename)));
-        // JSONObject obj = new JSONObject(content);
-        // return obj;
+        String content = new String(Files.readAllBytes(Paths.get(filename)));
+        JSONObject obj = new JSONObject(content);
+        return obj;
     }
     public Adventure generateAdventure(JSONObject obj) {
         
