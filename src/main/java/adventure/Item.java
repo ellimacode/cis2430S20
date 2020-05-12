@@ -7,15 +7,15 @@ public class Item{
     private String description;
     private Room room = new Room();
 
-    /**
-     *
-     * @param name item's name
-     * @param description item's description 
-     */
-    public Item(String name, String description) {
-        this.itemName = name;
-        this.description = description;
-    }
+    // /**
+    //  *
+    //  * @param name item's name
+    //  * @param description item's description 
+    //  */
+    // public Item(String name, String description) {
+    //     this.itemName = name;
+    //     this.description = description;
+    // }
 
     /* required public methods */
 

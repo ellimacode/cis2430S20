@@ -14,6 +14,9 @@ public class Room{
 
     public ArrayList<Item> listItems(){
         //lists all the items in the room
+        for (int i; i < contents.size(); i++) {
+            System.out.println("Item: " + contents.get(i));
+        }
         return this.contents;
 
     }
@@ -34,8 +37,22 @@ public class Room{
     }
 
     public Room getConnectedRoom(String direction) {
-        return this.room;
+        if (direction == "N") {
+            System.out.println("Go North");
+        }
 
+        else if (direction == "S") {
+            System.out.println("Go South");
+        }
+
+        else if (direction == "E") {
+            System.out.println("Go East");
+        }
+
+        else if (direction == "W") {
+            System.out.println("Go West");
+        }
+ 
     }
 
     /* you may wish to add some helper methods*/

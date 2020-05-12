@@ -2,7 +2,8 @@ package adventure;
 
 import org.json.simple.JSONObject;
 import java.util.Scanner;
-import java.io.File;
+import java.io.FileReader;
+// import java.io.File;
 
 
 public class Game{
@@ -47,9 +48,9 @@ public class Game{
     /* you must have these instance methods and may need more*/
 
     public JSONObject loadAdventureJson(String filename){
-        String content = new String(Files.readAllBytes(Paths.get(filename)));
-        JSONObject obj = new JSONObject(content);
-        return obj;
+        // String content = new String(Files.readAllBytes(Paths.get(filename)));
+        // JSONObject obj = new JSONObject(content);
+        // return obj;
     }
     public Adventure generateAdventure(JSONObject obj) {
         

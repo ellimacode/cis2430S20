@@ -15,11 +15,17 @@ public class Adventure{
         We will be using them to test your code */
 
     public ArrayList<Room> listAllRooms(){
+        for (int i = 0; i < rooms.size(); i++) {
+            System.out.println("Room: " + rooms.get(i));
+        }
         return this.rooms;
         
     }
 
     public ArrayList<Item> listAllItems(){
+        for (int j = 0; j < items.size(); j++) {
+            System.out.println("Item: " + items.get(j));
+        }
         return this.items; 
 
     }
