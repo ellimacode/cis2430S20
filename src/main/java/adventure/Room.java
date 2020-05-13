@@ -14,7 +14,7 @@ public class Room{
 
     public ArrayList<Item> listItems(){
         //lists all the items in the room
-        for (int i; i < contents.size(); i++) {
+        for (int i = 0; i < contents.size(); i++) {
             System.out.println("Item: " + contents.get(i));
         }
         return this.contents;
@@ -52,6 +52,8 @@ public class Room{
         else if (direction == "W") {
             System.out.println("Go West");
         }
+
+        return room; 
  
     }
 

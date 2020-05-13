@@ -4,10 +4,10 @@ import java.util.ArrayList;
 
 public class Adventure{
     /* you will need to add some private member variables */
-    private Room enter;
+    private Room enter = new Room();
     private String description;
-    private ArrayList<Room> rooms = new ArrayList<Room>();
-    private ArrayList<Item> items = new ArrayList<Item>();
+    private ArrayList<Room> rooms;
+    private ArrayList<Item> items;
 
     /* ======== Required public methods ========== */
         /* note,  you don't have to USE all of these
@@ -15,18 +15,23 @@ public class Adventure{
         We will be using them to test your code */
 
     public ArrayList<Room> listAllRooms(){
+        rooms = new ArrayList<Room>();
+
         for (int i = 0; i < rooms.size(); i++) {
-            System.out.println("Room: " + rooms.get(i));
+            System.out.println(rooms.get(i));
         }
-        return this.rooms;
+        return rooms; 
         
     }
 
     public ArrayList<Item> listAllItems(){
+        items = new ArrayList<Item>();
+
         for (int j = 0; j < items.size(); j++) {
-            System.out.println("Item: " + items.get(j));
+            System.out.println(items.get(j));
         }
-        return this.items; 
+
+        return items; 
 
     }
 
