@@ -7,6 +7,7 @@ public class Item{
     private String itemName;
     private String description;
     private Room room = new Room();
+    private ArrayList<Item> items = new ArrayList<>();
 
     /* required public methods */
 
@@ -28,8 +29,9 @@ public class Item{
 
     public Room getContainingRoom(){
         //returns a reference to the room that contains the item
-        return this.room;
+        return room.contains(itemName); //FIXME
     }
 
     /* you may wish to add some helper methods*/
+    
 }

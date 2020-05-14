@@ -1,13 +1,18 @@
 package adventure;
+package org.json; 
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import org.json.JSONArray; 
+import org.json.JSONException;
 
 public class Adventure{
     /* you will need to add some private member variables */
-    private Room enter = new Room();
+    private Room currentRoom = new Room();
     private String description;
-    private ArrayList<Room> rooms;
-    private ArrayList<Item> items;
+    private ArrayList<Room> rooms = new ArrayList<Room>();
+    private ArrayList<Item> items = new ArrayList<Item>();
+    private JSONArray jsonArray = new JSONArray();
 
     /* ======== Required public methods ========== */
         /* note,  you don't have to USE all of these
@@ -15,30 +20,36 @@ public class Adventure{
         We will be using them to test your code */
 
     public ArrayList<Room> listAllRooms(){
-        rooms = new ArrayList<Room>();
-
-        for (int i = 0; i < rooms.size(); i++) {
-            System.out.println(rooms.get(i));
+        try {
+            for (int i = 0; i < jsonArray.length(); i++) {
+                rooms.add(jsonArray.get(i));
+            }
+        } catch (JSONException e) {
+            System.out.println(e);
         }
+
         return rooms; 
-        
     }
 
     public ArrayList<Item> listAllItems(){
-        items = new ArrayList<Item>();
-
-        for (int j = 0; j < items.size(); j++) {
-            System.out.println(items.get(j));
-        }
+        try {
+            for (int j = 0; j < jsonArray.length(); j++) {
+                items.add(jsonArray.get(j));
+            }
+        } catch (JSONException e) {
+                System.out.println(e);
+            }
 
         return items; 
-
     }
 
     public String getCurrentRoomDescription(){
-        return description;
+        return this.description;
 
     }
 
-    /* you may wish to add additional methods*/
+    /* you may wish to add additional methods*/ 
+    public Room getCurrentRoom() {
+        return this.currentRoom; 
+    }
 }

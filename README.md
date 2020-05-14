@@ -9,6 +9,8 @@
 ## How to operate your program
 
 ### Running from the command line (without maven)
+* To compile: javac *.java
+* To execute: java ClassName 
 
 ### Instructions for using the program
 

@@ -1,4 +1,5 @@
 package adventure;
+package org.json; 
 
 import org.json.simple.JSONObject;
 import org.json.simple.JSONArray; 
@@ -7,10 +8,10 @@ import org.json.simple.parser.ParseException;
 import java.io.IOException;
 import java.io.FileNotFoundException; 
 
+import java.util.Iterator; 
 import java.util.Scanner;
 import java.io.FileReader;
-// import java.io.Files;
-// import java.io.Paths;
+
 
 public class Game{
 
@@ -83,6 +84,18 @@ public class Game{
 
         /* 7+. Use a game instance method to parse the user
         input to learn what the user wishes to do*/
+        if (inputLine == "yes") {
+            System.out.println("Enter filename:");
+            inputLine = scnr.nextLine();
+
+            theGame.loadAdventureJson(inputLine);
+        }
+
+        else if (inputLine == "no") {
+            System.out.println("Default Adventure");
+
+            theGame.generateAdventure(); //what JSONObject obj???
+        }
         
 
         //use a game instance method to execute the users wishes*/
@@ -101,25 +114,24 @@ public class Game{
             //read JSON file
             Object obj = jsonParser.parse(reader);
 
-            JSONArray list = (JSONArray) obj;
+            JSONObject mainObject = (JSONObject) obj;
 
             
         } catch (FileNotFoundException e) {
-            e.printStackFrame();
+            System.out.println(e);
         } catch (IOException e) {
-            e.printStackFrame();
+            System.out.println(e);
         } catch (ParseException e) {
-            e.printStackFrame();
+            System.out.println(e);
         }
 
-
-
-        // String content = new String(Files.readAllBytes(Paths.get(filename)));
-        // JSONObject obj = new JSONObject(content);
-        // return obj;
+        return mainObject; 
+ 
     }
     public Adventure generateAdventure(JSONObject obj) {
-        
+        Adventure adv = new Adventure();
+
+        return adv; 
     }
 
 }

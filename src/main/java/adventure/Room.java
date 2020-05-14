@@ -1,14 +1,22 @@
 package adventure;
 
 import java.util.ArrayList;
+import java.uitl.HashMap; 
 
 public class Room{
     /* you will need to add some private member variables */
 
-    private String description; 
-    private String name; 
-    private ArrayList<Item> contents = new ArrayList<Item>();
-    private Room room = new Room();
+    private String description;  
+    private String roomName; 
+    private ArrayList<Item> contents;
+    private HashMap<String, Room> rooms;
+
+    //constructor
+    public Room(String description) {
+        rooms = new HashMap<>();
+        contents = new ArrayList<Item>();
+        this.description = description;
+    }
 
     /* required public methods */
 
@@ -17,45 +25,47 @@ public class Room{
         for (int i = 0; i < contents.size(); i++) {
             System.out.println("Item: " + contents.get(i));
         }
-        return this.contents;
+        return contents;
 
     }
-
-    public String getName(){
-        return this.name; 
-
-    }
-
 
     /**
-     *
-     * @return room description 
+     * @return roomName String
      */
-    public String getLongDescription(){
-        return this.description;
+    public String getName(){
+        return roomName; 
 
     }
 
+    /**
+     * @return the room description 
+     */
+    public String getLongDescription(){
+        return description;
+
+    }
+
+    /**
+     * Return the room that is connected in the
+     * specified direction
+     * @param direction
+     * @return the room in the given direction 
+     */
     public Room getConnectedRoom(String direction) {
-        if (direction == "N") {
-            System.out.println("Go North");
-        }
-
-        else if (direction == "S") {
-            System.out.println("Go South");
-        }
-
-        else if (direction == "E") {
-            System.out.println("Go East");
-        }
-
-        else if (direction == "W") {
-            System.out.println("Go West");
-        }
-
-        return room; 
- 
+        return rooms.get(direction);
     }
 
     /* you may wish to add some helper methods*/
+
+    /**
+     * sets a neighboring room based on the direction
+     * @param direction
+     * @return side the neighboring room
+     */
+    public void setRoom(String direction, Room side) {
+        rooms.put(direction, side);
+    }
+
+    
+
 }
