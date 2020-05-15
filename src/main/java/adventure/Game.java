@@ -24,7 +24,11 @@ public class Game{
 
         Game theGame = new Game();
         // 1. Print a welcome message to the user
+<<<<<<< HEAD
         System.out.println("/----WELCOME TO COLOSSAL CASTLE ADVENTURE!----/");
+=======
+        System.out.println("WELCOME TO COLOSSAL CASTLE ADVENTURE!");
+>>>>>>> 7eca8332a56ec8b0d86a1c6bc8859a7367ee6f53
 
         // 2. Ask the user if they want to load a json file.
 
@@ -112,8 +116,16 @@ public class Game{
     }
 
     public Adventure generateAdventure(JSONObject obj) {
+<<<<<<< HEAD
 //        System.out.println("You are an explorer in a dark haunted cave looking for buried treasure.");
           return null;
+=======
+        adv = new Adventure();
+
+        System.out.println("You are an explorer in a dark haunted cave looking for buried treasure.");
+
+        return adv; 
+>>>>>>> 7eca8332a56ec8b0d86a1c6bc8859a7367ee6f53
     }
 
 
