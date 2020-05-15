@@ -1,4 +1,3 @@
-
 <!--
 This pom.xml file can be treated like a makefile, but allows for tons more utility.
 
@@ -50,7 +49,7 @@ execute: mvn exec:java
                 </executions>
 
                 <configuration> <!--tell the plugin which class to run -->
-                    <mainClass>adventure.HelloWorld</mainClass> 
+                    <mainClass>adventure.Game</mainClass> 
                 </configuration>
 
             </plugin>
