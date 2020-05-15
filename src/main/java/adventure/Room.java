@@ -1,7 +1,7 @@
 package adventure;
 
 import java.util.ArrayList;
-import java.uitl.HashMap; 
+import java.util.HashMap; 
 
 public class Room{
     /* you will need to add some private member variables */
@@ -12,21 +12,16 @@ public class Room{
     private HashMap<String, Room> rooms;
 
     //constructor
-    public Room(String description) {
-        rooms = new HashMap<>();
-        contents = new ArrayList<Item>();
-        this.description = description;
-    }
+    // public Room() {
+    //     rooms = new HashMap<>();
+    //     contents = new ArrayList<Item>();
+    // }
 
     /* required public methods */
 
     public ArrayList<Item> listItems(){
         //lists all the items in the room
-        for (int i = 0; i < contents.size(); i++) {
-            System.out.println("Item: " + contents.get(i));
-        }
         return contents;
-
     }
 
     /**
@@ -65,6 +60,8 @@ public class Room{
     public void setRoom(String direction, Room side) {
         rooms.put(direction, side);
     }
+
+
 
     
 
