@@ -1,21 +1,15 @@
 package adventure;
 
 import java.util.ArrayList;
-import java.util.HashMap; 
+import java.util.HashMap;
 
 public class Room{
     /* you will need to add some private member variables */
 
-    private String description;  
-    private String roomName; 
+    private String description;
+    private String roomName;
     private ArrayList<Item> contents;
     private HashMap<String, Room> rooms;
-
-    //constructor
-    // public Room() {
-    //     rooms = new HashMap<>();
-    //     contents = new ArrayList<Item>();
-    // }
 
     /* required public methods */
 
@@ -28,12 +22,12 @@ public class Room{
      * @return roomName String
      */
     public String getName(){
-        return roomName; 
+        return roomName;
 
     }
 
     /**
-     * @return the room description 
+     * @return the room description
      */
     public String getLongDescription(){
         return description;
@@ -44,7 +38,7 @@ public class Room{
      * Return the room that is connected in the
      * specified direction
      * @param direction
-     * @return the room in the given direction 
+     * @return the room in the given direction
      */
     public Room getConnectedRoom(String direction) {
         return rooms.get(direction);
@@ -61,8 +55,5 @@ public class Room{
         rooms.put(direction, side);
     }
 
-
-
-    
 
 }

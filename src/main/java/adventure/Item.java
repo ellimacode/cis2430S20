@@ -12,7 +12,7 @@ public class Item{
     /* required public methods */
 
     /**
-     * @return item's name  
+     * @return item's name
      */
     public String getName(){
         return this.itemName;
@@ -20,18 +20,19 @@ public class Item{
     }
 
     /**
-     * @return item's description 
-     */    
+     * @return item's description
+     */
     public String getLongDescription(){
-        return this.description; 
+        return this.description;
 
     }
 
     public Room getContainingRoom(){
         //returns a reference to the room that contains the item
-        return room.contains(itemName); //FIXME
+//        return room.contains(itemName); //FIXME
+        return null; 
     }
 
     /* you may wish to add some helper methods*/
-    
+
 }

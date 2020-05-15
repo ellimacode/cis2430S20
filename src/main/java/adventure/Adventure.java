@@ -1,7 +1,6 @@
-package adventure; 
+package adventure;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class Adventure{
     /* you will need to add some private member variables */
@@ -16,11 +15,11 @@ public class Adventure{
         We will be using them to test your code */
 
     public ArrayList<Room> listAllRooms(){
-        return this.rooms;  
+        return this.rooms;
     }
 
     public ArrayList<Item> listAllItems(){
-        return this.items;  
+        return this.items;
     }
 
     public String getCurrentRoomDescription(){
@@ -28,8 +27,8 @@ public class Adventure{
 
     }
 
-    /* you may wish to add additional methods*/ 
+    /* you may wish to add additional methods*/
     public Room getCurrentRoom() {
-        return this.currentRoom; 
+        return this.currentRoom;
     }
 }
