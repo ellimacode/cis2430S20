@@ -24,7 +24,6 @@ public class Game{
         Game theGame = new Game();
         // 1. Print a welcome message to the user
         System.out.println("WELCOME TO COLOSSAL CASTLE ADVENTURE!");
-        System.out.println("Enter 'HELP' on command line for all commands.");
 
         // 2. Ask the user if they want to load a json file.
 
@@ -117,7 +116,7 @@ public class Game{
     }
 
     public Adventure generateAdventure(JSONObject obj) {
-        Adventure adv = new Adventure(); //FIXME
+        adv = new Adventure();
 
         System.out.println("You are an explorer in a dark haunted cave looking for buried treasure.");
 
