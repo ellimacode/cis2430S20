@@ -5,7 +5,6 @@ import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser; 
 import org.json.simple.parser.ParseException;
 
-//import java.awt.desktop.SystemEventListener;
 import java.io.IOException;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -27,7 +26,6 @@ public class Game{
 
         System.out.println("/----WELCOME TO COLOSSAL CASTLE ADVENTURE!----/");
 
-        System.out.println("WELCOME TO COLOSSAL CASTLE ADVENTURE!");
 
 
         // 2. Ask the user if they want to load a json file.
@@ -120,11 +118,7 @@ public class Game{
 //        System.out.println("You are an explorer in a dark haunted cave looking for buried treasure.");
           return null;
 
-        // adv = new Adventure();
-
-        // System.out.println("You are an explorer in a dark haunted cave looking for buried treasure.");
-
-        // return adv; 
+        
 
     }
 
