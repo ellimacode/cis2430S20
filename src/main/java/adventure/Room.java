@@ -8,7 +8,7 @@ public class Room{
 
     private String description;
     private String roomName;
-    private ArrayList<Item> contents;
+    private ArrayList<Item> contents = new ArrayList<Item>();
     private HashMap<String, Room> rooms;
 
     /* required public methods */

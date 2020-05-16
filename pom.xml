@@ -49,11 +49,10 @@ execute: mvn exec:java
                 </executions>
 
                 <configuration> <!--tell the plugin which class to run -->
-<<<<<<< HEAD
+
                     <mainClass>adventure.Game</mainClass>
-=======
-                    <mainClass>adventure.Game</mainClass> 
->>>>>>> 7eca8332a56ec8b0d86a1c6bc8859a7367ee6f53
+                    
+
                 </configuration>
 
             </plugin>

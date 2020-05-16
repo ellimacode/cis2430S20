@@ -16,7 +16,7 @@ public class Game{
     /* this is the class that runs the game.
     You may need some member variables */
 
-    public static void main(String args[]){
+    public static void main(String args[]) {
 
         /* You will need to instantiate an object of type
         game as we're going to avoid using static methods
@@ -24,11 +24,8 @@ public class Game{
 
         Game theGame = new Game();
         // 1. Print a welcome message to the user
-<<<<<<< HEAD
+
         System.out.println("/----WELCOME TO COLOSSAL CASTLE ADVENTURE!----/");
-=======
-        System.out.println("WELCOME TO COLOSSAL CASTLE ADVENTURE!");
->>>>>>> 7eca8332a56ec8b0d86a1c6bc8859a7367ee6f53
 
         // 2. Ask the user if they want to load a json file.
 
@@ -42,54 +39,42 @@ public class Game{
         // 6. Get the user input. You'll need a Scanner
         Scanner scnr = new Scanner(System.in);
 
-        while (true) {
-            System.out.println("Would you like to load a json file? (yes or no)");
-            String inputLine = scnr.nextLine();
+        System.out.println("Would you like to load a json file (yes or no)?");
+        String inputLine = scnr.nextLine();
 
-            switch(inputLine) {
-                case "yes":
+        switch (inputLine) {
+            case "yes":
+                System.out.println("Enter filename: ");
+                String filename = scnr.next();
+                theGame.loadAdventureJson(filename);
                 break;
 
-                case "no":
+            case "no":
+                System.out.println("Default Adventure.");
                 break;
 
-                default:
-                System.out.println("Please enter again.");
-                boolean repeat = true; 
-
-                while (repeat) {
-                    System.out.println("Would you like to load a json file? (yes or no)");
-                    inputLine = scnr.nextLine();
-
-                    switch (inputLine) {
-                        case "yes":
-                            System.out.println("Enter filename: ");
-                            String filename = scnr.nextLine();
-                            theGame.loadAdventureJson(filename);
-                        break;
-
-                        case "no":
-                            System.out.println("Default Adventure");
-                        break;
-
-                        default:
-                        repeat = true; 
-                    }
-                }
-                break; 
-
-            }
+            default:
+                System.out.println("/---- Helpful Commands ----/");
+                System.out.println("yes - load json file");
+                System.out.println("no - load default adventure");
+                System.out.println("quit - quit game");
+                break;
         }
+    }
+
+
 
         /* 7+. Use a game instance method to parse the user
         input to learn what the user wishes to do*/
+    public void runGame() {
+
+    }
 
         //use a game instance method to execute the users wishes*/
 
         /* if the user doesn't wish to quit,
         repeat the steps above*/
 
-    }
 
 
     /* you must have these instance methods and may need more*/
@@ -116,16 +101,12 @@ public class Game{
     }
 
     public Adventure generateAdventure(JSONObject obj) {
-<<<<<<< HEAD
-//        System.out.println("You are an explorer in a dark haunted cave looking for buried treasure.");
+
           return null;
-=======
-        adv = new Adventure();
 
-        System.out.println("You are an explorer in a dark haunted cave looking for buried treasure.");
+//        System.out.println("You are an explorer in a dark haunted cave looking for buried treasure.");
 
-        return adv; 
->>>>>>> 7eca8332a56ec8b0d86a1c6bc8859a7367ee6f53
+
     }
 
 
