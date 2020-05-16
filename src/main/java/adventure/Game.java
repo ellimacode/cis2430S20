@@ -66,9 +66,6 @@ public class Game{
 
         /* 7+. Use a game instance method to parse the user
         input to learn what the user wishes to do*/
-    public void runGame() {
-
-    }
 
         //use a game instance method to execute the users wishes*/
 
