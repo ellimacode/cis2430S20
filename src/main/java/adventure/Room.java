@@ -11,7 +11,7 @@ public class Room{
     private HashMap<String, Room> rooms;
     private ArrayList<Item> contents = new ArrayList<Item>();
 
-    //constructors 
+    //constructors
     public Room() {
         rooms = new HashMap<String, Room>();
         contents = new ArrayList<Item>();
@@ -85,12 +85,7 @@ public class Room{
         contents.add(item);
     }
 
-    public String getItem(int i) {
-        if (contents.size() >= 0) {
-            return contents.get(i).toString();
-        }
-        return "No item(s) exist.";
-    }
+
 
 
 

@@ -132,12 +132,15 @@ public class Game{
             System.out.println("quit - quit game");
         }
 
+        //to move from room to room use keyword 'go'
         if (input.contains("go")) {
             enterRoom(input);
         }
 
-        if (input.equals("look")) {
-            System.out.println("Look what?");
+        //prints long description of room use keyword 'look'
+        if (input.contains("look")) {
+            System.out.println(playerRoom.getLongDescription());
+            System.out.println(playerRoom.listItems());
 
         }
 
@@ -199,6 +202,23 @@ public class Game{
             }
         }
     }
+
+    //allow user to look at items in room
+//    public void lookItems(String input) {
+//        String thing = input.substring(input.indexOf(' ') + 1, input.length()).trim();
+//
+//        if (!input.contains(thing)) {
+//            System.out.println("Look what?");
+//            return;
+//        }
+//
+//        else if (input.contains(thing)) {
+//            if (playerRoom.getName().equals(thing)) {
+//                System.out.println("Display long description of item");
+//                System.out.println(playerRoom)
+//            }
+//        }
+//    }
 
 
 
