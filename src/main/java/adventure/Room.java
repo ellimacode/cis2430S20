@@ -8,8 +8,20 @@ public class Room{
 
     private String description;
     private String roomName;
-    private ArrayList<Item> contents = new ArrayList<Item>();
     private HashMap<String, Room> rooms;
+    private ArrayList<Item> contents = new ArrayList<Item>();
+
+    //constructors 
+    public Room() {
+        rooms = new HashMap<String, Room>();
+        contents = new ArrayList<Item>();
+    }
+
+    public Room(String roomName) {
+        this.roomName = roomName;
+        rooms = new HashMap<String, Room>();
+        contents = new ArrayList<Item>();
+    }
 
     /* required public methods */
 
@@ -27,10 +39,10 @@ public class Room{
     }
 
     /**
-     * @return the room description
+     * @return the long description of room
      */
     public String getLongDescription(){
-        return description;
+        return "You are " + description + ".\n";
 
     }
 
@@ -41,6 +53,7 @@ public class Room{
      * @return the room in the given direction
      */
     public Room getConnectedRoom(String direction) {
+
         return rooms.get(direction);
     }
 
@@ -51,9 +64,35 @@ public class Room{
      * @param direction
      * @return side the neighboring room
      */
-    public void setRoom(String direction, Room side) {
-        rooms.put(direction, side);
+    public void setExits(Room north, Room south, Room east, Room west) {
+        if (north != null) {
+            rooms.put("north", north);
+        }
+        if (south != null) {
+            rooms.put("south", south);
+        }
+        if (east != null) {
+            rooms.put("east", east);
+        }
+        if (west != null) {
+            rooms.put("west", west);
+        }
+
     }
+
+    //add item to list of items
+    public void addItem(Item item) {
+        contents.add(item);
+    }
+
+    public String getItem(int i) {
+        if (contents.size() >= 0) {
+            return contents.get(i).toString();
+        }
+        return "No item(s) exist.";
+    }
+
+
 
 
 }

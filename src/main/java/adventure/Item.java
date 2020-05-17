@@ -1,13 +1,18 @@
 package adventure;
 
-import java.util.ArrayList;
-
 public class Item{
     /* you will need to add some private member variables */
 
     private String itemName;
     private String description;
     private Room room = new Room();
+
+
+    public Item(String itemName, String description) {
+        this.itemName = itemName;
+        this.description = description;
+
+    }
 
     /* required public methods */
 
@@ -30,6 +35,9 @@ public class Item{
     public Room getContainingRoom(){
         //returns a reference to the room that contains the item
 //        return room.contains(itemName); //FIXME
+        if (room.listItems() != null) {
+            return this.room;
+        }
         return null; 
     }
 
