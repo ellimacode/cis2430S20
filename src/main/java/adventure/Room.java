@@ -9,7 +9,7 @@ public class Room{
     private String description;
     private String roomName;
     private HashMap<String, Room> rooms;
-    private ArrayList<Item> contents = new ArrayList<Item>();
+    private ArrayList<Item> contents;
 
     //constructors
     public Room() {
@@ -83,6 +83,13 @@ public class Room{
     //add item to list of items
     public void addItem(Item item) {
         contents.add(item);
+    }
+
+    public boolean containsItem(String itemName) {
+        if (contents.contains(itemName)) {
+            return true;
+        }
+        return false;
     }
 
 

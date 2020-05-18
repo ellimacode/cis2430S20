@@ -5,6 +5,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser; 
 import org.json.simple.parser.ParseException;
 
+import java.awt.desktop.SystemEventListener;
 import java.io.IOException;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -34,7 +35,6 @@ public class Game{
         System.out.println();
         System.out.println("/----WELCOME TO COLOSSAL CASTLE ADVENTURE!----/");
         System.out.println();
-        System.out.println(playerRoom.getLongDescription());
 
         // 2. Ask the user if they want to load a json file.
 
@@ -46,23 +46,22 @@ public class Game{
         // 5. Begin game loop here
 
         // 6. Get the user input. You'll need a Scanner
+        Scanner scnr = new Scanner(System.in);
 
         System.out.println("Would you like to load a json file (yes or no)?");
         String inputLine = scnr.nextLine();
 
-        switch (inputLine) {
-            case "yes":
-                System.out.println("Enter filename: ");
-                String filename = scnr.nextLine();
-                theGame.loadAdventureJson(filename);
-                break;
-
-            case "no":
-                System.out.println("Default Adventure.");
-                theGame.runGame();
-                break;
-
+        if (inputLine.equals("yes")) {
+            System.out.println("Enter filename: ");
+            String filename = scnr.next();
+            theGame.loadAdventureJson(filename);
         }
+
+        else if (inputLine.equals("no")) {
+            System.out.println("Default adventure.");
+            theGame.runGame();
+        }
+
     }
 
         /* 7+. Use a game instance method to parse the user
@@ -72,7 +71,7 @@ public class Game{
     public void runGame() {
         do {
             System.out.println("Enter next command: ");
-            String user = scnr.next();
+            String user = getCommand();
             gameOver = processCommand(user);
 
         } while (!gameOver);
@@ -85,7 +84,6 @@ public class Game{
 
         /* if the user doesn't wish to quit,
         repeat the steps above*/
-
 
 
     /* you must have these instance methods and may need more*/
@@ -117,18 +115,49 @@ public class Game{
 
     }
 
-    //process the command the user enters
+    /**
+     * to get command from user
+     * @return input
+     */
+    public String getCommand() {
+        String input = " ";
+        String one = null;
+        String two = null;
+        Scanner reader = new Scanner(System.in);
+
+        System.out.println(">> ");
+        input = reader.nextLine();
+
+        Scanner tokenizer = new Scanner(input);
+        if (tokenizer.hasNext()) {
+            one = tokenizer.next();
+            if (tokenizer.hasNext()) {
+                two =tokenizer.next();
+            }
+        }
+        return input;
+    }
+
+    /**
+     * process the command the user enters
+     * @param input
+     * @return false
+     */
     public boolean processCommand(String input) {
+        input = input.toLowerCase();
+
+        //to quit the game use keyword 'quit'
         if (input.equals("quit")) {
             System.out.println("Quit what?");
             return false;
         }
 
+        //to show user all valid commands use keyword 'help'
         if (input.equals("help")) {
             System.out.println("Here are some helpful commands:");
             System.out.println("go (direction) - to move in the direction (N,S,E,W)");
-            System.out.println("look (itemName) - to show description of item");
-            System.out.println("look - to show description of room");
+            System.out.println("look (itemName) - to see description of item");
+            System.out.println("look - to see description of room");
             System.out.println("quit - quit game");
         }
 
@@ -141,19 +170,20 @@ public class Game{
         if (input.contains("look")) {
             System.out.println(playerRoom.getLongDescription());
             System.out.println(playerRoom.listItems());
-
         }
-
         return false;
     }
 
-    //create rooms for default adventure
+    /**
+     * create rooms for default adventure
+     */
     public void createRooms() {
+        //creates 6 different rooms
         Room entrance = new Room("Opening gate to the dark cave");
         Room main = new Room("The cave's main floor");
         Room closet = new Room("A weapon closet");
-        Room lair = new Room("The wizard's abandoned lair");
-        Room treasure = new Room("The treasure room");
+        Room lair = new Room("The Wizard's abandoned lair");
+        Room treasure = new Room("The Treasure Room");
         Room empty = new Room("A dark empty room");
 
         //north, south, east, west
@@ -169,7 +199,9 @@ public class Game{
 
     }
 
-    //create items for default adventure
+    /**
+     * create items for default adventure
+     */
     public void createItems() {
         Item lamp = new Item("Lamp", "A rusted gas lamp");
         Item wand = new Item("Wizard Wand", "The glowing wand was left behind in the abandoned lair.");
@@ -180,7 +212,10 @@ public class Game{
 
     }
 
-    //allows user to enter the next room
+    /**
+     * allows user to enter the next room
+     * @param input
+     */
     public void enterRoom(String input) {
         String direction = input.substring(input.indexOf(' ') + 1, input.length()).trim();
 

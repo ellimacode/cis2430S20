@@ -24,11 +24,14 @@ public class Adventure{
 
     public String getCurrentRoomDescription(){
         return this.description;
-
     }
 
     /* you may wish to add additional methods*/
     public Room getCurrentRoom() {
         return this.currentRoom;
+    }
+
+    public void setCurrentRoom(Room currentRoom) {
+        this.currentRoom = currentRoom;
     }
 }

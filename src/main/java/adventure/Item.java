@@ -37,8 +37,7 @@ public class Item{
 
     public Room getContainingRoom(){
         //returns a reference to the room that contains the item
-//        return room.contains(itemName); //FIXME
-        if (room.listItems() != null) {
+        if (room.containsItem(itemName)) {
             return this.room;
         }
         return null; 
