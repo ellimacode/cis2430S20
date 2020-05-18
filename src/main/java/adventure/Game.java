@@ -20,6 +20,7 @@ public class Game{
     private Item playerItem;
     private Scanner scnr = new Scanner(System.in);
 
+    //constructor
     public Game() {
         createRooms();
         createItems();
@@ -121,7 +122,7 @@ public class Game{
         Room empty = new Room("A dark empty room",
                 "There is a small stepping stool missing one of its legs, and a pile of coal.");
 
-        //north, south, east, west
+        //in the form of north, south, east, west
         entrance.setExits(main, null, null, null);
         main.setExits(closet, entrance, null, lair);
         closet.setExits(null, main, treasure, null);
@@ -169,8 +170,6 @@ public class Game{
      */
     public String getCommand() {
         String input = " ";
-//        Scanner reader = new Scanner(System.in);
-
         System.out.print(">> ");
         input = scnr.nextLine();
 
