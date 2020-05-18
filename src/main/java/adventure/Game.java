@@ -5,14 +5,11 @@ import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser; 
 import org.json.simple.parser.ParseException;
 
-import java.awt.desktop.SystemEventListener;
 import java.io.IOException;
 import java.io.FileNotFoundException;
 import java.lang.reflect.Array;
 import java.util.Scanner;
 import java.io.FileReader;
-
-import java.lang.Object.*;
 
 public class Game{
 
@@ -21,13 +18,14 @@ public class Game{
     private boolean gameOver = false;
     private Room playerRoom;
     private Item playerItem;
+    private Scanner scnr = new Scanner(System.in);
 
     public Game() {
         createRooms();
         createItems();
     }
 
-    public static void main(String args[]) {
+    public static void main(String[] args) {
 
         /* You will need to instantiate an object of type
         game as we're going to avoid using static methods
@@ -58,9 +56,7 @@ public class Game{
             System.out.println("Enter filename: ");
             String filename = scnr.next();
             theGame.loadAdventureJson(filename);
-        }
-
-        else if (inputLine.equals("no")) {
+        } else if (inputLine.equals("no")) {
             System.out.println("You are an explorer in a dark haunted cave looking for buried treasure.");
             theGame.runGame();
         }
@@ -111,12 +107,19 @@ public class Game{
      */
     public void createRooms() {
         //creates 6 different rooms
-        Room entrance = new Room("The Dark Cave's entrance", " You are at the opening gate to the dark cave. The gate was left unlocked.");
-        Room main = new Room("The cave's main floor", "You are in the cave's main floor. A small lamp on the floor allows you to see.");
-        Room closet = new Room("A weapon closet", "It is a storage room for armor and weapons. There's a tiny door behind the swords.");
-        Room lair = new Room("The Wizard's abandoned lair", "You are in the Wizard's old lair. There is broken glass on the ground from potion bottles. Something is glowing inside the cupboards.");
-        Room treasure = new Room("The Treasure Room", " JACKPOT!!! You are in the TREASURE ROOM. Jewellery and gold coins pouring out of every treasure chest.");
-        Room empty = new Room("A dark empty room", "There is a small stepping stool missing one of its legs, and a pile of coal.");
+        Room entrance = new Room("The Dark Cave's entrance",
+                "You are at the opening gate to the dark cave. The gate was left unlocked.");
+        Room main = new Room("The cave's main floor",
+                "You are in the cave's main floor. A small lamp on the floor allows you to see.");
+        Room closet = new Room("A weapon closet",
+                "It is a storage room for armor and weapons. There's a tiny door behind the swords.");
+        Room lair = new Room("The Wizard's abandoned lair",
+                "You are in the Wizard's old lair. Something is glowing inside the cupboards.");
+        Room treasure = new Room("The Treasure Room",
+                "JACKPOT!!! You are in the TREASURE ROOM. "
+                        + "Jewellery and gold coins pouring out of every treasure chest.");
+        Room empty = new Room("A dark empty room",
+                "There is a small stepping stool missing one of its legs, and a pile of coal.");
 
         //north, south, east, west
         entrance.setExits(main, null, null, null);
@@ -166,10 +169,10 @@ public class Game{
      */
     public String getCommand() {
         String input = " ";
-        Scanner reader = new Scanner(System.in);
+//        Scanner reader = new Scanner(System.in);
 
         System.out.print(">> ");
-        input = reader.next();
+        input = scnr.nextLine();
 
         return input;
     }
@@ -205,8 +208,6 @@ public class Game{
         //to move from room to room use keyword 'go'
         if (input.equals("go")) {
             enterRoom(input);
-//            finished = true;
-
         }
 
         //prints long description of room use keyword 'look'
@@ -230,9 +231,7 @@ public class Game{
         if (!isDirection(second)) {
             System.out.println("Go where?");
             return;
-        }
-
-        else if (isDirection(second)) {
+        } else if (isDirection(second)) {
             System.out.println("You are going " + second);
 
             Room next = playerRoom.getConnectedRoom(second);
@@ -240,57 +239,37 @@ public class Game{
             if (next != null) {
                 playerRoom = next;
                 System.out.println(playerRoom.getLongDescription());
-            }
-
-            else if (next == null) {
+            } else if (next == null) {
                 System.out.println("Enter a different direction.");
             }
         }
 
-//        if (!input.contains(direction)) {
-//            System.out.println("Go where?");
-//            return;
-//        }
-//
-//        else if (input.contains(direction)) {
-//            Room next = playerRoom.getConnectedRoom(direction);
-//
-//            if (next != null) {
-//                playerRoom = next;
-//                System.out.println(playerRoom.getLongDescription());
-//            }
-//
-//            else if (next == null) {
-//                System.out.println("Enter a different direction.");
-//            }
-//        }
     }
 
     /**
-     * checks if second word is a direction (N, S, E, W)
+     * checks if second word is a direction
+     * @param secondWord
      * @return true/false
      */
     public boolean isDirection(String secondWord) {
+        boolean realDirection = false;
+
         String[] directions = new String[] {"N", "S", "E", "W"};
 
         if (secondWord.equals(directions[0])) {
-            return true;
+            realDirection = true;
         }
         if (secondWord.equals(directions[1])) {
-            return true;
+            realDirection = true;
         }
         if (secondWord.equals(directions[2])) {
-            return true;
+            realDirection = true;
         }
         if (secondWord.equals(directions[3])) {
-            return true;
+            realDirection = true;
         }
 
-        return false;
+        return realDirection;
     }
-
-
-
-
 
 }

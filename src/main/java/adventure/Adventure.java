@@ -15,23 +15,23 @@ public class Adventure{
         We will be using them to test your code */
 
     public ArrayList<Room> listAllRooms(){
-        return this.rooms;
+        return rooms;
     }
 
     public ArrayList<Item> listAllItems(){
-        return this.items;
+        return items;
     }
 
     public String getCurrentRoomDescription(){
-        return this.description;
+        return description;
     }
 
     /* you may wish to add additional methods*/
     public Room getCurrentRoom() {
-        return this.currentRoom;
+        return currentRoom;
     }
 
-    public void setCurrentRoom(Room currentRoom) {
-        this.currentRoom = currentRoom;
+    public void setCurrentRoom(Room room) {
+        currentRoom = room;
     }
 }

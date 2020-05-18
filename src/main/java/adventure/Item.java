@@ -11,10 +11,9 @@ public class Item{
     private ArrayList<Item> items = new ArrayList<Item>();
 
 
-    public Item(String itemName, String description) {
-        this.itemName = itemName;
-        this.description = description;
-
+    public Item(String name, String info) {
+        itemName = name;
+        description = info;
     }
 
     /* required public methods */
@@ -23,16 +22,14 @@ public class Item{
      * @return item's name
      */
     public String getName(){
-        return this.itemName;
-
+        return itemName;
     }
 
     /**
      * @return item's description
      */
     public String getLongDescription(){
-        return this.description;
-
+        return description;
     }
 
     public Room getContainingRoom(){

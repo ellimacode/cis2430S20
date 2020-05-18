@@ -16,9 +16,9 @@ public class Room{
         contents = new ArrayList<Item>();
     }
 
-    public Room(String roomName, String description) {
-        this.roomName = roomName;
-        this.description = description;
+    public Room(String name, String info) {
+        roomName = name;
+        description = info;
         rooms = new HashMap<String, Room>();
         contents = new ArrayList<Item>();
     }
@@ -42,7 +42,7 @@ public class Room{
      * @return the long description of room
      */
     public String getLongDescription(){
-        return description + "\n";
+        return " " + description + "\n";
 
     }
 
@@ -60,9 +60,11 @@ public class Room{
     /* you may wish to add some helper methods*/
 
     /**
-     * sets a neighboring room based on the direction
-     * @param direction
-     * @return side the neighboring room
+     *
+     * @param northExit
+     * @param southExit
+     * @param eastExit
+     * @param westExit
      */
     public void setExits(Room northExit, Room southExit, Room eastExit, Room westExit) {
         if (northExit != null) {
