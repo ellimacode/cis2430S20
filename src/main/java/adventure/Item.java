@@ -29,7 +29,6 @@ public class Item{
      * @return item's description
      */
     public String getLongDescription(){
-
         return description;
     }
 

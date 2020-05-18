@@ -34,4 +34,5 @@ public class Adventure{
     public void setCurrentRoom(Room room) {
         currentRoom = room;
     }
+
 }
