@@ -8,8 +8,11 @@ import org.json.simple.parser.ParseException;
 import java.awt.desktop.SystemEventListener;
 import java.io.IOException;
 import java.io.FileNotFoundException;
+import java.lang.reflect.Array;
 import java.util.Scanner;
 import java.io.FileReader;
+
+import java.lang.Object.*;
 
 public class Game{
 
@@ -33,7 +36,7 @@ public class Game{
 
         // 1. Print a welcome message to the user
         System.out.println();
-        System.out.println("/----WELCOME TO COLOSSAL CASTLE ADVENTURE!----/");
+        System.out.println("-------WELCOME TO THE ADVENTURE GAME!-------");
         System.out.println();
 
         // 2. Ask the user if they want to load a json file.
@@ -58,7 +61,7 @@ public class Game{
         }
 
         else if (inputLine.equals("no")) {
-            System.out.println("Default adventure.");
+            System.out.println("You are an explorer in a dark haunted cave looking for buried treasure.");
             theGame.runGame();
         }
 
@@ -66,19 +69,6 @@ public class Game{
 
         /* 7+. Use a game instance method to parse the user
         input to learn what the user wishes to do*/
-
-    //game loop
-    public void runGame() {
-        do {
-            System.out.println("Enter next command: ");
-            String user = getCommand();
-            gameOver = processCommand(user);
-
-        } while (!gameOver);
-
-        System.out.println("Thanks for playing.");
-
-    }
 
         //use a game instance method to execute the users wishes*/
 
@@ -115,76 +105,18 @@ public class Game{
 
     }
 
-    /**
-     * to get command from user
-     * @return input
-     */
-    public String getCommand() {
-        String input = " ";
-        String one = null;
-        String two = null;
-        Scanner reader = new Scanner(System.in);
-
-        System.out.println(">> ");
-        input = reader.nextLine();
-
-        Scanner tokenizer = new Scanner(input);
-        if (tokenizer.hasNext()) {
-            one = tokenizer.next();
-            if (tokenizer.hasNext()) {
-                two =tokenizer.next();
-            }
-        }
-        return input;
-    }
-
-    /**
-     * process the command the user enters
-     * @param input
-     * @return false
-     */
-    public boolean processCommand(String input) {
-        input = input.toLowerCase();
-
-        //to quit the game use keyword 'quit'
-        if (input.equals("quit")) {
-            System.out.println("Quit what?");
-            return false;
-        }
-
-        //to show user all valid commands use keyword 'help'
-        if (input.equals("help")) {
-            System.out.println("Here are some helpful commands:");
-            System.out.println("go (direction) - to move in the direction (N,S,E,W)");
-            System.out.println("look (itemName) - to see description of item");
-            System.out.println("look - to see description of room");
-            System.out.println("quit - quit game");
-        }
-
-        //to move from room to room use keyword 'go'
-        if (input.contains("go")) {
-            enterRoom(input);
-        }
-
-        //prints long description of room use keyword 'look'
-        if (input.contains("look")) {
-            System.out.println(playerRoom.getLongDescription());
-            System.out.println(playerRoom.listItems());
-        }
-        return false;
-    }
 
     /**
      * create rooms for default adventure
      */
     public void createRooms() {
         //creates 6 different rooms
-        Room entrance = new Room("Opening gate to the dark cave");
-        Room main = new Room("The cave's main floor");
-        Room closet = new Room("A weapon closet");
-        Room lair = new Room("The Wizard's abandoned lair");
-        Room treasure = new Room("The Treasure Room");
-        Room empty = new Room("A dark empty room");
+        Room entrance = new Room("The Dark Cave's entrance", " You are at the opening gate to the dark cave. The gate was left unlocked.");
+        Room main = new Room("The cave's main floor", "You are in the cave's main floor. A small lamp on the floor allows you to see.");
+        Room closet = new Room("A weapon closet", "It is a storage room for armor and weapons. There's a tiny door behind the swords.");
+        Room lair = new Room("The Wizard's abandoned lair", "You are in the Wizard's old lair. There is broken glass on the ground from potion bottles. Something is glowing inside the cupboards.");
+        Room treasure = new Room("The Treasure Room", " JACKPOT!!! You are in the TREASURE ROOM. Jewellery and gold coins pouring out of every treasure chest.");
+        Room empty = new Room("A dark empty room", "There is a small stepping stool missing one of its legs, and a pile of coal.");
 
         //north, south, east, west
         entrance.setExits(main, null, null, null);
@@ -212,48 +144,152 @@ public class Game{
 
     }
 
+
+    /**
+     * game loop
+     */
+    public void runGame() {
+        do {
+            System.out.println("Enter next command: ");
+            String user = getCommand();
+            gameOver = processCommand(user);
+
+        } while (!gameOver);
+
+        System.out.println("Thanks for playing.");
+
+    }
+
+    /**
+     * to get command from user
+     * @return input
+     */
+    public String getCommand() {
+        String input = " ";
+        Scanner reader = new Scanner(System.in);
+
+        System.out.print(">> ");
+        input = reader.next();
+
+        return input;
+    }
+
+    /**
+     * process the command the user enters
+     * @param input
+     * @return false
+     */
+    public boolean processCommand(String input) {
+        boolean finished = false;
+
+        //to quit the game use keyword 'quit'
+        if (input.equals("quit")) {
+            System.out.println("You are quitting the game.");
+            finished = true;
+        }
+
+        //to show user all valid commands use keyword 'help'
+        if (input.equals("help")) {
+            System.out.println();
+            System.out.println("-------HELPFUL COMMANDS-------");
+            System.out.println();
+            System.out.println("go (direction) - to go in the direction N/S/E/W");
+            System.out.println("look (itemName) - to see description of item");
+            System.out.println("look - to see description of room");
+            System.out.println("quit - quit game");
+            System.out.println();
+
+            finished = false;
+        }
+
+        //to move from room to room use keyword 'go'
+        if (input.equals("go")) {
+            enterRoom(input);
+//            finished = true;
+
+        }
+
+        //prints long description of room use keyword 'look'
+        if (input.contains("look")) {
+            System.out.println(playerRoom.getLongDescription());
+        }
+
+        return finished;
+    }
+
     /**
      * allows user to enter the next room
      * @param input
      */
     public void enterRoom(String input) {
-        String direction = input.substring(input.indexOf(' ') + 1, input.length()).trim();
+        //get direction (second word)
+        String[] splited = input.split(" ");
+        String first = splited[0];
+        String second = splited[1];
 
-        if (!input.contains(direction)) {
+        if (!isDirection(second)) {
             System.out.println("Go where?");
             return;
         }
 
-        else if (input.contains(direction)) {
-            Room next = playerRoom.getConnectedRoom(direction);
+        else if (isDirection(second)) {
+            System.out.println("You are going " + second);
 
-            if (next == null) {
-                System.out.println("Enter a different direction.");
-            }
+            Room next = playerRoom.getConnectedRoom(second);
 
-            else if (next != null) {
+            if (next != null) {
                 playerRoom = next;
                 System.out.println(playerRoom.getLongDescription());
             }
-        }
-    }
 
-    //allow user to look at items in room
-//    public void lookItems(String input) {
-//        String thing = input.substring(input.indexOf(' ') + 1, input.length()).trim();
-//
-//        if (!input.contains(thing)) {
-//            System.out.println("Look what?");
+            else if (next == null) {
+                System.out.println("Enter a different direction.");
+            }
+        }
+
+//        if (!input.contains(direction)) {
+//            System.out.println("Go where?");
 //            return;
 //        }
 //
-//        else if (input.contains(thing)) {
-//            if (playerRoom.getName().equals(thing)) {
-//                System.out.println("Display long description of item");
-//                System.out.println(playerRoom)
+//        else if (input.contains(direction)) {
+//            Room next = playerRoom.getConnectedRoom(direction);
+//
+//            if (next != null) {
+//                playerRoom = next;
+//                System.out.println(playerRoom.getLongDescription());
+//            }
+//
+//            else if (next == null) {
+//                System.out.println("Enter a different direction.");
 //            }
 //        }
-//    }
+    }
+
+    /**
+     * checks if second word is a direction (N, S, E, W)
+     * @return true/false
+     */
+    public boolean isDirection(String secondWord) {
+        String[] directions = new String[] {"N", "S", "E", "W"};
+
+        if (secondWord.equals(directions[0])) {
+            return true;
+        }
+        if (secondWord.equals(directions[1])) {
+            return true;
+        }
+        if (secondWord.equals(directions[2])) {
+            return true;
+        }
+        if (secondWord.equals(directions[3])) {
+            return true;
+        }
+
+        return false;
+    }
+
+
 
 
 

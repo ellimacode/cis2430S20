@@ -5,7 +5,6 @@ import java.util.HashMap;
 
 public class Room{
     /* you will need to add some private member variables */
-
     private String description;
     private String roomName;
     private HashMap<String, Room> rooms;
@@ -17,8 +16,9 @@ public class Room{
         contents = new ArrayList<Item>();
     }
 
-    public Room(String roomName) {
+    public Room(String roomName, String description) {
         this.roomName = roomName;
+        this.description = description;
         rooms = new HashMap<String, Room>();
         contents = new ArrayList<Item>();
     }
@@ -42,7 +42,7 @@ public class Room{
      * @return the long description of room
      */
     public String getLongDescription(){
-        return "You are " + description + ".\n";
+        return description + "\n";
 
     }
 
@@ -64,27 +64,35 @@ public class Room{
      * @param direction
      * @return side the neighboring room
      */
-    public void setExits(Room north, Room south, Room east, Room west) {
-        if (north != null) {
-            rooms.put("north", north);
+    public void setExits(Room northExit, Room southExit, Room eastExit, Room westExit) {
+        if (northExit != null) {
+            rooms.put("N", northExit);
         }
-        if (south != null) {
-            rooms.put("south", south);
+        if (southExit != null) {
+            rooms.put("S", southExit);
         }
-        if (east != null) {
-            rooms.put("east", east);
+        if (eastExit != null) {
+            rooms.put("E", eastExit);
         }
-        if (west != null) {
-            rooms.put("west", west);
+        if (westExit != null) {
+            rooms.put("W", westExit);
         }
 
     }
 
-    //add item to list of items
+    /**
+     * adds items to list of items
+     * @param item
+     */
     public void addItem(Item item) {
         contents.add(item);
     }
 
+    /**
+     * checks if rooms contains specified item
+     * @param itemName
+     * @return true/false
+     */
     public boolean containsItem(String itemName) {
         if (contents.contains(itemName)) {
             return true;

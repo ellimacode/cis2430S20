@@ -7,12 +7,21 @@
 * Student ID: 1046663
 
 ## How to operate your program
+* To compile: mvn clean compile
+* To execute: mvn exec:java
 
 ### Running from the command line (without maven)
 * To compile: javac *.java
 * To execute: java ClassName 
 
 ### Instructions for using the program
+The program will ask the user if they would like to load a JSON file. 
+If yes, the user will provide filename to load the adventure. 
+If no, the user will be brought to a default adventure. 
+The user must enter all lower case keywords on command line in order to play the game. The directions
+are in captial letters (N, S, E, W). 
+You can type 'help' to see the valid commands. 
+To quit the game, simply type 'quit' to exit. 
 
 ## Statement of Individual Work
 
