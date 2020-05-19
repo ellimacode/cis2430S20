@@ -22,6 +22,7 @@ public class Item{
      * @return item's name
      */
     public String getName(){
+
         return itemName;
     }
 
@@ -29,6 +30,7 @@ public class Item{
      * @return item's description
      */
     public String getLongDescription(){
+
         return description;
     }
 

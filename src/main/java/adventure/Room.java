@@ -42,7 +42,7 @@ public class Room{
      * @return the long description of room
      */
     public String getLongDescription(){
-        return " " + description + "\n";
+        return description + "\n";
 
     }
 
@@ -89,6 +89,7 @@ public class Room{
     public void addItem(Item item) {
         contents.add(item);
     }
+
 
     /**
      * checks if rooms contains specified item
