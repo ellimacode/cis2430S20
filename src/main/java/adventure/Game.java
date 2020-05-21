@@ -217,7 +217,7 @@ public class Game{
         //to quit the game use keyword 'quit'
         if (input.equals("quit")) {
             System.out.println("You are quitting the game.");
-            finished = true;
+            finished = saveGame();
         }
 
         //to show user all valid commands use keyword 'help'
@@ -301,6 +301,31 @@ public class Game{
         }
 
         return realDirection;
+    }
+
+    /**
+     * checks if user wants to save progress of the game 
+     * @return false
+     */
+    public boolean saveGame() {
+        System.out.println("Do you want to save your progess? (yes or no)");
+        String answer = scnr.nextLine();
+        answer = answer.toLowerCase();
+
+        /* enter a name to identify my game save when i choose to save
+        the game */
+        if (answer.equals("yes")) {
+            System.out.println("Enter a name:");
+            String name = scnr.nextLine();
+            return true;
+        }
+
+        // player quits the game without saving progress
+        else if (answer.equals("no")) {
+            return true;
+        }
+
+        return false;
     }
 
 }
