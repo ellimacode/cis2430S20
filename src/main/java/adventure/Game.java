@@ -172,8 +172,8 @@ public class Game{
      * create items for default adventure
      */
     public void createItems() {
-        Item lamp = new Item("Lamp", "A rusted gas lamp.");
-        Item wand = new Item("Wizard Wand", "The glowing wand was left behind in the abandoned lair.");
+        Item lamp = new Item("Lamp", "A working gas lamp, bright enough to see what's ahead.");
+        Item wand = new Item("Wizard Wand", "It's a glowing wand, left behind in the abandoned lair.");
         Item potion = new Item("Potion bottle", "A bottle of glowing green potion, labelled 'do not drink'.");
 
         //first item
