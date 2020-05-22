@@ -138,7 +138,7 @@ public class Game{
         //creates 6 different rooms
         Room entrance = new Room("The Dark Cave's entrance",
                 "You are at the opening gate to the dark cave. The gate was left unlocked.");
-        Room main = new Room("The cave's main floor",
+        Room main = new Room("The Cave's main floor",
                 "You are in the cave's main floor. A small lamp on the floor allows you to see.");
         Room closet = new Room("A weapon closet",
                 "It is a storage room for armor and weapons. There's a tiny door behind the swords.");
@@ -150,14 +150,18 @@ public class Game{
         Room dark_room = new Room("A dark room",
                 "You are in a dark small room. "
                         + "There is a small stepping stool missing one of its legs, and a pile of coal.");
+        Room underground = new Room("The Underground", "You are underneath the cave's main floor. "
+                + "It's cold and dark.");
 
         //in the form of north, south, east, west
-        entrance.setExits(main, null, null, null);
-        main.setExits(closet, entrance, null, lair);
-        closet.setExits(null, main, treasure, null);
-        lair.setExits(null, null, main, dark_room);
-        treasure.setExits(null, null, null, closet);
-        dark_room.setExits(null, null, lair, null);
+        entrance.setExits(main, null, null, null, null, null);
+        main.setExits(closet, entrance, null, lair, null, underground);
+        closet.setExits(null, main, treasure, null, null, null);
+        lair.setExits(null, null, main, dark_room, null, null);
+        treasure.setExits(null, null, null, closet, null, null);
+        dark_room.setExits(null, null, lair, null, null, null);
+        underground.setExits(null, null, null, null, main, null);
+
 
         //start at entrance of cave
         playerRoom = entrance;
@@ -225,7 +229,7 @@ public class Game{
             System.out.println();
             System.out.println("-------HELPFUL COMMANDS-------");
             System.out.println();
-            System.out.println("go (direction) - to go in the direction (N/S/E/W)");
+            System.out.println("go (direction) - to go in the direction (N/S/E/W/up/down)");
             System.out.println("look (itemName) - to see description of item");
             System.out.println("look - to see description of current room");
             System.out.println("quit - quit game");
@@ -285,7 +289,7 @@ public class Game{
     public boolean isDirection(String secondWord) {
         boolean realDirection = false;
 
-        String[] directions = new String[] {"N", "S", "E", "W"};
+        String[] directions = new String[] {"N", "S", "E", "W", "up", "down"};
 
         if (secondWord.equals(directions[0])) {
             realDirection = true;
@@ -299,12 +303,18 @@ public class Game{
         if (secondWord.equals(directions[3])) {
             realDirection = true;
         }
+        if (secondWord.equals(directions[4])) {
+            realDirection = true;
+        }
+        if (secondWord.equals(directions[5])) {
+            realDirection = true;
+        }
 
         return realDirection;
     }
 
     /**
-     * checks if user wants to save progress of the game 
+     * checks if user wants to save progress of the game
      * @return false
      */
     public boolean saveGame() {

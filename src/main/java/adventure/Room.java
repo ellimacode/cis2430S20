@@ -66,7 +66,8 @@ public class Room{
      * @param eastExit
      * @param westExit
      */
-    public void setExits(Room northExit, Room southExit, Room eastExit, Room westExit) {
+    public void setExits(Room northExit, Room southExit, Room eastExit, Room westExit,
+                         Room upExit, Room downExit) {
         if (northExit != null) {
             rooms.put("N", northExit);
         }
@@ -78,6 +79,12 @@ public class Room{
         }
         if (westExit != null) {
             rooms.put("W", westExit);
+        }
+        if (upExit != null) {
+            rooms.put("up", upExit);
+        }
+        if (downExit != null) {
+            rooms.put("down", downExit);
         }
 
     }
