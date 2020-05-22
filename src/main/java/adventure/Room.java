@@ -2,18 +2,40 @@ package adventure;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import org.json.simple.JSONObject;
 
 public class Room{
     /* you will need to add some private member variables */
     private String description;
     private String roomName;
+    private int ID;
     private HashMap<String, Room> rooms;
     private ArrayList<Item> contents;
-
+    
     //constructors
     public Room() {
+        description = null;
+        roomName = null;
+        ID = -999;
         rooms = new HashMap<String, Room>();
         contents = new ArrayList<Item>();
+    }
+
+    //based on JSON file
+    public Room(JSONObject roomJSON) {
+        int ID = (int) roomJSON.get("ID");
+        String name = (String) roomJSON.get("name");
+        String long_description = (String) roomJSON.get("long_description");
+
+        this.ID = ID;
+        this.roomName = name;
+        this.description = long_description;
+    }
+
+    public Room(String name, String info, int num) {
+        roomName = name;
+        description = info;
+        ID = num;
     }
 
     public Room(String name, String info) {

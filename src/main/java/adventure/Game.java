@@ -99,35 +99,10 @@ public class Game{
 
     public Adventure generateAdventure(JSONObject obj) {
         if (obj != null) {
-            Adventure adventure = new Adventure();
-            JSONObject main = (JSONObject) obj.get("adventure");
-
-            if (main != null) {
-
-                JSONArray room_list = (JSONArray) obj.get("room");
-                JSONArray item_list = (JSONArray) obj.get("item");
-
-                for (Object current_room: room_list) {
-                    JSONObject room = (JSONObject) current_room;
-                    String room_name = (String) room.get("name");
-                    String start_room = (String) room.get("start");
-                    String long_description = (String) room.get("long_description");
-
-                }
-
-                for (Object current_item: item_list) {
-                    JSONObject item = (JSONObject) current_item;
-                    String item_name = (String) item.get("name");
-                    String long_description = (String) item.get("long_description");
-                }
-
-            }
-
-            return adventure;
+            JSONObject mainObj = (JSONObject) obj.get("adventure");
         }
 
         return null;
-
     }
 
 
