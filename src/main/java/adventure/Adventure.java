@@ -12,28 +12,6 @@ public class Adventure{
     private ArrayList<Room> rooms;
     private ArrayList<Item> items;
 
-//    //constructor
-//    public Adventure(JSONObject mainJSON) {
-//        //get list of rooms
-//        setRooms(mainJSON.getJSONArray("room"));
-//        //get list of items
-//        setItems(mainJSON.getJSONArray("item"));
-//    }
-//
-//    private void setRooms(JSONArray roomJSON) {
-//        for (Object current_room: roomJSON) {
-//            Room nextRoom = new Room(roomJSON.get());
-//            rooms.add(nextRoom);
-//        }
-//    }
-//
-//    private void setItems(JSONArray itemJSON) {
-//        for (Object current_item: itemJSON) {
-//            Item nextItem = new Item(itemJSON.get());
-//            items.add(nextItem);
-//
-//        }
-//    }
 
     /* ======== Required public methods ========== */
         /* note,  you don't have to USE all of these
@@ -65,5 +43,9 @@ public class Adventure{
 
         currentRoom = room;
     }
+
+
+
+
 
 }

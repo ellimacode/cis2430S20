@@ -31,6 +31,7 @@ public class Game{
         game as we're going to avoid using static methods
         for this assignment */
         Game theGame = new Game();
+        Player player = new Player();
 
         // 1. Print a welcome message to the user
         System.out.println();
@@ -57,9 +58,12 @@ public class Game{
         if (inputLine.equals("yes")) {
             System.out.println("Enter filename: ");
             String filename = scnr.next();
-            theGame.loadAdventureJson(filename);
+
+            JSONObject mainObject = theGame.loadAdventureJson(filename);
+            theGame.generateAdventure(mainObject);
+
         } else if (inputLine.equals("no")) {
-            System.out.println("You are an explorer in a dark haunted cave looking for buried treasure.");
+            System.out.println(player.getLocation());
             theGame.runGame();
         }
 
@@ -99,7 +103,30 @@ public class Game{
 
     public Adventure generateAdventure(JSONObject obj) {
         if (obj != null) {
-            JSONObject mainObj = (JSONObject) obj.get("adventure");
+            JSONObject advObj = (JSONObject) obj.get("adventure");
+
+            JSONArray roomList = (JSONArray) advObj.get("room");
+            JSONArray itemList = (JSONArray) advObj.get("item");
+
+            for (Object current_room: roomList) {
+                JSONObject playerRoom = (JSONObject) current_room;
+                String roomName = (String) playerRoom.get("name");
+                int ID = (int) playerRoom.get("ID");
+                String roomDescription = (String) playerRoom.get("long_description");
+                System.out.println(roomName);
+
+                
+
+            }
+
+            for (Object current_item: itemList) {
+                JSONObject playerItem = (JSONObject) current_item;
+                String itemName = (String) playerItem.get("name");
+                int ID = (int) playerItem.get("ID");
+                String itemDescription = (String) playerItem.get("long_description");
+                System.out.println(itemName);
+
+            }
         }
 
         return null;

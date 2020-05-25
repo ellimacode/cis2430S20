@@ -10,6 +10,9 @@ public class Command {
     private String action;
     private String noun;
 
+    //array of valid commands
+    public static final String[] commands = {"go", "look", "help", "quit"};
+
   /**
      * Create a command object with default values.  
      * both instance variables are set to null
@@ -56,6 +59,7 @@ public class Command {
      * @return The command word.
      */
     public String getActionWord() {
+
         return this.action;
     }
 
@@ -64,6 +68,7 @@ public class Command {
      * second word.
      */
     public String getNoun() {
+
         return this.noun;
     }
 
@@ -73,6 +78,35 @@ public class Command {
      * @return true if the command has a second word.
      */
     public boolean hasSecondWord() {
+
         return (noun != null);
+    }
+
+
+    /**
+     * checks if the user command is valid
+     * @param command
+     * @return true if command is in commands, false otherwise
+     */
+    public static Boolean isValid(String command) {
+        boolean valid = false;
+
+        if (command.equals(commands[0])) {
+            valid = true;
+        }
+
+        if (command.equals(commands[1])) {
+            valid = true;
+        }
+
+        if (command.equals(commands[2])) {
+            valid = true;
+        }
+
+        if (command.equals(commands[3])) {
+            valid = true;
+        }
+
+        return valid;
     }
 }
