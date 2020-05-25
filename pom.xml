@@ -6,7 +6,7 @@ checkstyle: mvn checkstyle:checkstyle  (results show up in target/site)
 compile : mvn compile
 junit: mvn test
 execute: mvn exec:java
-jar: mvn assembly:single
+jar: mvn assembly:assembly
 
 to run your executable jar: java -jar <pathtoexecutablejar> <flags>
 -->

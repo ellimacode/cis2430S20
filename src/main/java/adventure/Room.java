@@ -11,7 +11,7 @@ public class Room{
     private int ID;
     private HashMap<String, Room> rooms;
     private ArrayList<Item> contents;
-    
+
     //constructors
     public Room() {
         description = null;
@@ -21,22 +21,22 @@ public class Room{
         contents = new ArrayList<Item>();
     }
 
-    //based on JSON file
-    public Room(JSONObject roomJSON) {
-        int ID = (int) roomJSON.get("ID");
-        String name = (String) roomJSON.get("name");
-        String long_description = (String) roomJSON.get("long_description");
-
-        this.ID = ID;
-        this.roomName = name;
-        this.description = long_description;
-    }
-
-    public Room(String name, String info, int num) {
-        roomName = name;
-        description = info;
-        ID = num;
-    }
+//    //based on JSON file
+//    public Room(JSONObject roomJSON) {
+//        int ID = (int) roomJSON.get("ID");
+//        String name = (String) roomJSON.get("name");
+//        String long_description = (String) roomJSON.get("long_description");
+//
+//        this.ID = ID;
+//        this.roomName = name;
+//        this.description = long_description;
+//    }
+//
+//    public Room(String name, String info, int num) {
+//        roomName = name;
+//        description = info;
+//        ID = num;
+//    }
 
     public Room(String name, String info) {
         roomName = name;
@@ -87,6 +87,8 @@ public class Room{
      * @param southExit
      * @param eastExit
      * @param westExit
+     * @param upExit
+     * @param downExit
      */
     public void setExits(Room northExit, Room southExit, Room eastExit, Room westExit,
                          Room upExit, Room downExit) {
@@ -116,6 +118,7 @@ public class Room{
      * @param item
      */
     public void addItem(Item item) {
+
         contents.add(item);
     }
 
