@@ -1,5 +1,6 @@
 package adventure;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Player {
@@ -18,8 +19,19 @@ public class Player {
         currentRoom = new Room();
     }
 
+    /* REQUIRED METHODS */
+
     public String getName() {
+
         return name;
+    }
+
+    /**
+     * get the player's inventory
+     * @return inventory
+     */
+    public ArrayList<Item> getInventory() {
+        return inventory;
     }
 
     /**
@@ -27,11 +39,26 @@ public class Player {
      * @return location
      */
     public String getLocation() {
+
         return location;
     }
 
+    /**
+     * get the current room
+     * @return currentRoom
+     */
     public Room getCurrentRoom() {
+
         return currentRoom;
+    }
+
+    /**
+     * get the name saved under the game
+     * @return null for now
+     */
+    public String getSaveGameName() {
+
+        return null;
     }
 
 

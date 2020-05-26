@@ -18,6 +18,8 @@ public class Game{
     private Room playerRoom;
     private Item playerItem;
     private Scanner scnr = new Scanner(System.in);
+    private Adventure adv;
+
 
     //constructor
     public Game() {
@@ -102,6 +104,7 @@ public class Game{
     }
 
     public Adventure generateAdventure(JSONObject obj) {
+
         if (obj != null) {
             JSONObject advObj = (JSONObject) obj.get("adventure");
 
@@ -110,21 +113,22 @@ public class Game{
 
             for (Object current_room: roomList) {
                 JSONObject playerRoom = (JSONObject) current_room;
+
+                //room's name, ID and description
                 String roomName = (String) playerRoom.get("name");
                 int ID = (int) playerRoom.get("ID");
                 String roomDescription = (String) playerRoom.get("long_description");
-                System.out.println(roomName);
-
-                
 
             }
 
             for (Object current_item: itemList) {
                 JSONObject playerItem = (JSONObject) current_item;
+
+                //item's name, ID and description
                 String itemName = (String) playerItem.get("name");
                 int ID = (int) playerItem.get("ID");
                 String itemDescription = (String) playerItem.get("long_description");
-                System.out.println(itemName);
+
 
             }
         }

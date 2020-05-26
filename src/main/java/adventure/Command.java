@@ -91,20 +91,10 @@ public class Command {
     public static Boolean isValid(String command) {
         boolean valid = false;
 
-        if (command.equals(commands[0])) {
-            valid = true;
-        }
-
-        if (command.equals(commands[1])) {
-            valid = true;
-        }
-
-        if (command.equals(commands[2])) {
-            valid = true;
-        }
-
-        if (command.equals(commands[3])) {
-            valid = true;
+        for (int i = 0; i < commands.length; i++) {
+            if (commands[i].equals(command)) {
+                valid = true;
+            }
         }
 
         return valid;
