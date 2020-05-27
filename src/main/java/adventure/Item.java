@@ -44,4 +44,9 @@ public class Item{
 
     /* you may wish to add some helper methods*/
 
+    public String toString() {
+        String itemString = itemName + " " + description;
+        return itemString;
+    }
+
 }

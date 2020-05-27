@@ -5,6 +5,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser; 
 import org.json.simple.parser.ParseException;
 
+import java.io.InputStream;
 import java.io.IOException;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -312,5 +313,11 @@ public class Game{
 
         return false;
     }
+
+    //to load default adventure file (JSON)
+    public JSONObject loadAdventureJson(InputStream inputStream) {
+        return null;
+    }
+
 
 }

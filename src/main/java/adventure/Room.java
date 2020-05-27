@@ -135,6 +135,11 @@ public class Room{
         return false;
     }
 
+    public String toString() {
+        String roomString = roomName + " " + description;
+        return roomString;
+    }
+
 
 
 
