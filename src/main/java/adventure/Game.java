@@ -19,12 +19,14 @@ public class Game{
     private Item playerItem;
     private Scanner scnr = new Scanner(System.in);
     private Adventure adv;
+    private Parser parser;
 
 
     //constructor
     public Game() {
         createRooms();
         createItems();
+        parser = new Parser();
     }
 
     public static void main(String[] args) {
@@ -193,9 +195,15 @@ public class Game{
      */
     public void runGame() {
         do {
-            System.out.println("Enter next command: ");
-            String user = getCommand();
-            gameOver = processCommand(user);
+            try {
+                System.out.print(">> ");
+                String user = scnr.nextLine();
+                Command command = parser.parseUserCommand(user);
+                gameOver = processCommand(command);
+            }
+            catch (InvalidCommandException ex) {
+                System.out.println(ex.getMessage());
+            }
 
         } while (!gameOver);
 
@@ -203,35 +211,29 @@ public class Game{
 
     }
 
-    /**
-     * to get command from user
-     * @return input
-     */
-    public String getCommand() {
-        String input = " ";
-
-        System.out.print(">> ");
-        input = scnr.nextLine();
-
-        return input;
-    }
 
     /**
      * process the command the user enters
      * @param input
      * @return false
      */
-    public boolean processCommand(String input) {
+    public boolean processCommand(Command command) {
         boolean finished = false;
 
+        String userCommand = command.getActionWord();
+
+        if (!command.isValid(userCommand)) {
+            System.out.println("Invalid Command.");
+        }
+
         //to quit the game use keyword 'quit'
-        if (input.equals("quit")) {
+        if (userCommand.equals("quit")) {
             System.out.println("You are quitting the game.");
             finished = saveGame();
         }
 
         //to show user all valid commands use keyword 'help'
-        if (input.equals("help")) {
+        if (userCommand.equals("help")) {
             System.out.println();
             System.out.println("-------HELPFUL COMMANDS-------");
             System.out.println();
@@ -245,13 +247,13 @@ public class Game{
         }
 
         //to move from room to room use keyword 'go'
-        if (input.contains("go")) {
-            enterRoom(input);
+        if (userCommand.contains("go")) {
+            enterRoom(command);
             finished = false;
         }
 
         //prints long description of room use keyword 'look'
-        if (input.contains("look")) {
+        if (userCommand.equals("look")) {
             System.out.println(playerRoom.getLongDescription());
             finished = false;
         }
@@ -261,62 +263,29 @@ public class Game{
 
     /**
      * allows user to enter the next room
-     * @param input
+     * @param command
      */
-    public void enterRoom(String input) {
+    public void enterRoom(Command command) {
         //get direction (second word)
-        String[] splited = input.split(" ");
-        String first = splited[0];
-        String second = splited[1];
-
-        if (!isDirection(second)) {
+        if (!command.hasSecondWord()) {
             System.out.println("Go where?");
             return;
+        }
 
-        } else if (isDirection(second)) {
-            Room next = playerRoom.getConnectedRoom(second);
+        else if (command.hasSecondWord()) {
+            String direction = command.getNoun();
+
+            Room next = playerRoom.getConnectedRoom(direction);
 
             if (next != null) {
                 playerRoom = next;
                 System.out.println(playerRoom.getLongDescription());
             } else if (next == null) {
-                System.out.println("No Exit");
+                System.out.println("No Exit.");
                 System.out.println();
             }
         }
 
-    }
-
-    /**
-     * checks if second word is a direction
-     * @param secondWord
-     * @return true/false
-     */
-    public boolean isDirection(String secondWord) {
-        boolean realDirection = false;
-
-        String[] directions = new String[] {"N", "S", "E", "W", "up", "down"};
-
-        if (secondWord.equals(directions[0])) {
-            realDirection = true;
-        }
-        if (secondWord.equals(directions[1])) {
-            realDirection = true;
-        }
-        if (secondWord.equals(directions[2])) {
-            realDirection = true;
-        }
-        if (secondWord.equals(directions[3])) {
-            realDirection = true;
-        }
-        if (secondWord.equals(directions[4])) {
-            realDirection = true;
-        }
-        if (secondWord.equals(directions[5])) {
-            realDirection = true;
-        }
-
-        return realDirection;
     }
 
     /**
