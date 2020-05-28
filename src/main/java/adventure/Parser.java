@@ -44,4 +44,11 @@ public class Parser {
         return null;
 
     }
+
+    @Override
+    public String toString() {
+        return "Parser{" +
+                "command=" + command +
+                '}';
+    }
 }

@@ -13,7 +13,7 @@ public class Room{
     private HashMap<String, Room> rooms;
     private ArrayList<Item> contents;
 
-    private HashMap<String, Integer> jsonRooms;
+    private HashMap<String, Integer> json_rooms;
 
     //constructors
     public Room() {
@@ -23,7 +23,7 @@ public class Room{
         ID = -999;
         rooms = new HashMap<String, Room>();
         contents = new ArrayList<Item>();
-        jsonRooms = new HashMap<String, Integer>();
+        json_rooms = new HashMap<String, Integer>();
     }
 
     //based on JSONfile
@@ -32,7 +32,7 @@ public class Room{
         roomName = name;
         short_description = short_desc;
         long_description = long_desc;
-        jsonRooms = new HashMap<String, Integer>();
+        json_rooms = new HashMap<String, Integer>();
     }
 
     //based on default adventure
@@ -59,6 +59,7 @@ public class Room{
     }
 
     public Integer getID() {
+
         return ID;
     }
 
@@ -71,15 +72,6 @@ public class Room{
     }
 
     /**
-     * add connecting room to hashmap, JSON 
-     * @param direction
-     * @param id
-     */
-    public void addConnectedRoom(String direction, Integer id) {
-        jsonRooms.put(direction, id);
-    }
-
-    /**
      * Return the room that is connected in the
      * specified direction
      * @param direction
@@ -88,6 +80,16 @@ public class Room{
     public Room getConnectedRoom(String direction) {
 
         return rooms.get(direction);
+    }
+
+    /**
+     * add connecting room to hashmap, JSON
+     * @param direction
+     * @param id
+     */
+    public void addConnectedRoom(String direction, Integer id) {
+
+        json_rooms.put(direction, id);
     }
 
     /* you may wish to add some helper methods*/
@@ -146,14 +148,15 @@ public class Room{
         return false;
     }
 
+    @Override
     public String toString() {
-        String roomString = roomName + " " + long_description;
-        return roomString;
+        return "Room{" +
+                "short_description='" + short_description + '\'' +
+                ", long_description='" + long_description + '\'' +
+                ", roomName='" + roomName + '\'' +
+                ", ID=" + ID +
+                ", rooms=" + rooms +
+                ", contents=" + contents +
+                '}';
     }
-
-
-
-
-
-
 }

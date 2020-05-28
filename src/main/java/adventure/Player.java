@@ -23,6 +23,7 @@ public class Player {
     /* REQUIRED METHODS */
 
     public void setName(String playerName) {
+
         name = playerName;
     }
 

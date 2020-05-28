@@ -12,7 +12,7 @@ public class Command {
 
     //array of valid commands
     public static final String[] commands = {"go", "look", "help", "quit", "up", "down",
-            "N", "S", "E", "W"};
+            "N", "S", "E", "W", "inventory", "take"};
 
   /**
      * Create a command object with default values.  
@@ -99,5 +99,13 @@ public class Command {
         }
 
         return valid;
+    }
+
+    @Override
+    public String toString() {
+        return "Command{" +
+                "action='" + action + '\'' +
+                ", noun='" + noun + '\'' +
+                '}';
     }
 }

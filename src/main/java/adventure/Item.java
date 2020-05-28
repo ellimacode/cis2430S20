@@ -33,6 +33,7 @@ public class Item{
     }
 
     public Integer getID() {
+
         return ID;
     }
 
@@ -60,7 +61,11 @@ public class Item{
     }
 
     public void setContainingRoom(Room r){
+
         room = r;
     }
+
+
+
 
 }

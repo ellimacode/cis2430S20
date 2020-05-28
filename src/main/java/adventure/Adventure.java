@@ -49,10 +49,13 @@ public class Adventure{
         currentRoom = room;
     }
 
-   
-
-
-
-
-
+    @Override
+    public String toString() {
+        return "Adventure{" +
+                "currentRoom=" + currentRoom +
+                ", description='" + description + '\'' +
+                ", rooms=" + rooms +
+                ", items=" + items +
+                '}';
+    }
 }

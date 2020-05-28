@@ -5,12 +5,9 @@ import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser; 
 import org.json.simple.parser.ParseException;
 
-import javax.lang.model.type.ArrayType;
-import java.io.InputStream;
-import java.io.IOException;
-import java.io.FileNotFoundException;
+
+import java.io.*;
 import java.util.Scanner;
-import java.io.FileReader;
 import java.util.ArrayList;
 
 public class Game{
@@ -33,7 +30,6 @@ public class Game{
 
     public static void main(String[] args) {
 
-
         /* You will need to instantiate an object of type
         game as we're going to avoid using static methods
         for this assignment */
@@ -45,16 +41,6 @@ public class Game{
         System.out.println("----------WELCOME TO THE WORLD OF ADVENTURE GAME!----------");
         System.out.println();
 
-        // 2. Ask the user if they want to load a json file.
-
-        /* 3. Parse the file the user specified to create the
-        adventure, or load your default adventure*/
-
-        // 4. Print the beginning of the adventure
-
-        // 5. Begin game loop here
-
-        // 6. Get the user input. You'll need a Scanner
         Scanner scnr = new Scanner(System.in);
 
         System.out.print("Enter name: ");
@@ -75,20 +61,17 @@ public class Game{
         theGame.runGame();
 
 
-
     }
 
-        /* 7+. Use a game instance method to parse the user
-        input to learn what the user wishes to do*/
-
-        //use a game instance method to execute the users wishes*/
-
-        /* if the user doesn't wish to quit,
-        repeat the steps above*/
 
 
     /* you must have these instance methods and may need more*/
 
+    /**
+     * loads the JSON file, pass in filename
+     * @param filename
+     * @return advJson (JSONObject)
+     */
     public JSONObject loadAdventureJson(String filename){
         JSONObject advJson = null;
 
@@ -109,6 +92,41 @@ public class Game{
         return advJson;
     }
 
+    /**
+     * loads JSON file through InputStream
+     * Overloaded method
+     * @param inputStream
+     * @return adv_json (JSONObject)
+     */
+    public JSONObject loadAdventureJson(InputStream inputStream) {
+
+        try {
+            BufferedReader streamReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
+            StringBuilder builder = new StringBuilder();
+
+            String input = "";
+            while ((input = streamReader.readLine()) != null) {
+                builder.append(input);
+            }
+
+            inputStream.close();
+
+            JSONObject adv_json = new JSONObject(builder.toString());
+
+            return adv_json;
+
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+
+        return null;
+    }
+
+    /**
+     * generate adventure based on JSON file
+     * @param obj
+     * @return adv (Adventure)
+     */
     public Adventure generateAdventure(JSONObject obj) {
         Adventure adv;
 
@@ -245,7 +263,7 @@ public class Game{
 
 
     /**
-     * game loop
+     * game loop for default adventure
      */
     public void runGame() {
         do {
@@ -375,12 +393,14 @@ public class Game{
     }
 
 
-
-    //to load default adventure file (JSON)
-    public JSONObject loadAdventureJson(InputStream inputStream) {
-
-        return null;
+    @Override
+    public String toString() {
+        return "Game{" +
+                "gameOver=" + gameOver +
+                ", playerRoom=" + playerRoom +
+                ", playerItem=" + playerItem +
+                ", scnr=" + scnr +
+                ", parser=" + parser +
+                '}';
     }
-
-
 }

@@ -3,6 +3,8 @@ package adventure;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 import static org.junit.Assert.assertTrue;
+
+import jdk.internal.jline.internal.TestAccessible;
 import org.junit.Test;
 import org.junit.Before;
 
@@ -25,12 +27,37 @@ public void testSetNameWithValidInput(){
 
 }
 
-@Test
-public void testONEGetConnectedRoom() {
-    System.out.println("Testing GetConnectedRoom with null");
+/* test cases for GetConnectedRoom method
+in Room class
+ */
 
+@Test
+public void TestOne() {
+    System.out.println("Testing getConnectedRoom with direction N");
+    String north = "N";
+    testRoom.getConnectedRoom(north);
+    boolean expected = true;
+    boolean result = false;
+    if (testRoom != null) {
+        result = true;
+        assertEquals(expected, result);
+    }
+}
+
+@Test
+public void TestTwo() {
+    System.out.println("Testing getConnectedRoom with invalid direction");
+    String invalid = "jefefnjn";
+    testRoom.getConnectedRoom(invalid);
+    boolean expected = true;
+    boolean result = false;
+    if (testRoom == null) {
+        result = true;
+        assertEquals(expected, result);
+    }
 
 }
+
 
 
 }
