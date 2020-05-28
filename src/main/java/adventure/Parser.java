@@ -9,17 +9,27 @@ public class Parser {
     /* REQUIRED METHODS */
     public Command parseUserCommand(String userCommand) throws InvalidCommandException {
 
-        try {
+        String first;
+        String second;
 
-            //split user command to two words
-            String[] splited = userCommand.split(" ");
-            String first = splited[0];
-            String second = splited[1];
+        try {
+            Scanner tokenizer = new Scanner(userCommand);
+
+            if (tokenizer.hasNext()) {
+                first = tokenizer.next();
+            } else {
+                first = null;
+            }
+
+            if (tokenizer.hasNext()) {
+                second = tokenizer.next();
+            } else {
+                second = null;
+            }
 
             if (command.isValid(first)) {
                 return new Command(first, second);
-            }
-            else {
+            } else {
                 return new Command(null, second);
             }
 

@@ -62,18 +62,18 @@ public class Game{
         player.setName(playerName);
         System.out.println("Welcome " + playerName + "!");
 
-        String filename = scnr.nextLine();
-
-
-        //JSON adventure 
-        JSONObject jsonObject = theGame.loadAdventureJson(filename);
-        Adventure adventure = theGame.generateAdventure(jsonObject);
-        ArrayList<Room> rooms = adventure.listAllRooms();
-        ArrayList<Item> items = adventure.listAllItems();
+//        String filename = scnr.nextLine();
+//
+//        //JSON adventure
+//        JSONObject jsonObject = theGame.loadAdventureJson(filename);
+//        Adventure adventure = theGame.generateAdventure(jsonObject);
+//        ArrayList<Room> rooms = adventure.listAllRooms();
+//        ArrayList<Item> items = adventure.listAllItems();
 
         //default adventure
         System.out.println(player.getLocation());
         theGame.runGame();
+
 
 
     }
@@ -90,24 +90,23 @@ public class Game{
     /* you must have these instance methods and may need more*/
 
     public JSONObject loadAdventureJson(String filename){
-        JSONObject mainObject = new JSONObject();
-
-        JSONParser jsonParser = new JSONParser();
+        JSONObject advJson = null;
 
         try (FileReader reader = new FileReader(filename)) {
-
+            JSONParser jsonParser = new JSONParser();
             Object obj = jsonParser.parse(reader);
+            advJson = (JSONObject) obj;
+            reader.close();
 
         } catch (FileNotFoundException e) {
             System.out.println(e);
-            mainObject = null;
         } catch (IOException e) {
             System.out.println(e);
         } catch (ParseException e) {
             System.out.println(e);
         }
 
-        return mainObject;
+        return advJson;
     }
 
     public Adventure generateAdventure(JSONObject obj) {
@@ -330,15 +329,22 @@ public class Game{
         else if (command.hasSecondWord()) {
             String direction = command.getNoun();
 
-            Room next = playerRoom.getConnectedRoom(direction);
+            if (command.isValid(direction)) {
+                Room next = playerRoom.getConnectedRoom(direction);
 
-            if (next != null) {
-                playerRoom = next;
-                System.out.println(playerRoom.getLongDescription());
-            } else if (next == null) {
-                System.out.println("No Exit.");
+                if (next != null) {
+                    playerRoom = next;
+                    System.out.println(playerRoom.getLongDescription());
+                } else {
+                    System.out.println("No Exit.");
+                    System.out.println();
+                }
+            } else {
+                System.out.println("Go where?");
                 System.out.println();
+                return;
             }
+
         }
 
     }
@@ -367,6 +373,8 @@ public class Game{
 
         return false;
     }
+
+
 
     //to load default adventure file (JSON)
     public JSONObject loadAdventureJson(InputStream inputStream) {

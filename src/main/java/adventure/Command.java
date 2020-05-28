@@ -11,7 +11,8 @@ public class Command {
     private String noun;
 
     //array of valid commands
-    public static final String[] commands = {"go", "look", "help", "quit"};
+    public static final String[] commands = {"go", "look", "help", "quit", "up", "down",
+            "N", "S", "E", "W"};
 
   /**
      * Create a command object with default values.  

@@ -25,5 +25,12 @@ public void testSetNameWithValidInput(){
 
 }
 
+@Test
+public void testONEGetConnectedRoom() {
+    System.out.println("Testing GetConnectedRoom with null");
+
+
+}
+
 
 }
