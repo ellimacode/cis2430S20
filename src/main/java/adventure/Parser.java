@@ -23,6 +23,7 @@ public class Parser {
                 return new Command(null, second);
             }
 
+
         } catch(InvalidCommandException ex) {
             throw new InvalidCommandException("Invalid Command. Please try again!");
         }

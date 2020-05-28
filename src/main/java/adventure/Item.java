@@ -1,19 +1,25 @@
 package adventure;
 
-import java.util.ArrayList;
 
 public class Item{
     /* you will need to add some private member variables */
 
     private String itemName;
     private String description;
-    private Room room = new Room();
-    private ArrayList<Item> items = new ArrayList<Item>();
-
+    private Room room;
+    private Integer ID;
 
     public Item(String name, String info) {
         itemName = name;
         description = info;
+        room = new Room();
+    }
+
+    public Item(Integer tag, String name, String info) {
+        ID = tag;
+        itemName = name;
+        description = info;
+        room = new Room();
     }
 
     /* required public methods */
@@ -24,6 +30,10 @@ public class Item{
     public String getName(){
 
         return itemName;
+    }
+
+    public Integer getID() {
+        return ID;
     }
 
     /**
@@ -47,6 +57,10 @@ public class Item{
     public String toString() {
         String itemString = itemName + " " + description;
         return itemString;
+    }
+
+    public void setContainingRoom(Room r){
+        room = r;
     }
 
 }

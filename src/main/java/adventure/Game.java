@@ -5,11 +5,13 @@ import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser; 
 import org.json.simple.parser.ParseException;
 
+import javax.lang.model.type.ArrayType;
 import java.io.InputStream;
 import java.io.IOException;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.io.FileReader;
+import java.util.ArrayList;
 
 public class Game{
 
@@ -19,7 +21,6 @@ public class Game{
     private Room playerRoom;
     private Item playerItem;
     private Scanner scnr = new Scanner(System.in);
-    private Adventure adv;
     private Parser parser;
 
 
@@ -31,6 +32,7 @@ public class Game{
     }
 
     public static void main(String[] args) {
+
 
         /* You will need to instantiate an object of type
         game as we're going to avoid using static methods
@@ -55,22 +57,24 @@ public class Game{
         // 6. Get the user input. You'll need a Scanner
         Scanner scnr = new Scanner(System.in);
 
-        System.out.println("Would you like to load a JSON file (yes or no)?");
-        String inputLine = scnr.nextLine();
+        System.out.print("Enter name: ");
+        String playerName = scnr.nextLine();
+        player.setName(playerName);
+        System.out.println("Welcome " + playerName + "!");
 
-        inputLine = inputLine.toLowerCase();
+        String filename = scnr.nextLine();
 
-        if (inputLine.equals("yes")) {
-            System.out.println("Enter filename: ");
-            String filename = scnr.next();
 
-            JSONObject mainObject = theGame.loadAdventureJson(filename);
-            theGame.generateAdventure(mainObject);
+        //JSON adventure 
+        JSONObject jsonObject = theGame.loadAdventureJson(filename);
+        Adventure adventure = theGame.generateAdventure(jsonObject);
+        ArrayList<Room> rooms = adventure.listAllRooms();
+        ArrayList<Item> items = adventure.listAllItems();
 
-        } else if (inputLine.equals("no")) {
-            System.out.println(player.getLocation());
-            theGame.runGame();
-        }
+        //default adventure
+        System.out.println(player.getLocation());
+        theGame.runGame();
+
 
     }
 
@@ -107,36 +111,86 @@ public class Game{
     }
 
     public Adventure generateAdventure(JSONObject obj) {
+        Adventure adv;
 
-        if (obj != null) {
-            JSONObject advObj = (JSONObject) obj.get("adventure");
+        //iterate through adventure
+        JSONObject advObj = (JSONObject) obj.get("adventure");
 
-            JSONArray roomList = (JSONArray) advObj.get("room");
-            JSONArray itemList = (JSONArray) advObj.get("item");
+        JSONArray roomArray = (JSONArray) advObj.get("room");
+        JSONArray itemArray = (JSONArray) advObj.get("item");
 
-            for (Object current_room: roomList) {
-                JSONObject playerRoom = (JSONObject) current_room;
+        ArrayList<Room> roomList = new ArrayList<Room>();
+        ArrayList<Item> itemList = new ArrayList<Item>();
 
-                //room's name, ID and description
-                String roomName = (String) playerRoom.get("name");
-                int ID = (int) playerRoom.get("ID");
-                String roomDescription = (String) playerRoom.get("long_description");
+        //iterate through JSONArray for rooms
+        for (Object current_room: roomArray) {
+            JSONObject playerRoom = (JSONObject) current_room;
 
+            //room's name, ID and description
+            Long temp = (Long) playerRoom.get("id");
+            Integer room_id = new Integer(temp.intValue());
+            String name = (String) playerRoom.get("name");
+            String shortDesc = (String) playerRoom.get("short_description");
+            String longDesc = (String) playerRoom.get("long_description");
+
+            //seperate JSON arrays for entrances and loot
+            JSONArray enterArray = (JSONArray) playerRoom.get("entrance");
+            JSONArray lootArray = (JSONArray) playerRoom.get("loot");
+
+            Room nextRoom = new Room(room_id, name, shortDesc, longDesc);
+
+            //iterate through JSONArray for entrances
+            if (enterArray != null) {
+                for (Object current_ent: enterArray) {
+                    JSONObject playerEnt = (JSONObject) current_ent;
+
+                    Long tempId = (Long) playerEnt.get("id");
+                    Integer enter_id = new Integer(tempId.intValue());
+                    String direction = (String) playerEnt.get("dir");
+
+                    nextRoom.addConnectedRoom(direction, enter_id);
+                }
             }
 
-            for (Object current_item: itemList) {
-                JSONObject playerItem = (JSONObject) current_item;
+            //iterate through JSONArray for loot
+            if (lootArray != null) {
+                for (Object current_loot: lootArray) {
+                    JSONObject playerLoot = (JSONObject) current_loot;
 
-                //item's name, ID and description
-                String itemName = (String) playerItem.get("name");
-                int ID = (int) playerItem.get("ID");
-                String itemDescription = (String) playerItem.get("long_description");
+                    Long temp_id = (Long) playerLoot.get("id");
+                    Integer loot_id = new Integer(temp_id.intValue());
 
-
+                    for (Item curr_item: itemList) {
+                        if (loot_id.equals(curr_item.getID())) {
+                            nextRoom.addItem(curr_item);
+                            curr_item.setContainingRoom(nextRoom);
+                            break;
+                        }
+                    }
+                }
             }
+
+            roomList.add(nextRoom);
         }
 
-        return null;
+        //iterate through JSONArray for items
+        for (Object current_item: itemArray) {
+            JSONObject playerItem = (JSONObject) current_item;
+
+            //item's name, ID and description
+            Long temp = (Long) playerItem.get("id");
+            Integer id = new Integer(temp.intValue());
+            String name = (String) playerItem.get("name");
+            String itemDescription = (String) playerItem.get("desc");
+
+            Item nextItem = new Item(id, name, itemDescription);
+            itemList.add(nextItem);
+
+        }
+
+        adv = new Adventure(roomList, itemList);
+
+        return adv;
     }
 
 
@@ -316,6 +370,7 @@ public class Game{
 
     //to load default adventure file (JSON)
     public JSONObject loadAdventureJson(InputStream inputStream) {
+
         return null;
     }
 

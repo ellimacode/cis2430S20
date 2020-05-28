@@ -17,9 +17,14 @@ public class Player {
                 "looking for buried treasure.";
 
         currentRoom = new Room();
+        name = null;
     }
 
     /* REQUIRED METHODS */
+
+    public void setName(String playerName) {
+        name = playerName;
+    }
 
     public String getName() {
 

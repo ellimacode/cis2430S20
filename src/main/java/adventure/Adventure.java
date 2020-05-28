@@ -12,6 +12,11 @@ public class Adventure{
     private ArrayList<Room> rooms;
     private ArrayList<Item> items;
 
+    public Adventure (ArrayList<Room> rooms, ArrayList<Item> items) {
+        this.rooms = rooms;
+        this.items = items;
+    }
+
 
     /* ======== Required public methods ========== */
         /* note,  you don't have to USE all of these

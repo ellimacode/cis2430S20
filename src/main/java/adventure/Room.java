@@ -6,41 +6,39 @@ import org.json.simple.JSONObject;
 
 public class Room{
     /* you will need to add some private member variables */
-    private String description;
+    private String short_description;
+    private String long_description;
     private String roomName;
-    private int ID;
+    private Integer ID;
     private HashMap<String, Room> rooms;
     private ArrayList<Item> contents;
 
+    private HashMap<String, Integer> jsonRooms;
+
     //constructors
     public Room() {
-        description = null;
+        short_description = null;
+        long_description = null;
         roomName = null;
         ID = -999;
         rooms = new HashMap<String, Room>();
         contents = new ArrayList<Item>();
+        jsonRooms = new HashMap<String, Integer>();
     }
 
-//    //based on JSON file
-//    public Room(JSONObject roomJSON) {
-//        int ID = (int) roomJSON.get("ID");
-//        String name = (String) roomJSON.get("name");
-//        String long_description = (String) roomJSON.get("long_description");
-//
-//        this.ID = ID;
-//        this.roomName = name;
-//        this.description = long_description;
-//    }
-//
-//    public Room(String name, String info, int num) {
-//        roomName = name;
-//        description = info;
-//        ID = num;
-//    }
+    //based on JSONfile
+    public Room(Integer tag, String name, String short_desc, String long_desc) {
+        ID = tag;
+        roomName = name;
+        short_description = short_desc;
+        long_description = long_desc;
+        jsonRooms = new HashMap<String, Integer>();
+    }
 
+    //based on default adventure
     public Room(String name, String info) {
         roomName = name;
-        description = info;
+        long_description = info;
         rooms = new HashMap<String, Room>();
         contents = new ArrayList<Item>();
     }
@@ -60,12 +58,25 @@ public class Room{
 
     }
 
+    public Integer getID() {
+        return ID;
+    }
+
     /**
      * @return the long description of room
      */
     public String getLongDescription(){
-        return description + "\n";
+        return long_description + "\n";
 
+    }
+
+    /**
+     * add connecting room to hashmap, JSON 
+     * @param direction
+     * @param id
+     */
+    public void addConnectedRoom(String direction, Integer id) {
+        jsonRooms.put(direction, id);
     }
 
     /**
@@ -136,7 +147,7 @@ public class Room{
     }
 
     public String toString() {
-        String roomString = roomName + " " + description;
+        String roomString = roomName + " " + long_description;
         return roomString;
     }
 
