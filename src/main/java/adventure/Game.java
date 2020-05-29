@@ -22,8 +22,7 @@ public class Game{
 
     //constructor
     public Game() {
-        createRooms();
-        createItems();
+        createAdv();
         parser = new Parser();
 
     }
@@ -205,10 +204,11 @@ public class Game{
     }
 
 
+
     /**
-     * create rooms for default adventure
+     * create rooms and items for default adventure
      */
-    public void createRooms() {
+    public void createAdv() {
         //creates 6 different rooms
         Room entrance = new Room("The Dark Cave's entrance",
                 "You are at the opening gate to the dark cave. The gate was left unlocked.");
@@ -240,18 +240,14 @@ public class Game{
         //start at entrance of cave
         playerRoom = entrance;
 
-    }
-
-    /**
-     * create items for default adventure
-     */
-    public void createItems() {
         Item lamp = new Item("Lamp", "A working gas lamp, bright enough to see what's ahead.");
         Item wand = new Item("Wizard Wand", "It's a glowing wand, left behind in the abandoned lair.");
         Item potion = new Item("Potion bottle", "A bottle of glowing green potion, labelled 'do not drink'.");
 
         //first item
-        playerRoom.addItem(lamp);
+        entrance.addItem(lamp);
+        lair.addItem(wand);
+        lair.addItem(potion);
 
     }
 
@@ -306,6 +302,7 @@ public class Game{
             System.out.println("go (direction) - to go in the direction (N/S/E/W/up/down)");
             System.out.println("look (itemName) - to see description of item");
             System.out.println("look - to see description of current room");
+            System.out.println("take (itemName) - to pick up item");
             System.out.println("quit - quit game");
             System.out.println();
 
@@ -321,6 +318,12 @@ public class Game{
         //prints long description of room use keyword 'look'
         if (userCommand.equals("look")) {
             System.out.println(playerRoom.getLongDescription());
+            finished = false;
+        }
+
+        //to take item and add to inventory
+        if (userCommand.contains("take")) {
+            takeItem(command);
             finished = false;
         }
 
@@ -352,7 +355,9 @@ public class Game{
                     System.out.println("No Exit.");
                     System.out.println();
                 }
-            } else {
+            }
+
+            else {
                 System.out.println("Go where?");
                 System.out.println();
                 return;
@@ -360,6 +365,24 @@ public class Game{
 
         }
 
+    }
+
+
+    public void takeItem(Command command) {
+        //get item name (second word)
+        if (!command.hasSecondWord()) {
+            System.out.println("Take what?");
+            System.out.println();
+            return;
+        }
+
+        else if (command.hasSecondWord()) {
+            String thing = command.getNoun();
+
+            System.out.println("You have taken " + thing); //FIXME
+            System.out.println();
+
+        }
     }
 
     /**
@@ -399,4 +422,6 @@ public class Game{
                 ", parser=" + parser +
                 '}';
     }
+
+
 }

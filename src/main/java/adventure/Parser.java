@@ -41,8 +41,7 @@ public class Parser {
     }
 
     public String allCommands() {
-        return null;
-
+        return null; 
     }
 
     @Override

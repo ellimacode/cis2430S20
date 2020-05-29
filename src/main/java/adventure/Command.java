@@ -101,6 +101,7 @@ public class Command {
         return valid;
     }
 
+
     @Override
     public String toString() {
         return "Command{" +
