@@ -5,7 +5,6 @@ import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser; 
 import org.json.simple.parser.ParseException;
 
-
 import java.io.*;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -17,15 +16,16 @@ public class Game{
     private boolean gameOver = false;
     private Room playerRoom;
     private Item playerItem;
-    private Scanner scnr = new Scanner(System.in);
     private Parser parser;
 
+    private Scanner scnr = new Scanner(System.in);
 
     //constructor
     public Game() {
         createRooms();
         createItems();
         parser = new Parser();
+
     }
 
     public static void main(String[] args) {
@@ -99,27 +99,21 @@ public class Game{
      * @return adv_json (JSONObject)
      */
     public JSONObject loadAdventureJson(InputStream inputStream) {
+        JSONObject adv_json = null;
 
         try {
-            BufferedReader streamReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
-            StringBuilder builder = new StringBuilder();
+            JSONParser parser = new JSONParser();
+            Object obj = parser.parse(new InputStreamReader(inputStream));
 
-            String input = "";
-            while ((input = streamReader.readLine()) != null) {
-                builder.append(input);
-            }
-
-            inputStream.close();
-
-            JSONObject adv_json = new JSONObject(builder.toString());
-
-            return adv_json;
+            adv_json = (JSONObject) obj;
 
         } catch (IOException e) {
             System.out.println(e);
+        } catch (ParseException e) {
+            System.out.println(e);
         }
 
-        return null;
+        return adv_json;
     }
 
     /**
@@ -341,6 +335,7 @@ public class Game{
         //get direction (second word)
         if (!command.hasSecondWord()) {
             System.out.println("Go where?");
+            System.out.println();
             return;
         }
 
@@ -373,6 +368,7 @@ public class Game{
      */
     public boolean saveGame() {
         System.out.println("Do you want to save your progess? (yes or no)");
+        System.out.print(">> ");
         String answer = scnr.nextLine();
         answer = answer.toLowerCase();
 
