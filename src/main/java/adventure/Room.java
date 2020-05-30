@@ -2,7 +2,6 @@ package adventure;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import org.json.simple.JSONObject;
 
 public class Room{
     /* you will need to add some private member variables */
@@ -20,7 +19,6 @@ public class Room{
         short_description = null;
         long_description = null;
         roomName = null;
-        ID = -999;
         rooms = new HashMap<String, Room>();
         contents = new ArrayList<Item>();
         json_rooms = new HashMap<String, Integer>();
@@ -135,6 +133,15 @@ public class Room{
         contents.add(item);
     }
 
+    /**
+     * gets an item from room
+     * @param i
+     * @return item
+     */
+    public Item getItem(int i) {
+        return contents.get(i);
+    }
+
 
     /**
      * checks if rooms contains specified item
@@ -151,13 +158,7 @@ public class Room{
 
     @Override
     public String toString() {
-        return "Room{" +
-                "short_description='" + short_description + '\'' +
-                ", long_description='" + long_description + '\'' +
-                ", roomName='" + roomName + '\'' +
-                ", ID=" + ID +
-                ", rooms=" + rooms +
-                ", contents=" + contents +
-                '}';
+        return roomName + "\n" + long_description + "\n";
+        
     }
 }

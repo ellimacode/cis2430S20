@@ -5,7 +5,12 @@ import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser; 
 import org.json.simple.parser.ParseException;
 
-import java.io.*;
+import java.io.InputStream;
+import java.io.IOException;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -17,12 +22,14 @@ public class Game{
     private Room currentRoom;
     private Item currentItem;
     private Parser parser;
+    private Player player;
     private Scanner scnr = new Scanner(System.in);
 
     //constructor
     public Game() {
         createAdv();
         parser = new Parser();
+        player = new Player();
 
     }
 
@@ -32,7 +39,6 @@ public class Game{
         game as we're going to avoid using static methods
         for this assignment */
         Game theGame = new Game();
-        Player player = new Player();
 
         // 1. Print a welcome message to the user
         System.out.println();
@@ -40,28 +46,23 @@ public class Game{
         System.out.println();
 
         Scanner scnr = new Scanner(System.in);
-
         System.out.print("Enter name: ");
         String playerName = scnr.nextLine();
-        player.setName(playerName);
-        System.out.println("Welcome " + playerName + "!");
 
 //        String filename = scnr.nextLine();
 //
-//        //JSON adventure
 //        JSONObject jsonObject = theGame.loadAdventureJson(filename);
 //        Adventure adventure = theGame.generateAdventure(jsonObject);
 //        ArrayList<Room> rooms = adventure.listAllRooms();
 //        ArrayList<Item> items = adventure.listAllItems();
 
         //default adventure
-        System.out.println(player.getLocation());
+        System.out.println("You are an explorer in a dark haunted cave "
+                + "looking for buried treasure.");
         theGame.runGame();
 
 
     }
-
-
 
     /* you must have these instance methods and may need more*/
 
@@ -71,12 +72,12 @@ public class Game{
      * @return advJson (JSONObject)
      */
     public JSONObject loadAdventureJson(String filename){
-        JSONObject advJson = null;
+        JSONObject adv_json = null;
 
         try (FileReader reader = new FileReader(filename)) {
             JSONParser jsonParser = new JSONParser();
             Object obj = jsonParser.parse(reader);
-            advJson = (JSONObject) obj;
+            adv_json = (JSONObject) obj;
             reader.close();
 
         } catch (FileNotFoundException e) {
@@ -87,7 +88,7 @@ public class Game{
             System.out.println(e);
         }
 
-        return advJson;
+        return adv_json;
     }
 
     /**
@@ -96,7 +97,7 @@ public class Game{
      * @param inputStream
      * @return adv_json (JSONObject)
      */
-    public JSONObject loadAdventureJson(InputStream inputStream) {
+    public JSONObject loadAdventureJson(InputStream inputStream){
         JSONObject adv_json = null;
 
         try {
@@ -152,7 +153,6 @@ public class Game{
             if (enterArray != null) {
                 for (Object current_ent: enterArray) {
                     JSONObject playerEnt = (JSONObject) current_ent;
-
                     Long tempId = (Long) playerEnt.get("id");
                     Integer enter_id = new Integer(tempId.intValue());
                     String direction = (String) playerEnt.get("dir");
@@ -165,7 +165,6 @@ public class Game{
             if (lootArray != null) {
                 for (Object current_loot: lootArray) {
                     JSONObject playerLoot = (JSONObject) current_loot;
-
                     Long temp_id = (Long) playerLoot.get("id");
                     Integer loot_id = new Integer(temp_id.intValue());
 
@@ -178,7 +177,6 @@ public class Game{
                     }
                 }
             }
-
             roomList.add(nextRoom);
         }
 
@@ -194,11 +192,9 @@ public class Game{
 
             Item nextItem = new Item(id, name, itemDescription);
             itemList.add(nextItem);
-
         }
 
         adv = new Adventure(roomList, itemList);
-
         return adv;
     }
 
@@ -208,7 +204,6 @@ public class Game{
      * create rooms and items for default adventure
      */
     public void createAdv() {
-        //creates 6 different rooms
         Room entrance = new Room("The Dark Cave's entrance",
                 "You are at the opening gate to the dark cave. The gate was left unlocked.");
         Room main = new Room("The Cave's main floor",
@@ -226,7 +221,6 @@ public class Game{
         Room underground = new Room("The Underground", "You are underneath the cave's main floor. "
                 + "It's cold and dark.");
 
-        //in the form of north, south, east, west
         entrance.setExits(main, null, null, null, null, null);
         main.setExits(closet, entrance, null, lair, null, underground);
         closet.setExits(null, main, treasure, null, null, null);
@@ -235,11 +229,8 @@ public class Game{
         dark_room.setExits(null, null, lair, null, null, null);
         underground.setExits(null, null, null, null, main, null);
 
-
-        //start at entrance of cave
         currentRoom = entrance;
 
-        //create 3 items
         Item lamp = new Item("Lamp", "A working gas lamp, bright enough to see what's ahead.");
         Item wand = new Item("Wizard Wand", "It's a glowing wand, left behind in the abandoned lair.");
         Item potion = new Item("Potion Bottle", "A bottle of glowing green potion, labelled 'do not drink'.");
@@ -248,7 +239,6 @@ public class Game{
         entrance.addItem(lamp);
         lair.addItem(wand);
         lair.addItem(potion);
-
     }
 
 
@@ -276,7 +266,7 @@ public class Game{
 
     /**
      * process the command the user enters
-     * @param input
+     * @param command
      * @return false
      */
     public boolean processCommand(Command command) {
@@ -341,14 +331,11 @@ public class Game{
             System.out.println("Go where?");
             System.out.println();
             return;
-        }
-
-        else if (command.hasSecondWord()) {
+        } else if (command.hasSecondWord()) {
             String direction = command.getNoun();
 
             if (command.isValid(direction)) {
                 Room next = currentRoom.getConnectedRoom(direction);
-
                 if (next != null) {
                     currentRoom = next;
                     System.out.println(currentRoom.getLongDescription());
@@ -356,16 +343,12 @@ public class Game{
                     System.out.println("No Exit.");
                     System.out.println();
                 }
-            }
-
-            else {
+            } else {
                 System.out.println("Go where?");
                 System.out.println();
                 return;
             }
-
         }
-
     }
 
 
@@ -385,27 +368,23 @@ public class Game{
             String temp = command.getNoun();
 
             if (temp.equals("lamp")) {
-                currentItem = lamp;
-            } else if (temp.equals("potion")) {
-                currentItem = potion;
+                currentItem = currentRoom.getItem(0);
             } else if (temp.equals("wand")) {
-                currentItem = wand;
+                currentItem = currentRoom.getItem(0);
+            } else if (temp.equals("potion")) {
+                currentItem = currentRoom.getItem(1);
             }
 
-            //check if item is valid
             if (currentRoom.containsItem(currentItem)) {
-                player.addItem(currentItem);
+                player.addItems(currentItem);
 
-                System.out.println("You have taken " + currentItem); //FIXME
+                System.out.println("You have taken " + currentItem.getName()); 
                 System.out.println();
-            }
-
-            else {
+            } else {
                 System.out.println("The item doesn't exist.");
                 System.out.println();
                 return;
             }
-
         }
     }
 
@@ -438,13 +417,8 @@ public class Game{
 
     @Override
     public String toString() {
-        return "Game{" +
-                "gameOver=" + gameOver +
-                ", currentRoom=" + currentRoom +
-                ", currentItem=" + currentItem +
-                ", scnr=" + scnr +
-                ", parser=" + parser +
-                '}';
+        return "currentRoom = " + currentRoom +
+                "currentItem = " + currentItem;
     }
 
 

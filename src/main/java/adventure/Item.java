@@ -1,6 +1,8 @@
 package adventure;
 
 
+import java.util.ArrayList;
+
 public class Item{
     /* you will need to add some private member variables */
 
@@ -8,10 +10,13 @@ public class Item{
     private String description;
     private Room room;
     private Integer ID;
+    private ArrayList<Item> items;
 
+    //constructors
     public Item(String name, String info) {
         itemName = name;
         description = info;
+        items = new ArrayList<Item>();
 
     }
 
@@ -19,6 +24,7 @@ public class Item{
         ID = tag;
         itemName = name;
         description = info;
+        items = new ArrayList<Item>();
 
     }
 
@@ -36,6 +42,7 @@ public class Item{
 
         return ID;
     }
+
 
     /**
      * @return item's description

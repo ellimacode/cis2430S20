@@ -1,6 +1,5 @@
 package adventure;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Player {
@@ -13,24 +12,16 @@ public class Player {
     //constructors
     public Player() {
         inventory = new ArrayList<Item>();
-        location = "You are an explorer in a dark haunted cave " +
-                "looking for buried treasure.";
+
     }
 
-    public Player(Room currentRoom) {
+    public Player(String player) {
+        name = player;
         inventory = new ArrayList<Item>();
-        location = "You are an explorer in a dark haunted cave " +
-                "looking for buried treasure.";
 
-        this.currentRoom = currentRoom;
     }
 
     /* REQUIRED METHODS */
-
-    public void setName(String playerName) {
-
-        name = playerName;
-    }
 
     public String getName() {
 

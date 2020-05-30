@@ -32,7 +32,7 @@ in Room class
  */
 
 @Test
-public void TestOne() {
+public void testValidDirect() {
     System.out.println("Testing getConnectedRoom with direction N");
     String north = "N";
     testRoom.getConnectedRoom(north);
@@ -45,9 +45,9 @@ public void TestOne() {
 }
 
 @Test
-public void TestTwo() {
+public void testInvalidDirect() {
     System.out.println("Testing getConnectedRoom with invalid direction");
-    String invalid = "jefefnjn";
+    String invalid = "INVALID";
     testRoom.getConnectedRoom(invalid);
     boolean expected = true;
     boolean result = false;
@@ -56,6 +56,19 @@ public void TestTwo() {
         assertEquals(expected, result);
     }
 
+}
+
+@Test
+public void testCorrectDirect() {
+    System.out.println("Testing getConnectedRoom with lowercase direction");
+    String lowercase = "n";
+    testRoom.getConnectedRoom(lowercase);
+    boolean expected = true;
+    boolean result = false;
+    if (testRoom == null) {
+        result = true;
+        assertEquals(expected, result);
+    }
 }
 
 
