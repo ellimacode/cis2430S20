@@ -138,15 +138,16 @@ public class Room{
 
     /**
      * checks if rooms contains specified item
-     * @param itemName
+     * @param item
      * @return true/false
      */
-    public boolean containsItem(String itemName) {
-        if (contents.contains(itemName)) {
+    public boolean containsItem(Item item) {
+        if (contents.contains(item)) {
             return true;
         }
         return false;
     }
+
 
     @Override
     public String toString() {

@@ -12,14 +12,14 @@ public class Item{
     public Item(String name, String info) {
         itemName = name;
         description = info;
-        room = new Room();
+
     }
 
     public Item(Integer tag, String name, String info) {
         ID = tag;
         itemName = name;
         description = info;
-        room = new Room();
+
     }
 
     /* required public methods */
@@ -47,10 +47,7 @@ public class Item{
 
     public Room getContainingRoom(){
         //returns a reference to the room that contains the item
-        if (room.containsItem(itemName)) {
-            return this.room;
-        }
-        return null; 
+        return room;
     }
 
     /* you may wish to add some helper methods*/

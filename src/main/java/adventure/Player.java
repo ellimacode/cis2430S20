@@ -10,14 +10,19 @@ public class Player {
     private String location;
     private Room currentRoom;
 
-    //constructor
+    //constructors
     public Player() {
         inventory = new ArrayList<Item>();
         location = "You are an explorer in a dark haunted cave " +
                 "looking for buried treasure.";
+    }
 
-        currentRoom = new Room();
-        name = null;
+    public Player(Room currentRoom) {
+        inventory = new ArrayList<Item>();
+        location = "You are an explorer in a dark haunted cave " +
+                "looking for buried treasure.";
+
+        this.currentRoom = currentRoom;
     }
 
     /* REQUIRED METHODS */
@@ -37,6 +42,7 @@ public class Player {
      * @return inventory
      */
     public ArrayList<Item> getInventory() {
+
         return inventory;
     }
 
@@ -67,6 +73,9 @@ public class Player {
         return null;
     }
 
+    public void addItems(Item item) {
+        inventory.add(item);
+    }
 
 
 

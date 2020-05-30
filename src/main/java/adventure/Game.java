@@ -14,10 +14,9 @@ public class Game{
     /* this is the class that runs the game.
     You may need some member variables */
     private boolean gameOver = false;
-    private Room playerRoom;
-    private Item playerItem;
+    private Room currentRoom;
+    private Item currentItem;
     private Parser parser;
-
     private Scanner scnr = new Scanner(System.in);
 
     //constructor
@@ -238,13 +237,14 @@ public class Game{
 
 
         //start at entrance of cave
-        playerRoom = entrance;
+        currentRoom = entrance;
 
+        //create 3 items
         Item lamp = new Item("Lamp", "A working gas lamp, bright enough to see what's ahead.");
         Item wand = new Item("Wizard Wand", "It's a glowing wand, left behind in the abandoned lair.");
-        Item potion = new Item("Potion bottle", "A bottle of glowing green potion, labelled 'do not drink'.");
+        Item potion = new Item("Potion Bottle", "A bottle of glowing green potion, labelled 'do not drink'.");
 
-        //first item
+        //items contained in specified rooms
         entrance.addItem(lamp);
         lair.addItem(wand);
         lair.addItem(potion);
@@ -303,6 +303,7 @@ public class Game{
             System.out.println("look (itemName) - to see description of item");
             System.out.println("look - to see description of current room");
             System.out.println("take (itemName) - to pick up item");
+            System.out.println("inventory - to see current inventory");
             System.out.println("quit - quit game");
             System.out.println();
 
@@ -317,7 +318,7 @@ public class Game{
 
         //prints long description of room use keyword 'look'
         if (userCommand.equals("look")) {
-            System.out.println(playerRoom.getLongDescription());
+            System.out.println(currentRoom.getLongDescription());
             finished = false;
         }
 
@@ -346,11 +347,11 @@ public class Game{
             String direction = command.getNoun();
 
             if (command.isValid(direction)) {
-                Room next = playerRoom.getConnectedRoom(direction);
+                Room next = currentRoom.getConnectedRoom(direction);
 
                 if (next != null) {
-                    playerRoom = next;
-                    System.out.println(playerRoom.getLongDescription());
+                    currentRoom = next;
+                    System.out.println(currentRoom.getLongDescription());
                 } else {
                     System.out.println("No Exit.");
                     System.out.println();
@@ -368,6 +369,10 @@ public class Game{
     }
 
 
+    /**
+     * allows user to take items
+     * @param command
+     */
     public void takeItem(Command command) {
         //get item name (second word)
         if (!command.hasSecondWord()) {
@@ -377,10 +382,29 @@ public class Game{
         }
 
         else if (command.hasSecondWord()) {
-            String thing = command.getNoun();
+            String temp = command.getNoun();
 
-            System.out.println("You have taken " + thing); //FIXME
-            System.out.println();
+            if (temp.equals("lamp")) {
+                currentItem = lamp;
+            } else if (temp.equals("potion")) {
+                currentItem = potion;
+            } else if (temp.equals("wand")) {
+                currentItem = wand;
+            }
+
+            //check if item is valid
+            if (currentRoom.containsItem(currentItem)) {
+                player.addItem(currentItem);
+
+                System.out.println("You have taken " + currentItem); //FIXME
+                System.out.println();
+            }
+
+            else {
+                System.out.println("The item doesn't exist.");
+                System.out.println();
+                return;
+            }
 
         }
     }
@@ -416,8 +440,8 @@ public class Game{
     public String toString() {
         return "Game{" +
                 "gameOver=" + gameOver +
-                ", playerRoom=" + playerRoom +
-                ", playerItem=" + playerItem +
+                ", currentRoom=" + currentRoom +
+                ", currentItem=" + currentItem +
                 ", scnr=" + scnr +
                 ", parser=" + parser +
                 '}';
