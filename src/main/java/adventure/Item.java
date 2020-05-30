@@ -10,13 +10,11 @@ public class Item{
     private String description;
     private Room room;
     private Integer ID;
-    private ArrayList<Item> items;
 
     //constructors
     public Item(String name, String info) {
         itemName = name;
         description = info;
-        items = new ArrayList<Item>();
 
     }
 
@@ -24,7 +22,6 @@ public class Item{
         ID = tag;
         itemName = name;
         description = info;
-        items = new ArrayList<Item>();
 
     }
 
@@ -60,14 +57,15 @@ public class Item{
     /* you may wish to add some helper methods*/
 
 
-    public void setContainingRoom(Room r){
+    public void setContainingRoom(Room containedRoom){
 
-        room = r;
+        room = containedRoom;
     }
     
 
     @Override
     public String toString() {
+
         return itemName + "\n" + description + "\n";
     }
 }

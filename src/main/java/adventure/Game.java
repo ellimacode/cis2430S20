@@ -318,6 +318,15 @@ public class Game{
             finished = false;
         }
 
+        //to see inventory
+        if (userCommand.equals("inventory")) {
+            System.out.println("-----INVENTORY-----");
+            System.out.println();
+            System.out.println(player.getInventory());
+            System.out.println("Total # of items: " + player.numItems());
+            System.out.println();
+        }
+
         return finished;
     }
 
@@ -378,7 +387,7 @@ public class Game{
             if (currentRoom.containsItem(currentItem)) {
                 player.addItems(currentItem);
 
-                System.out.println("You have taken " + currentItem.getName()); 
+                System.out.println("You have taken " + currentItem.getName());
                 System.out.println();
             } else {
                 System.out.println("The item doesn't exist.");
@@ -417,8 +426,8 @@ public class Game{
 
     @Override
     public String toString() {
-        return "currentRoom = " + currentRoom +
-                "currentItem = " + currentItem;
+        return "Room: " + currentRoom +
+                "Item(s): " + currentItem;
     }
 
 

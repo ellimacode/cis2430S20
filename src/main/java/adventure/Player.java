@@ -68,6 +68,15 @@ public class Player {
         inventory.add(item);
     }
 
+    /**
+     * the number of totals items in inventory
+     * @return num_items
+     */
+    public int numItems() {
+        int num_items = inventory.size();
+        return num_items;
+    }
+
 
 
 
