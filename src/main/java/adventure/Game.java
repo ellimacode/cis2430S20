@@ -46,28 +46,41 @@ public class Game implements java.io.Serializable {
         for this assignment */
         Game theGame = new Game();
 
-        //read in command line arguments
-        if (args[0] == "-a") {
-            JSONObject jsonObject = theGame.loadAdventureJson(args[1]);
-            Adventure adventure = theGame.generateAdventure(jsonObject);
-            ArrayList<Room> rooms = adventure.listAllRooms();
-            ArrayList<Item> items = adventure.listAllItems();
-
-        } else if (args[0] == "-l") {
-            System.out.println("\n----------WELCOME BACK " + args[1] + "----------\n");
+        for (int i = 0; i < args.length; i++) {
+            System.out.println("args[" + i + "]: " + args[i]);
         }
 
-        //Print a welcome message to the user
-        System.out.println("\n----------WELCOME TO THE WORLD OF ADVENTURE GAME!----------\n");
+        if (args.length == 0) {
 
-        Scanner scnr = new Scanner(System.in);
-        System.out.print("Enter name: ");
-        String playerName = scnr.nextLine();
+            //Print a welcome message to the user
+            //DEFAULT ADVENTURE
+            System.out.println("\n----------WELCOME TO THE WORLD OF ADVENTURE GAME!----------\n");
 
-        //default adventure
-        System.out.println("You are an explorer in a dark haunted cave "
-                + "looking for buried treasure.");
-        theGame.runGame();
+            Scanner scnr = new Scanner(System.in);
+            System.out.print("Enter name: ");
+            String playerName = scnr.nextLine();
+
+            //default adventure
+            System.out.println("You are an explorer in a dark haunted cave "
+                    + "looking for buried treasure.");
+            theGame.runGame();
+        } else {
+
+            //read in command line arguments
+            if (args[0].equals("-a")) {
+                JSONObject jsonObject = theGame.loadAdventureJson(args[1]);
+                Adventure adventure = theGame.generateAdventure(jsonObject);
+                ArrayList<Room> rooms = adventure.listAllRooms();
+                ArrayList<Item> items = adventure.listAllItems();
+                theGame.runJson();
+
+            }
+
+            if (args[0].equals("-l")) {
+                System.out.println("\n----------WELCOME BACK " + args[1] + "----------\n");
+            }
+
+        }
 
     }
 

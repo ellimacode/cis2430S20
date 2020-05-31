@@ -12,14 +12,15 @@
 
 ### Running from the command line (without maven)
 * To compile: javac *.java
-* To execute: java -jar target/2430_A2-1.0-jar-with-dependencies.jar
+* To execute: java -jar target/2430_A2-1.0-jar-with-dependencies.jar 
+(COMMAND LINE ARGUMENTS)
 
 ### Instructions for using the program
-The program will ask the user if they would like to load a JSON file. 
-If yes, the user will provide filename to load the adventure. 
-If no, the user will be brought to a default adventure. 
-The user must enter all lower case keywords on command line in order to play the game. The directions
-are in captial letters (N, S, E, W, up, down). 
+The user must input command line arguments to either load a saved game/
+a json file (new adventure). 
+If not, the user will be brought to a default adventure. 
+The user must enter all lower case keywords on command line in order to play the game. 
+The directions are in captial letters (N, S, E, W, up, down). 
 You can type 'help' to see the valid commands. 
 To quit the game, simply type 'quit' to exit. 
 
