@@ -1,8 +1,6 @@
 package adventure;
 
 
-import java.util.ArrayList;
-
 public class Item implements java.io.Serializable {
     /* you will need to add some private member variables */
 
@@ -13,21 +11,30 @@ public class Item implements java.io.Serializable {
 
     private static final long serialVersionUID = -3788086098781612036L;
 
-    //constructors
+
+    /**
+     * constructor 1, initialize name and description
+     * @param name
+     * @param info
+     */
     public Item(String name, String info) {
         itemName = name;
         description = info;
 
     }
 
+    /**
+     * constructor 2, initialize tag,name and description
+     * @param tag
+     * @param name
+     * @param info
+     */
     public Item(Integer tag, String name, String info) {
         id = tag;
         itemName = name;
         description = info;
 
     }
-
-    /* required public methods */
 
     /**
      * set the name to item's name
@@ -84,20 +91,31 @@ public class Item implements java.io.Serializable {
         return description;
     }
 
+    /**
+     * returns a reference to the room that contans the item
+     * @return room 
+     */
     public Room getContainingRoom(){
-        //returns a reference to the room that contains the item
         return room;
     }
 
     /* you may wish to add some helper methods*/
 
 
+    /**
+     * set contained room
+     * @param containedRoom
+     */
     public void setContainingRoom(Room containedRoom){
 
         room = containedRoom;
     }
-    
 
+
+    /**
+     * format string for item
+     * @return
+     */
     @Override
     public String toString() {
         return "NAME: " + itemName + ", " + "DESCRIPTION: " + description + "\n";

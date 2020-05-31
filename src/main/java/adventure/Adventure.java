@@ -1,6 +1,5 @@
 package adventure;
 
-import javax.swing.plaf.synth.SynthSeparatorUI;
 import java.util.ArrayList;
 
 public class Adventure implements java.io.Serializable {
@@ -12,9 +11,9 @@ public class Adventure implements java.io.Serializable {
     private ArrayList<Item> items;
     private static final long serialVersionUID = -3788086098781612036L;
 
-    public Adventure (ArrayList<Room> rooms, ArrayList<Item> items) {
-        this.rooms = rooms;
-        this.items = items;
+    public Adventure(ArrayList<Room> listofRooms, ArrayList<Item> listofItems) {
+        rooms = listofRooms;
+        items = listofItems;
     }
 
     /* ======== Required public methods ========== */
@@ -22,38 +21,59 @@ public class Adventure implements java.io.Serializable {
         methods but you do have to provide them.
         We will be using them to test your code */
 
+    /**
+     * get the list of rooms
+     * @return rooms
+     */
     public ArrayList<Room> listAllRooms(){
-
         return rooms;
     }
 
+    /**
+     * get the list of items
+     * @return items
+     */
     public ArrayList<Item> listAllItems(){
-
         return items;
     }
 
+    /**
+     * get the current room's description
+     * @return description
+     */
     public String getCurrentRoomDescription(){
-
         return description;
     }
 
-    /* you may wish to add additional methods*/
-    public Room getCurrentRoom() {
 
+    /**
+     * get the current room
+     * @return currentRoom
+     */
+    public Room getCurrentRoom() {
         return currentRoom;
     }
 
+    /**
+     * set the current room
+     * @param room
+     */
     public void setCurrentRoom(Room room) {
-
         currentRoom = room;
     }
 
 
-    //process commands
+    /**
+     * process quit command
+     * @param toQuit
+     */
     public void quitPlayer(Command toQuit) {
         System.out.println("You are quitting the game.");
     }
 
+    /**
+     * print out helpful commands to user
+     */
     public void helpPlayer() {
         System.out.println("\n-------HELPFUL COMMANDS-------\n");
         System.out.println("go (direction) - to go in the direction (N/S/E/W/up/down)");
@@ -64,6 +84,10 @@ public class Adventure implements java.io.Serializable {
         System.out.println("quit - quit game\n");
     }
 
+    /**
+     * allows player to move
+     * @param toGo
+     */
     public void goPlayer(Command toGo) {
         if (!toGo.hasSecondWord()) {
             System.out.println("Go where?\n");
@@ -87,6 +111,10 @@ public class Adventure implements java.io.Serializable {
         }
     }
 
+    /**
+     * allows player to look at items
+     * @param lookThing
+     */
     public void lookItem(Command lookThing) {
         String thing = lookThing.getNoun();
 
@@ -104,10 +132,17 @@ public class Adventure implements java.io.Serializable {
 
     }
 
+    /**
+     * allows player to look at room description
+     */
     public void lookPlayer() {
         System.out.println(currentRoom.getLongDescription() + "\n");
     }
 
+    /**
+     * format string form of adventure class
+     * @return rooms, items
+     */
     @Override
     public String toString() {
         return "Rooms: " + rooms + "\n"

@@ -13,7 +13,7 @@ public class Command implements java.io.Serializable {
     private static final long serialVersionUID = -3788086098781612036L;
 
     //array of valid commands
-    public static final String[] commands = {"go", "look", "help", "quit", "up", "down",
+    public static final String[] COMMANDS = {"go", "look", "help", "quit", "up", "down",
             "N", "S", "E", "W", "inventory", "take"};
 
   /**
@@ -93,8 +93,8 @@ public class Command implements java.io.Serializable {
     public static Boolean isValid(String command) {
         boolean valid = false;
 
-        for (int i = 0; i < commands.length; i++) {
-            if (commands[i].equals(command)) {
+        for (int i = 0; i < COMMANDS.length; i++) {
+            if (COMMANDS[i].equals(command)) {
                 valid = true;
             }
         }
@@ -103,6 +103,10 @@ public class Command implements java.io.Serializable {
     }
 
 
+    /**
+     * format string for command
+     * @return
+     */
     @Override
     public String toString() {
         return "Action: " + action + ", Noun: " + noun + "\n";

@@ -4,10 +4,13 @@ public class InvalidCommandException extends Exception implements java.io.Serial
     private static final long serialVersionUID = -3788086098781612036L;
 
     public InvalidCommandException(String message) {
-
         super(message);
     }
 
+    /**
+     * format string for exception
+     * @return super
+     */
     @Override
     public String toString() {
 

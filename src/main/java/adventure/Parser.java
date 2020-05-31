@@ -6,43 +6,36 @@ public class Parser implements java.io.Serializable {
 
     private Command command;
     //array of valid action words
-    public static final String[] validActions = {"go", "look", "help", "quit", "up", "down",
+    public static final String[] ACTIONS = {"go", "look", "help", "quit", "up", "down",
             "N", "S", "E", "W", "inventory", "take"};
 
     private static final long serialVersionUID = -3788086098781612036L;
 
-    /* REQUIRED METHODS */
+    /**
+     * parses user input to create valid command
+     * @param userCommand
+     * @return command
+     * @throws InvalidCommandException
+     */
     public Command parseUserCommand(String userCommand) throws InvalidCommandException {
-
-        String first;
-        String second;
-
+        String first = null;
+        String second = null;
         try {
             Scanner tokenizer = new Scanner(userCommand);
-
             if (tokenizer.hasNext()) {
                 first = tokenizer.next();
-            } else {
-                first = null;
             }
-
             if (tokenizer.hasNext()) {
                 second = tokenizer.next();
-            } else {
-                second = null;
             }
-
             if (command.isValid(first)) {
                 return new Command(first, second);
             } else {
                 return new Command(null, second);
             }
-
-
         } catch(InvalidCommandException ex) {
-            throw new InvalidCommandException("Invalid Command. Please try again!");
+            throw new InvalidCommandException("Invalid Command!");
         }
-
     }
 
     /**
@@ -50,12 +43,16 @@ public class Parser implements java.io.Serializable {
      * @return validActions
      */
     public String allCommands() {
-        for (int i = 0; i < validActions.length; i++) {
-            return validActions[i];
+        for (int i = 0; i < ACTIONS.length; i++) {
+            return ACTIONS[i];
         }
         return null;
     }
 
+    /**
+     * format string for command
+     * @return
+     */
     @Override
     public String toString() {
         return "Command: " + command;

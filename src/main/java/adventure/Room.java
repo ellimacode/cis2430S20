@@ -5,46 +5,50 @@ import java.util.HashMap;
 
 public class Room implements java.io.Serializable {
     /* you will need to add some private member variables */
-    private String short_description;
-    private String long_description;
+    private String shortDescription;
+    private String longDescription;
     private String roomName;
     private Integer id;
     private HashMap<String, Room> rooms;
     private ArrayList<Item> contents;
-    private HashMap<String, Integer> json_rooms;
+    private HashMap<String, Integer> jsonRooms;
 
     private static final long serialVersionUID = -3788086098781612036L;
 
     //constructors
     public Room() {
-        short_description = null;
-        long_description = null;
+        shortDescription = null;
+        longDescription = null;
         roomName = null;
         rooms = new HashMap<String, Room>();
         contents = new ArrayList<Item>();
-        json_rooms = new HashMap<String, Integer>();
+        jsonRooms = new HashMap<String, Integer>();
     }
 
     //based on JSONfile
-    public Room(Integer tag, String name, String short_desc, String long_desc) {
+    public Room(Integer tag, String name, String shortDesc, String longDesc) {
         id = tag;
         roomName = name;
-        short_description = short_desc;
-        long_description = long_desc;
-        json_rooms = new HashMap<String, Integer>();
+        shortDescription = shortDesc;
+        longDescription = longDesc;
+        jsonRooms = new HashMap<String, Integer>();
         contents = new ArrayList<Item>();
     }
 
     //based on default adventure
     public Room(String name, String info) {
         roomName = name;
-        long_description = info;
+        longDescription = info;
         rooms = new HashMap<String, Room>();
         contents = new ArrayList<Item>();
     }
 
     /* required public methods */
 
+    /**
+     * get the list of items
+     * @return contents
+     */
     public ArrayList<Item> listItems(){
         //lists all the items in the room
         return contents;
@@ -88,16 +92,16 @@ public class Room implements java.io.Serializable {
      * set long description of room
      * @param info
      */
-    public void setLong_description(String info) {
-        long_description = info;
+    public void setLongDescription(String info) {
+        longDescription = info;
     }
 
     /**
      * get room's long description
-     * @return long_description
+     * @return longDescription
      */
     public String getLongDescription(){
-        return long_description + "\n";
+        return longDescription + "\n";
 
     }
 
@@ -114,11 +118,10 @@ public class Room implements java.io.Serializable {
     /**
      * add connecting room to hashmap, JSON
      * @param direction
-     * @param id
+     * @param tag
      */
-    public void addConnectedRoom(String direction, Integer id) {
-
-        json_rooms.put(direction, id);
+    public void addConnectedRoom(String direction, Integer tag) {
+        jsonRooms.put(direction, tag);
     }
 
     /* you may wish to add some helper methods*/
@@ -186,9 +189,13 @@ public class Room implements java.io.Serializable {
     }
 
 
+    /**
+     * format string for room
+     * @return
+     */
     @Override
     public String toString() {
-        return "Room Name: " + roomName + ", " + "Description: " + long_description + "\n";
+        return "Name: " + roomName + ", " + "Description: " + longDescription + "\n";
         
     }
 }

@@ -122,11 +122,10 @@ public class Player implements java.io.Serializable {
 
     /**
      * the number of totals items in inventory
-     * @return num_items
+     * @return inventory.size()
      */
     public int numItems() {
-        int num_items = inventory.size();
-        return num_items;
+        return inventory.size();
     }
 
 
