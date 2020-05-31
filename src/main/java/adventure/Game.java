@@ -26,7 +26,6 @@ public class Game implements java.io.Serializable {
     private Parser parser;
     private Player player;
     private Scanner scnr = new Scanner(System.in);
-
     private Adventure adventure;
 
     private static final long serialVersionUID = -3788086098781612036L;
@@ -47,28 +46,28 @@ public class Game implements java.io.Serializable {
         for this assignment */
         Game theGame = new Game();
 
-        // 1. Print a welcome message to the user
-        System.out.println();
-        System.out.println("----------WELCOME TO THE WORLD OF ADVENTURE GAME!----------");
-        System.out.println();
+        //read in command line arguments
+        if (args[0] == "-a") {
+            JSONObject jsonObject = theGame.loadAdventureJson(args[1]);
+            Adventure adventure = theGame.generateAdventure(jsonObject);
+            ArrayList<Room> rooms = adventure.listAllRooms();
+            ArrayList<Item> items = adventure.listAllItems();
+
+        } else if (args[0] == "-l") {
+            System.out.println("\n----------WELCOME BACK " + args[1] + "----------\n");
+        }
+
+        //Print a welcome message to the user
+        System.out.println("\n----------WELCOME TO THE WORLD OF ADVENTURE GAME!----------\n");
 
         Scanner scnr = new Scanner(System.in);
         System.out.print("Enter name: ");
         String playerName = scnr.nextLine();
 
-//        System.out.print("Enter filename: ");
-//        String filename = scnr.nextLine();
-//
-//        JSONObject jsonObject = theGame.loadAdventureJson(filename);
-//        Adventure adventure = theGame.generateAdventure(jsonObject);
-//        ArrayList<Room> rooms = adventure.listAllRooms();
-//        ArrayList<Item> items = adventure.listAllItems();
-
         //default adventure
         System.out.println("You are an explorer in a dark haunted cave "
                 + "looking for buried treasure.");
         theGame.runGame();
-
 
     }
 

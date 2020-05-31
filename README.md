@@ -12,7 +12,7 @@
 
 ### Running from the command line (without maven)
 * To compile: javac *.java
-* To execute: java Game 
+* To execute: java -jar target/2430_A2-1.0-jar-with-dependencies.jar
 
 ### Instructions for using the program
 The program will ask the user if they would like to load a JSON file. 
