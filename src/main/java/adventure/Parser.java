@@ -5,6 +5,9 @@ import java.util.Scanner;
 public class Parser {
 
     private Command command;
+    //array of valid action words
+    public static final String[] validActions = {"go", "look", "help", "quit", "up", "down",
+            "N", "S", "E", "W", "inventory", "take"};
 
     /* REQUIRED METHODS */
     public Command parseUserCommand(String userCommand) throws InvalidCommandException {
@@ -40,14 +43,19 @@ public class Parser {
 
     }
 
+    /**
+     * get all valid action words
+     * @return validActions
+     */
     public String allCommands() {
-        return null; 
+        for (int i = 0; i < validActions.length; i++) {
+            return validActions[i];
+        }
+        return null;
     }
 
     @Override
     public String toString() {
-        return "Parser{" +
-                "command=" + command +
-                '}';
+        return "Command: " + command;
     }
 }

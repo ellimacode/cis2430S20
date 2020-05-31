@@ -9,7 +9,7 @@ public class Item{
     private String itemName;
     private String description;
     private Room room;
-    private Integer ID;
+    private Integer id;
 
     //constructors
     public Item(String name, String info) {
@@ -19,7 +19,7 @@ public class Item{
     }
 
     public Item(Integer tag, String name, String info) {
-        ID = tag;
+        id = tag;
         itemName = name;
         description = info;
 
@@ -28,21 +28,54 @@ public class Item{
     /* required public methods */
 
     /**
-     * @return item's name
+     * set the name to item's name
+     * @param name
+     */
+    public void setItemName(String name) {
+
+        itemName = name;
+    }
+
+    /**
+     * get the item's name
+     * @return itemName
      */
     public String getName(){
 
         return itemName;
     }
 
-    public Integer getID() {
+    /**
+     * set the id to num
+     * @param num
+     */
+    public void setId(Integer num) {
 
-        return ID;
+        id = num;
+    }
+
+    /**
+     * get the id of item
+     * @return id
+     */
+    public Integer getId() {
+
+        return id;
+    }
+
+    /**
+     * set the item's description
+     * @param info
+     */
+    public void setDescription(String info) {
+
+        description = info;
     }
 
 
     /**
-     * @return item's description
+     * get long description of item
+     * @return description
      */
     public String getLongDescription(){
 
@@ -65,7 +98,6 @@ public class Item{
 
     @Override
     public String toString() {
-
-        return itemName + "\n" + description + "\n";
+        return "NAME: " + itemName + ", " + "DESCRIPTION: " + description + "\n";
     }
 }

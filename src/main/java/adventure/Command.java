@@ -24,7 +24,6 @@ public class Command {
     }
 
 
-
   /**
      * Create a command object given only an action.  this.noun is set to null
      *
@@ -104,9 +103,6 @@ public class Command {
 
     @Override
     public String toString() {
-        return "Command{" +
-                "action='" + action + '\'' +
-                ", noun='" + noun + '\'' +
-                '}';
+        return "Action: " + action + ", Noun: " + noun + "\n";
     }
 }

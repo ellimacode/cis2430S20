@@ -169,7 +169,7 @@ public class Game{
                     Integer loot_id = new Integer(temp_id.intValue());
 
                     for (Item curr_item: itemList) {
-                        if (loot_id.equals(curr_item.getID())) {
+                        if (loot_id.equals(curr_item.getId())) {
                             nextRoom.addItem(curr_item);
                             curr_item.setContainingRoom(nextRoom);
                             break;
@@ -295,6 +295,7 @@ public class Game{
             System.out.println("take (itemName) - to pick up item");
             System.out.println("inventory - to see current inventory");
             System.out.println("quit - quit game");
+            System.out.println(parser.allCommands());
             System.out.println();
 
             finished = false;
@@ -308,8 +309,28 @@ public class Game{
 
         //prints long description of room use keyword 'look'
         if (userCommand.equals("look")) {
-            System.out.println(currentRoom.getLongDescription());
-            finished = false;
+
+            if (!command.hasSecondWord()) {
+                System.out.println(currentRoom.getLongDescription());
+                finished = false;
+            }
+            else if (command.hasSecondWord()) {
+                String item_name = command.getNoun();
+
+                if (item_name.equals("lamp")) {
+                    currentItem = currentRoom.getItem(0);
+                } else if (item_name.equals("wand")) {
+                    currentItem = currentRoom.getItem(0);
+                } else if (item_name.equals("potion")) {
+                    currentItem = currentRoom.getItem(1);
+                } else {
+                    System.out.println("No item exist.");
+                    System.out.println();
+                }
+
+                System.out.println(currentItem.getLongDescription());
+                System.out.println();
+            }
         }
 
         //to take item and add to inventory
@@ -385,7 +406,7 @@ public class Game{
             }
 
             if (currentRoom.containsItem(currentItem)) {
-                player.addItems(currentItem);
+                player.setInventory(currentItem);
 
                 System.out.println("You have taken " + currentItem.getName());
                 System.out.println();

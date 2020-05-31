@@ -1,13 +1,10 @@
 package adventure;
 
-import org.json.simple.JSONObject;
-import org.json.simple.JSONArray;
-
 import java.util.ArrayList;
 
 public class Adventure{
     /* you will need to add some private member variables */
-    private Room currentRoom = new Room();
+    private Room currentRoom;
     private String description;
     private ArrayList<Room> rooms;
     private ArrayList<Item> items;
@@ -16,7 +13,6 @@ public class Adventure{
         this.rooms = rooms;
         this.items = items;
     }
-
 
     /* ======== Required public methods ========== */
         /* note,  you don't have to USE all of these
@@ -51,11 +47,7 @@ public class Adventure{
 
     @Override
     public String toString() {
-        return "Adventure{" +
-                "currentRoom=" + currentRoom +
-                ", description='" + description + '\'' +
-                ", rooms=" + rooms +
-                ", items=" + items +
-                '}';
+        return "Rooms: " + rooms + "\n"
+                + "Items: " + items + "\n";
     }
 }

@@ -8,7 +8,7 @@ public class Room{
     private String short_description;
     private String long_description;
     private String roomName;
-    private Integer ID;
+    private Integer id;
     private HashMap<String, Room> rooms;
     private ArrayList<Item> contents;
 
@@ -26,11 +26,12 @@ public class Room{
 
     //based on JSONfile
     public Room(Integer tag, String name, String short_desc, String long_desc) {
-        ID = tag;
+        id = tag;
         roomName = name;
         short_description = short_desc;
         long_description = long_desc;
         json_rooms = new HashMap<String, Integer>();
+        contents = new ArrayList<Item>();
     }
 
     //based on default adventure
@@ -49,20 +50,50 @@ public class Room{
     }
 
     /**
-     * @return roomName String
+     * set room name
+     * @param name
+     */
+    public void setRoomName(String name) {
+        roomName = name;
+    }
+
+    /**
+     * get room name
+     * @return roomName
      */
     public String getName(){
         return roomName;
 
     }
 
-    public Integer getID() {
-
-        return ID;
+    /**
+     * set room ID
+     * @param num
+     */
+    public void setId(Integer num) {
+        id = num;
     }
 
     /**
-     * @return the long description of room
+     * get room ID
+     * @return id
+     */
+    public Integer getId() {
+        return id;
+    }
+
+
+    /**
+     * set long description of room
+     * @param info
+     */
+    public void setLong_description(String info) {
+        long_description = info;
+    }
+
+    /**
+     * get room's long description
+     * @return long_description
      */
     public String getLongDescription(){
         return long_description + "\n";
@@ -76,7 +107,6 @@ public class Room{
      * @return the room in the given direction
      */
     public Room getConnectedRoom(String direction) {
-
         return rooms.get(direction);
     }
 
@@ -158,7 +188,7 @@ public class Room{
 
     @Override
     public String toString() {
-        return roomName + "\n" + long_description + "\n";
+        return "Room Name: " + roomName + ", " + "Description: " + long_description + "\n";
         
     }
 }
