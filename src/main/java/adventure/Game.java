@@ -493,13 +493,15 @@ public class Game implements java.io.Serializable {
             System.out.println("Enter a name:");
             String saveFile = scnr.nextLine();
 
+            Game game = new Game();
+
             //serialization
             try {
                 //saving object in a file
                 FileOutputStream outputStream = new FileOutputStream(saveFile);
                 ObjectOutputStream outputDest = new ObjectOutputStream(outputStream);
 
-//                outputDest.writeObject();
+                outputDest.writeObject(game);
 
                 outputDest.close();
                 outputStream.close();
