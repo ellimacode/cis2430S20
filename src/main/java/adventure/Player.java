@@ -2,7 +2,7 @@ package adventure;
 
 import java.util.ArrayList;
 
-public class Player {
+public class Player implements java.io.Serializable {
 
     private ArrayList<Item> inventory;
     private String name;
@@ -10,8 +10,10 @@ public class Player {
     private Room currentRoom;
     private String saveName;
 
+    private static final long serialVersionUID = -3788086098781612036L;
+
     /**
-     * constructor 1
+     * constructor 1, no parameters
      */
     public Player() {
         inventory = new ArrayList<Item>();
@@ -78,6 +80,7 @@ public class Player {
      * @return location
      */
     public String getLocation() {
+
         return location;
     }
 
@@ -86,6 +89,7 @@ public class Player {
      * @param room
      */
     public void setCurrentRoom(Room room) {
+
         currentRoom = room;
     }
 
@@ -94,6 +98,7 @@ public class Player {
      * @return currentRoom
      */
     public Room getCurrentRoom() {
+
         return currentRoom;
     }
 

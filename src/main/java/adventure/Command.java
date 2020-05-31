@@ -6,9 +6,11 @@ commands
 
 You may add other methods to this class if you wish*/
 
-public class Command {
+public class Command implements java.io.Serializable {
     private String action;
     private String noun;
+
+    private static final long serialVersionUID = -3788086098781612036L;
 
     //array of valid commands
     public static final String[] commands = {"go", "look", "help", "quit", "up", "down",

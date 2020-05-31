@@ -5,16 +5,18 @@ import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser; 
 import org.json.simple.parser.ParseException;
 
-import java.io.InputStream;
-import java.io.IOException;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.InputStream;
+import java.io.Serializable;
+import java.io.FileOutputStream;
 import java.io.InputStreamReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.FileReader;
+import java.io.FileNotFoundException;
+import java.io.ObjectOutputStream;
 import java.util.Scanner;
 import java.util.ArrayList;
 
-public class Game{
+public class Game implements java.io.Serializable {
 
     /* this is the class that runs the game.
     You may need some member variables */
@@ -24,6 +26,11 @@ public class Game{
     private Parser parser;
     private Player player;
     private Scanner scnr = new Scanner(System.in);
+
+    private Adventure adventure;
+
+    private static final long serialVersionUID = -3788086098781612036L;
+
 
     //constructor
     public Game() {
@@ -49,6 +56,7 @@ public class Game{
         System.out.print("Enter name: ");
         String playerName = scnr.nextLine();
 
+//        System.out.print("Enter filename: ");
 //        String filename = scnr.nextLine();
 //
 //        JSONObject jsonObject = theGame.loadAdventureJson(filename);
@@ -236,9 +244,75 @@ public class Game{
         Item potion = new Item("Potion Bottle", "A bottle of glowing green potion, labelled 'do not drink'.");
 
         //items contained in specified rooms
-        entrance.addItem(lamp);
+        main.addItem(lamp);
         lair.addItem(wand);
         lair.addItem(potion);
+    }
+
+    /**
+     * game loop for running json
+     */
+    public void runJson() {
+        do {
+            try {
+                System.out.print(">> ");
+                String user2 = scnr.nextLine();
+                Command command2 = parser.parseUserCommand(user2);
+                gameOver = followCommand(command2);
+            } catch (InvalidCommandException ex) {
+                System.out.println(ex.getMessage());
+            }
+
+        } while (!gameOver);
+
+        System.out.println("Thanks for playing.");
+    }
+
+    /**
+     * process user commands for json adventure
+     * @param command
+     */
+    public boolean followCommand(Command command) {
+        boolean done = false;
+
+        String userInput = command.getActionWord();
+
+        if (!command.isValid(userInput)) {
+            System.out.println("Invalid Command.");
+        }
+
+        if (userInput.equals("quit")) {
+            adventure.quitPlayer(command);
+            done = true;
+        }
+
+        if (userInput.equals("help")) {
+            adventure.helpPlayer();
+            done = false;
+        }
+
+        if (userInput.equals("go")) {
+            adventure.goPlayer(command);
+            done = false;
+        }
+
+        if (userInput.equals("look")) {
+            if (command.hasSecondWord()) {
+                adventure.lookItem(command);
+            } else {
+                adventure.lookPlayer();
+            }
+            done = false;
+        }
+
+        if (userInput.equals("inventory")) {
+            System.out.println("--------INVENTORY--------\n");
+            System.out.println(player.getInventory());
+            System.out.println("Total # of items: " + player.numItems() + "\n");
+            done = false;
+        }
+
+        return done;
     }
 
 
@@ -249,9 +323,9 @@ public class Game{
         do {
             try {
                 System.out.print(">> ");
-                String user = scnr.nextLine();
-                Command command = parser.parseUserCommand(user);
-                gameOver = processCommand(command);
+                String user1 = scnr.nextLine();
+                Command command1 = parser.parseUserCommand(user1);
+                gameOver = processCommand(command1);
             }
             catch (InvalidCommandException ex) {
                 System.out.println(ex.getMessage());
@@ -262,7 +336,6 @@ public class Game{
         System.out.println("Thanks for playing.");
 
     }
-
 
     /**
      * process the command the user enters
@@ -286,17 +359,13 @@ public class Game{
 
         //to show user all valid commands use keyword 'help'
         if (userCommand.equals("help")) {
-            System.out.println();
-            System.out.println("-------HELPFUL COMMANDS-------");
-            System.out.println();
+            System.out.println("\n-------HELPFUL COMMANDS-------\n");
             System.out.println("go (direction) - to go in the direction (N/S/E/W/up/down)");
             System.out.println("look (itemName) - to see description of item");
             System.out.println("look - to see description of current room");
             System.out.println("take (itemName) - to pick up item");
             System.out.println("inventory - to see current inventory");
-            System.out.println("quit - quit game");
-            System.out.println(parser.allCommands());
-            System.out.println();
+            System.out.println("quit - quit game\n");
 
             finished = false;
         }
@@ -324,12 +393,10 @@ public class Game{
                 } else if (item_name.equals("potion")) {
                     currentItem = currentRoom.getItem(1);
                 } else {
-                    System.out.println("No item exist.");
-                    System.out.println();
+                    System.out.println("No item exist.\n");
                 }
 
-                System.out.println(currentItem.getLongDescription());
-                System.out.println();
+                System.out.println(currentItem.getLongDescription() + "\n");
             }
         }
 
@@ -341,11 +408,9 @@ public class Game{
 
         //to see inventory
         if (userCommand.equals("inventory")) {
-            System.out.println("-----INVENTORY-----");
-            System.out.println();
+            System.out.println("--------INVENTORY--------\n");
             System.out.println(player.getInventory());
-            System.out.println("Total # of items: " + player.numItems());
-            System.out.println();
+            System.out.println("Total # of items: " + player.numItems() + "\n");
         }
 
         return finished;
@@ -358,8 +423,7 @@ public class Game{
     public void enterRoom(Command command) {
         //get direction (second word)
         if (!command.hasSecondWord()) {
-            System.out.println("Go where?");
-            System.out.println();
+            System.out.println("Go where?\n");
             return;
         } else if (command.hasSecondWord()) {
             String direction = command.getNoun();
@@ -370,12 +434,10 @@ public class Game{
                     currentRoom = next;
                     System.out.println(currentRoom.getLongDescription());
                 } else {
-                    System.out.println("No Exit.");
-                    System.out.println();
+                    System.out.println("No Exit.\n");
                 }
             } else {
-                System.out.println("Go where?");
-                System.out.println();
+                System.out.println("Go where?\n");
                 return;
             }
         }
@@ -389,8 +451,7 @@ public class Game{
     public void takeItem(Command command) {
         //get item name (second word)
         if (!command.hasSecondWord()) {
-            System.out.println("Take what?");
-            System.out.println();
+            System.out.println("Take what?\n");
             return;
         }
 
@@ -408,11 +469,9 @@ public class Game{
             if (currentRoom.containsItem(currentItem)) {
                 player.setInventory(currentItem);
 
-                System.out.println("You have taken " + currentItem.getName());
-                System.out.println();
+                System.out.println("You have taken " + currentItem.getName() + "\n");
             } else {
-                System.out.println("The item doesn't exist.");
-                System.out.println();
+                System.out.println("The item doesn't exist.\n");
                 return;
             }
         }
@@ -432,7 +491,25 @@ public class Game{
         the game */
         if (answer.equals("yes")) {
             System.out.println("Enter a name:");
-            String name = scnr.nextLine();
+            String saveFile = scnr.nextLine();
+
+            //serialization
+            try {
+                //saving object in a file
+                FileOutputStream outputStream = new FileOutputStream(saveFile);
+                ObjectOutputStream outputDest = new ObjectOutputStream(outputStream);
+
+//                outputDest.writeObject();
+
+                outputDest.close();
+                outputStream.close();
+
+                System.out.println("Progress has been saved.");
+
+            } catch (IOException ex) {
+                System.out.println(ex);
+            }
+
             return true;
         }
 
@@ -447,8 +524,7 @@ public class Game{
 
     @Override
     public String toString() {
-        return "Room: " + currentRoom +
-                "Item(s): " + currentItem;
+        return "Room: " + currentRoom + ", Item(s): " + currentItem;
     }
 
 

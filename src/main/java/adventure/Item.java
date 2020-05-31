@@ -3,13 +3,15 @@ package adventure;
 
 import java.util.ArrayList;
 
-public class Item{
+public class Item implements java.io.Serializable {
     /* you will need to add some private member variables */
 
     private String itemName;
     private String description;
     private Room room;
     private Integer id;
+
+    private static final long serialVersionUID = -3788086098781612036L;
 
     //constructors
     public Item(String name, String info) {

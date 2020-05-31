@@ -2,12 +2,14 @@ package adventure;
 
 import java.util.Scanner;
 
-public class Parser {
+public class Parser implements java.io.Serializable {
 
     private Command command;
     //array of valid action words
     public static final String[] validActions = {"go", "look", "help", "quit", "up", "down",
             "N", "S", "E", "W", "inventory", "take"};
+
+    private static final long serialVersionUID = -3788086098781612036L;
 
     /* REQUIRED METHODS */
     public Command parseUserCommand(String userCommand) throws InvalidCommandException {

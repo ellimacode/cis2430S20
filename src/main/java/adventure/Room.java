@@ -3,7 +3,7 @@ package adventure;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Room{
+public class Room implements java.io.Serializable {
     /* you will need to add some private member variables */
     private String short_description;
     private String long_description;
@@ -11,8 +11,9 @@ public class Room{
     private Integer id;
     private HashMap<String, Room> rooms;
     private ArrayList<Item> contents;
-
     private HashMap<String, Integer> json_rooms;
+
+    private static final long serialVersionUID = -3788086098781612036L;
 
     //constructors
     public Room() {
@@ -159,7 +160,6 @@ public class Room{
      * @param item
      */
     public void addItem(Item item) {
-
         contents.add(item);
     }
 
