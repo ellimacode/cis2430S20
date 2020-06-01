@@ -26,6 +26,7 @@ public class Adventure implements java.io.Serializable {
      * @return rooms
      */
     public ArrayList<Room> listAllRooms(){
+
         return rooms;
     }
 
@@ -34,6 +35,7 @@ public class Adventure implements java.io.Serializable {
      * @return items
      */
     public ArrayList<Item> listAllItems(){
+
         return items;
     }
 
@@ -42,6 +44,7 @@ public class Adventure implements java.io.Serializable {
      * @return description
      */
     public String getCurrentRoomDescription(){
+
         return description;
     }
 
@@ -51,6 +54,7 @@ public class Adventure implements java.io.Serializable {
      * @return currentRoom
      */
     public Room getCurrentRoom() {
+
         return currentRoom;
     }
 
@@ -123,7 +127,7 @@ public class Adventure implements java.io.Serializable {
         } else if (thing.equals("wand")) {
             currentItem = currentRoom.getItem(0);
         } else if (thing.equals("potion")) {
-            currentItem = currentRoom.getItem(1);
+            currentItem = currentRoom.getItem(0);
         } else {
             System.out.println("No item exist.\n");
         }

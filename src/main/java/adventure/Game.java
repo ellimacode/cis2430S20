@@ -5,12 +5,12 @@ import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser; 
 import org.json.simple.parser.ParseException;
 
-import java.io.FileOutputStream;
-import java.io.InputStreamReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.InputStream;
 import java.io.FileReader;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -200,15 +200,15 @@ public class Game implements java.io.Serializable {
         Room closet = new Room("A weapon closet",
                 "It is a storage room for armor and weapons. There's a tiny door behind the swords.");
         Room lair = new Room("The Wizard's abandoned lair",
-                "You are in the Wizard's old lair. Something is glowing inside the cupboards.");
+                "You are in the Wizard's old lair. Something is glowing inside the cupboards, a potion.");
         Room treasure = new Room("The Treasure Room",
                 "JACKPOT!!! You are in the TREASURE ROOM. "
-                        + "Jewellery and gold coins pouring out of every treasure chest.");
+                        + "Jewellery and gold coins pouring out of treasure chests.");
         Room darkRoom = new Room("A dark room",
                 "You are in a dark small room. "
                         + "There is a small stepping stool missing one of its legs, and a pile of coal.");
         Room underground = new Room("The Underground", "You are underneath the cave's main floor. "
-                + "It's cold and dark.");
+                + "There's a glowing stick, maybe it's a wand.");
         entrance.setExits(main, null, null, null, null, null);
         main.setExits(closet, entrance, null, lair, null, underground);
         closet.setExits(null, main, treasure, null, null, null);
@@ -220,10 +220,10 @@ public class Game implements java.io.Serializable {
         currentRoom = entrance;
 
         Item lamp = new Item("Lamp", "A working gas lamp, bright enough to see what's ahead.");
-        Item wand = new Item("Wizard Wand", "It's a glowing wand, left behind in the abandoned lair.");
+        Item wand = new Item("Wizard Wand", "It's a glowing wand, probably from the abandoned lair.");
         Item potion = new Item("Potion Bottle", "A bottle of glowing green potion, labelled 'do not drink'.");
         main.addItem(lamp);
-        lair.addItem(wand);
+        underground.addItem(wand);
         lair.addItem(potion);
     }
 
@@ -254,38 +254,26 @@ public class Game implements java.io.Serializable {
      */
     public boolean followCommand(Command command) {
         boolean done = false;
-
         String userInput = command.getActionWord();
-
         if (!command.isValid(userInput)) {
             System.out.println("Invalid Command.");
-        }
-
-        if (userInput.equals("quit")) {
+        } else if (userInput.equals("quit")) {
             adventure.quitPlayer(command);
             done = true;
-        }
-
-        if (userInput.equals("help")) {
+        } else if (userInput.equals("help")) {
             adventure.helpPlayer();
             done = false;
-        }
-
-        if (userInput.equals("go")) {
+        } else if (userInput.equals("go")) {
             adventure.goPlayer(command);
             done = false;
-        }
-
-        if (userInput.equals("look")) {
+        } else if (userInput.equals("look")) {
             if (command.hasSecondWord()) {
                 adventure.lookItem(command);
             } else {
                 adventure.lookPlayer();
             }
             done = false;
-        }
-
-        if (userInput.equals("inventory")) {
+        } else if (userInput.equals("inventory")) {
             System.out.println("--------INVENTORY--------\n");
             System.out.println(player.getInventory());
             System.out.println("Total # of items: " + player.numItems() + "\n");
@@ -328,42 +316,26 @@ public class Game implements java.io.Serializable {
             System.out.println("Invalid Command.");
         }
 
-        //to quit the game use keyword 'quit'
         if (userCommand.equals("quit")) {
             System.out.println("You are quitting the game.");
             finished = saveGame();
-        }
-
-        //to show user all valid commands use keyword 'help'
-        if (userCommand.equals("help")) {
+        } else if (userCommand.equals("help")) {
             helpGame();
             finished = false;
-        }
-
-        //to move from room to room use keyword 'go'
-        if (userCommand.contains("go")) {
+        } else if (userCommand.contains("go")) {
             enterRoom(command);
             finished = false;
-        }
-
-        //prints long description of room use keyword 'look'
-        if (userCommand.equals("look")) {
+        } else if (userCommand.equals("look")) {
             if (!command.hasSecondWord()) {
                 System.out.println(currentRoom.getLongDescription());
             } else if (command.hasSecondWord()) {
                 lookItem(command);
             }
             finished = false;
-        }
-
-        //to take item
-        if (userCommand.contains("take")) {
+        } else if (userCommand.contains("take")) {
             takeItem(command);
             finished = false;
-        }
-
-        //to see inventory
-        if (userCommand.equals("inventory")) {
+        } else if (userCommand.equals("inventory")) {
             checkInventory();
             finished = false;
         }
@@ -500,7 +472,7 @@ public class Game implements java.io.Serializable {
         } else if (temp.equals("wand")) {
             currentItem = currentRoom.getItem(0);
         } else if (temp.equals("potion")) {
-            currentItem = currentRoom.getItem(1);
+            currentItem = currentRoom.getItem(0);
         }
         return currentItem;
     }
