@@ -6,11 +6,9 @@ commands
 
 You may add other methods to this class if you wish*/
 
-public class Command implements java.io.Serializable {
+public class Command {
     private String action;
     private String noun;
-
-    private static final long serialVersionUID = -3788086098781612036L;
 
     //array of valid commands
     public static final String[] COMMANDS = {"go", "look", "help", "quit", "up", "down",
@@ -102,6 +100,14 @@ public class Command implements java.io.Serializable {
         return valid;
     }
 
+    /**
+     * get the array of valid commands
+     * @return COMMANDS
+     */
+    public String[] getCommands() {
+        return COMMANDS;
+    }
+
 
     /**
      * format string for command
@@ -109,6 +115,7 @@ public class Command implements java.io.Serializable {
      */
     @Override
     public String toString() {
+
         return "Action: " + action + ", Noun: " + noun + "\n";
     }
 }

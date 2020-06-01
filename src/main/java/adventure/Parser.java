@@ -1,15 +1,11 @@
 package adventure;
 
 import java.util.Scanner;
+import java.util.StringJoiner;
 
-public class Parser implements java.io.Serializable {
+public class Parser {
 
     private Command command;
-    //array of valid action words
-    public static final String[] ACTIONS = {"go", "look", "help", "quit", "up", "down",
-            "N", "S", "E", "W", "inventory", "take"};
-
-    private static final long serialVersionUID = -3788086098781612036L;
 
     /**
      * parses user input to create valid command
@@ -40,13 +36,16 @@ public class Parser implements java.io.Serializable {
 
     /**
      * get all valid action words
-     * @return validActions
+     * @return allActions
      */
     public String allCommands() {
-        for (int i = 0; i < ACTIONS.length; i++) {
-            return ACTIONS[i];
+        String[] actions = command.getCommands();
+        StringJoiner joiner = new StringJoiner("/");
+        for (int i = 0; i < actions.length; i++) {
+            joiner.add(actions[i]);
         }
-        return null;
+        String allActions = joiner.toString();
+        return allActions;
     }
 
     /**

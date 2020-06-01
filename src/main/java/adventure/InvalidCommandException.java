@@ -1,9 +1,9 @@
 package adventure;
 
-public class InvalidCommandException extends Exception implements java.io.Serializable {
-    private static final long serialVersionUID = -3788086098781612036L;
+public class InvalidCommandException extends Exception {
 
     public InvalidCommandException(String message) {
+
         super(message);
     }
 
