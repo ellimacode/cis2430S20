@@ -222,9 +222,13 @@ public class Game implements java.io.Serializable {
         Item lamp = new Item("Lamp", "A working gas lamp, bright enough to see what's ahead.");
         Item wand = new Item("Wizard Wand", "It's a glowing wand, probably from the abandoned lair.");
         Item potion = new Item("Potion Bottle", "A bottle of glowing green potion, labelled 'do not drink'.");
+        Item apple = new Item("Apple", "A shiny, red apple.");
+        Item cape = new Item("Red Cape", "A red velvety cape, probably worn by the King.");
         main.addItem(lamp);
         underground.addItem(wand);
         lair.addItem(potion);
+        darkRoom.addItem(apple);
+        closet.addItem(cape);
     }
 
 
@@ -438,7 +442,6 @@ public class Game implements java.io.Serializable {
         System.out.println("Do you want to save your progess? (yes or no)");
         System.out.print(">> ");
         String answer = scnr.nextLine();
-        answer = answer.toLowerCase();
         if (answer.equals("yes")) {
             System.out.println("Enter a name:");
             String saveFile = scnr.nextLine();

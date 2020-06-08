@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="8.29">
+<file name="/home/undergrad/1/ccua/Desktop/2430S20/project/src/main/java/adventure/Game.java">
+<error line="115" column="5" severity="error" message="Method length is 54 lines (max allowed is 20)." source="com.puppycrawl.tools.checkstyle.checks.sizes.MethodLengthCheck"/>
+<error line="195" column="5" severity="error" message="Method length is 32 lines (max allowed is 20)." source="com.puppycrawl.tools.checkstyle.checks.sizes.MethodLengthCheck"/>
+<error line="255" column="5" severity="error" message="Method length is 29 lines (max allowed is 20)." source="com.puppycrawl.tools.checkstyle.checks.sizes.MethodLengthCheck"/>
+<error line="311" column="5" severity="error" message="Method length is 31 lines (max allowed is 20)." source="com.puppycrawl.tools.checkstyle.checks.sizes.MethodLengthCheck"/>
+<error line="437" column="5" severity="error" message="Method length is 25 lines (max allowed is 20)." source="com.puppycrawl.tools.checkstyle.checks.sizes.MethodLengthCheck"/>
+</file>
+<file name="/home/undergrad/1/ccua/Desktop/2430S20/project/src/main/java/adventure/Adventure.java">
+</file>
+<file name="/home/undergrad/1/ccua/Desktop/2430S20/project/src/main/java/adventure/Command.java">
+</file>
+<file name="/home/undergrad/1/ccua/Desktop/2430S20/project/src/main/java/adventure/Parser.java">
+</file>
+<file name="/home/undergrad/1/ccua/Desktop/2430S20/project/src/main/java/adventure/Item.java">
+</file>
+<file name="/home/undergrad/1/ccua/Desktop/2430S20/project/src/main/java/adventure/InvalidCommandException.java">
+</file>
+<file name="/home/undergrad/1/ccua/Desktop/2430S20/project/src/main/java/adventure/Room.java">
+</file>
+<file name="/home/undergrad/1/ccua/Desktop/2430S20/project/src/main/java/adventure/Player.java">
+</file>
+</checkstyle>
