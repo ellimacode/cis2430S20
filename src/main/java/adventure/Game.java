@@ -198,7 +198,8 @@ public class Game implements java.io.Serializable {
         Room main = new Room("The Cave's main floor",
                 "You are in the cave's main floor. A small lamp on the floor allows you to see.");
         Room closet = new Room("A weapon closet",
-                "It is a storage room for armor and weapons. There's a tiny door behind the swords.");
+                "It's a storage room for armor and weapons. A cape fell on the floor." +
+                        " There's a tiny door behind the swords.");
         Room lair = new Room("The Wizard's abandoned lair",
                 "You are in the Wizard's old lair. Something is glowing inside the cupboards, a potion.");
         Room treasure = new Room("The Treasure Room",
@@ -206,7 +207,7 @@ public class Game implements java.io.Serializable {
                         + "Jewellery and gold coins pouring out of treasure chests.");
         Room darkRoom = new Room("A dark room",
                 "You are in a dark small room. "
-                        + "There is a small stepping stool missing one of its legs, and a pile of coal.");
+                        + "There is a small apple sitting on top of a broken stepping stool.");
         Room underground = new Room("The Underground", "You are underneath the cave's main floor. "
                 + "There's a glowing stick, maybe it's a wand.");
         entrance.setExits(main, null, null, null, null, null);
@@ -222,7 +223,7 @@ public class Game implements java.io.Serializable {
         Item lamp = new Item("Lamp", "A working gas lamp, bright enough to see what's ahead.");
         Item wand = new Item("Wizard Wand", "It's a glowing wand, probably from the abandoned lair.");
         Item potion = new Item("Potion Bottle", "A bottle of glowing green potion, labelled 'do not drink'.");
-        Item apple = new Item("Apple", "A shiny, red apple.");
+        Item apple = new Item("Apple", "A shiny, red apple. It's okay to eat it.");
         Item cape = new Item("Red Cape", "A red velvety cape, probably worn by the King.");
         main.addItem(lamp);
         underground.addItem(wand);
@@ -319,9 +320,7 @@ public class Game implements java.io.Serializable {
         if (!command.isValid(userCommand)) {
             System.out.println("Invalid Command.");
         }
-
         if (userCommand.equals("quit")) {
-            System.out.println("You are quitting the game.");
             finished = saveGame();
         } else if (userCommand.equals("help")) {
             helpGame();
@@ -427,10 +426,13 @@ public class Game implements java.io.Serializable {
     public void helpGame() {
         System.out.println("\n-------HELPFUL COMMANDS-------\n");
         System.out.println("go (direction) - to go in the direction (N/S/E/W/up/down)");
-        System.out.println("look (itemName) - to see description of item");
+        System.out.println("look (item) - to see description of item");
         System.out.println("look - to see description of current room");
-        System.out.println("take (itemName) - to pick up item");
+        System.out.println("take (item) - to pick up item");
         System.out.println("inventory - to see current inventory");
+        System.out.println("eat (item) - to eat edible item");
+        System.out.println("wear (item) - to wear clothing item");
+        System.out.println("throw (item) - to throw item");
         System.out.println("quit - quit game\n");
     }
 
