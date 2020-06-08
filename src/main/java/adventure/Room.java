@@ -59,6 +59,7 @@ public class Room implements java.io.Serializable {
      * @param name
      */
     public void setName(String name) {
+
         roomName = name;
     }
 
