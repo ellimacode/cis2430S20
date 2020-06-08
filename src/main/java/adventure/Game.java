@@ -476,6 +476,10 @@ public class Game implements java.io.Serializable {
             currentItem = currentRoom.getItem(0);
         } else if (temp.equals("potion")) {
             currentItem = currentRoom.getItem(0);
+        } else if (temp.equals("apple")) {
+            currentItem = currentRoom.getItem(0);
+        } else if (temp.equals("cape")) {
+            currentItem = currentRoom.getItem(0);
         }
         return currentItem;
     }
