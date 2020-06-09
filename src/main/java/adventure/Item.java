@@ -11,7 +11,6 @@ public class Item implements java.io.Serializable {
 
     private static final long serialVersionUID = -3788086098781612036L;
 
-
     /**
      * constructor 1, initialize name and description
      * @param name
@@ -118,6 +117,7 @@ public class Item implements java.io.Serializable {
      */
     @Override
     public String toString() {
+
         return "NAME: " + itemName + ", " + "DESCRIPTION: " + description + "\n";
     }
 }
