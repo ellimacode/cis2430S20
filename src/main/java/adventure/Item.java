@@ -12,7 +12,7 @@ public class Item implements java.io.Serializable {
     private static final long serialVersionUID = -3788086098781612036L;
 
     /**
-     * constructor 1, initialize name and description
+     * constructor, initialize name and description
      * @param name
      * @param info
      */
@@ -23,7 +23,7 @@ public class Item implements java.io.Serializable {
     }
 
     /**
-     * constructor 2, initialize tag,name and description
+     * constructor, initialize tag,name and description
      * @param tag
      * @param name
      * @param info
