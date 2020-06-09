@@ -52,9 +52,10 @@ public class Player implements java.io.Serializable {
      * add item to list of inventory
      * @param item
      */
-    public void setInventory(Item item) {
-
-        inventory.add(item);
+    public void addInventory(Item item) {
+        if (!inventory.contains(item)) {
+            inventory.add(item);
+        }
     }
 
     /**
@@ -125,6 +126,7 @@ public class Player implements java.io.Serializable {
      * @return inventory.size()
      */
     public int numItems() {
+
         return inventory.size();
     }
 

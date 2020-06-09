@@ -63,6 +63,7 @@ public class Adventure implements java.io.Serializable {
      * @param room
      */
     public void setCurrentRoom(Room room) {
+
         currentRoom = room;
     }
 
@@ -72,6 +73,7 @@ public class Adventure implements java.io.Serializable {
      * @param toQuit
      */
     public void quitPlayer(Command toQuit) {
+
         System.out.println("You are quitting the game.");
     }
 
@@ -136,10 +138,12 @@ public class Adventure implements java.io.Serializable {
 
     }
 
+
     /**
      * allows player to look at room description
      */
     public void lookPlayer() {
+
         System.out.println(currentRoom.getLongDescription() + "\n");
     }
 

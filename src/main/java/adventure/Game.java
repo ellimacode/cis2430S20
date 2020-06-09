@@ -384,7 +384,7 @@ public class Game implements java.io.Serializable {
             String temp = command.getNoun();
             currentItem = validItem(temp);
             if (currentRoom.containsItem(currentItem)) {
-                player.setInventory(currentItem);
+                player.addInventory(currentItem);
                 System.out.println("You have taken " + currentItem.getName() + "\n");
             } else {
                 System.out.println("The item doesn't exist.\n");
@@ -493,6 +493,7 @@ public class Game implements java.io.Serializable {
      */
     @Override
     public String toString() {
+
         return "Room: " + currentRoom + ", Item(s): " + currentItem;
     }
 
