@@ -95,6 +95,7 @@ public class Item implements java.io.Serializable {
      * @return room 
      */
     public Room getContainingRoom(){
+
         return room;
     }
 

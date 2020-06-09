@@ -8,11 +8,13 @@ public class Food extends Item implements Edible {
      * @param type
      */
     public Food(String food, String type) {
+
         super(food, type);
     }
 
     @Override
     public String eat() {
+
         return "Food Item is edible.\n";
     }
 	

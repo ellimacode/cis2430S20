@@ -8,6 +8,7 @@ public class SmallFood extends Food implements Tossable {
      * @param type
      */
     public SmallFood(String smallFood, String type) {
+
         super(smallFood, type);
     }
 

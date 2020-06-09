@@ -201,7 +201,7 @@ public class Game implements java.io.Serializable {
                 "It's a storage room for armor and weapons. A cape fell on the floor." +
                         " There's a tiny door behind the swords.");
         Room lair = new Room("The Wizard's abandoned lair",
-                "You are in the Wizard's old lair. Something is glowing inside the cupboards, a potion.");
+                "You are in the Wizard's old lair. Something is glowing inside the cupboards, it's a potion.");
         Room treasure = new Room("The Treasure Room",
                 "JACKPOT!!! You are in the TREASURE ROOM. "
                         + "Jewellery and gold coins pouring out of treasure chests.");
@@ -403,7 +403,11 @@ public class Game implements java.io.Serializable {
         } else if (thingName.equals("wand")) {
             currentItem = currentRoom.getItem(0);
         } else if (thingName.equals("potion")) {
-            currentItem = currentRoom.getItem(1);
+            currentItem = currentRoom.getItem(0);
+        } else if (thingName.equals("cape")) {
+            currentItem = currentRoom.getItem(0);
+        } else if (thingName.equals("apple")) {
+            currentItem = currentRoom.getItem(0);
         } else {
             System.out.println("No item exist.\n");
         }
@@ -432,7 +436,8 @@ public class Game implements java.io.Serializable {
         System.out.println("inventory - to see current inventory");
         System.out.println("eat (item) - to eat edible item");
         System.out.println("wear (item) - to wear clothing item");
-        System.out.println("throw (item) - to throw item");
+        System.out.println("toss (item) - to throw item");
+        System.out.println("read (item) - to read labelled item");
         System.out.println("quit - quit game\n");
     }
 
