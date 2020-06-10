@@ -12,41 +12,51 @@ public class Gui extends JFrame {
     public static final int WIDTH = 600;
     public static final int HEIGHT = 500;
 
+    private Container contentPane;
+    private BorderLayout layout;
+    private JLabel label;
+    private JTextField item1;
+    private JTextField item2;
+
+
     /**
      * constructor
      * @param g
      */
     public Gui(Game myGame) {
-        super();
+        super("ADVENTURE GAME");
         game = myGame;
-        setSize(WIDTH, HEIGHT);
-        setTitle("ADVENTURE GAME");
+        setupSize();
 
-        //to close window and exit program
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        layout = new BorderLayout();
+        layout.setHgap(10);
+        layout.setVgap(10);
 
-        Container contentPane = getContentPane();
-        contentPane.setLayout(new FlowLayout());
+        setLayout(layout);
 
-        //create a label
-        JLabel label = new JLabel("Label");
-        contentPane.add(label);
+        label = new JLabel("LABEL");
+        label.setToolTipText("This is gonna show up on hover");
+        add(label);
 
-        //create a panel, type of container
-        JPanel panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
-        //create a second label, add to panel
-        JLabel label1 = new JLabel("Lambda Listeners");
-        panel.add(label1);
-        //create a text field, add to panel
-        TextField text = new TextField("This is a text field.");
-        panel.add(text);
+        item1 = new JTextField(10);
+        add(item1, BorderLayout.LINE_START);
 
-        //add panel to container
-        contentPane.add(panel);
+        item2 = new JTextField("enter text here");
+        add(item2, BorderLayout.CENTER);
+
+        item1.addActionListener(e->JOptionPane.showMessageDialog(null, "Handled Lambda Listener!"));
+
 
     }
 
+    //set up size of window
+    private void setupSize() {
+        setSize(WIDTH, HEIGHT);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+
+
+    //launcher
     public static void main(String[] args) {
         Game game = new Game();
         Gui gui = new Gui(game);
