@@ -12,11 +12,18 @@ public class Gui extends JFrame {
     public static final int WIDTH = 600;
     public static final int HEIGHT = 500;
 
+
+    public static final String[] choices = {
+            "Rename Player Name", "Load JSON", "Load Saved Game", "Save"
+    };
+
     private Container contentPane;
     private BorderLayout layout;
     private JLabel label;
-    private JTextField item1;
-    private JTextField item2;
+
+    private JComboBox<String> menuBox;
+    private JTextArea textArea;
+    private JTextField commandLine;
 
 
     /**
@@ -25,7 +32,6 @@ public class Gui extends JFrame {
      */
     public Gui(Game myGame) {
         super("ADVENTURE GAME");
-        game = myGame;
         setupSize();
 
         layout = new BorderLayout();
@@ -38,15 +44,36 @@ public class Gui extends JFrame {
         label.setToolTipText("This is gonna show up on hover");
         add(label);
 
-        item1 = new JTextField(10);
-        add(item1, BorderLayout.LINE_START);
+        menuBox = createMenu();
+        add(menuBox, BorderLayout.LINE_START);
 
-        item2 = new JTextField("enter text here");
-        add(item2, BorderLayout.CENTER);
+        textArea = new JTextArea("Description is here...");
+        textArea.setSize(100,50);
+        add(textArea, BorderLayout.CENTER);
+        menuBox.addActionListener(e->JOptionPane.showMessageDialog(null, "Handled Lambda Listener!"));
 
-        item1.addActionListener(e->JOptionPane.showMessageDialog(null, "Handled Lambda Listener!"));
+
+        commandLine = createCommand();
+        add(commandLine, BorderLayout.SOUTH);
 
 
+    }
+
+
+
+    //create command line for user input
+    private JTextField createCommand() {
+        commandLine = new JTextField("Type commands here...");
+        commandLine.setEditable(true);
+        return commandLine;
+    }
+
+
+    //create single menu
+    private JComboBox<String> createMenu() {
+        menuBox = new JComboBox<String>(choices);
+        menuBox.setMaximumSize(menuBox.getPreferredSize());
+        return menuBox;
     }
 
     //set up size of window
