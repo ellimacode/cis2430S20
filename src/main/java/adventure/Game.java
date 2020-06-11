@@ -196,7 +196,7 @@ public class Game implements java.io.Serializable {
         Room entrance = new Room("The Dark Cave's entrance",
                 "You are at the opening gate to the dark cave. The gate was left unlocked.");
         Room main = new Room("The Cave's main floor",
-                "You are in the cave's main floor. A small lamp on the floor allows you to see.");
+                "You are in the cave's main floor. A lamp on the floor allows you to see.");
         Room closet = new Room("A weapon closet",
                 "It's a storage room for armor and weapons. A cape fell on the floor." +
                         " There's a tiny door behind the swords.");
@@ -207,7 +207,7 @@ public class Game implements java.io.Serializable {
                         + "Jewellery and gold coins pouring out of treasure chests.");
         Room darkRoom = new Room("A dark room",
                 "You are in a dark small room. "
-                        + "There is a small apple sitting on top of a broken stepping stool.");
+                        + "There is an apple sitting on top of a broken stepping stool.");
         Room underground = new Room("The Underground", "You are underneath the cave's main floor. "
                 + "There's a glowing stick, maybe it's a wand.");
         entrance.setExits(main, null, null, null, null, null);
@@ -341,6 +341,10 @@ public class Game implements java.io.Serializable {
         } else if (userCommand.equals("inventory")) {
             checkInventory();
             finished = false;
+        } else if (userCommand.equals("eat") | userCommand.equals("toss") |
+                userCommand.equals("wear")) {
+            actionItem(command);
+            finished = false;
         }
         return finished;
     }
@@ -389,6 +393,30 @@ public class Game implements java.io.Serializable {
             } else {
                 System.out.println("The item doesn't exist.\n");
             }
+        }
+    }
+
+    /**
+     * allow user to do one of three actions: wear,
+     * throw and eat item
+     */
+    public void actionItem(Command command) {
+        String action = command.getActionWord();
+
+        if (!command.hasSecondWord()) {
+            System.out.println("Do what?\n");
+            return;
+        } else if (command.hasSecondWord()) {
+            String thing = command.getNoun();
+            currentItem = validItem(thing);
+            if (action.equals("eat")) {
+
+            } else if (action.equals("throw")) {
+
+            } else if (action.equals("wear")) {
+
+            }
+
         }
     }
 

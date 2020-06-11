@@ -15,7 +15,7 @@ public class SmallFood extends Food implements Tossable {
     @Override
     public String toss() {
 
-        return "SmallFood is tossable.\n";
+        return "You can toss the item.\n";
     }
 
 }

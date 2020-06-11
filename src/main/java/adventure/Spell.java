@@ -10,7 +10,7 @@ public class Spell extends Item implements Readable {
     @Override
     public String read() {
 
-        return "Spell is readable.\n";
+        return "You can read the spell.\n";
     }
 
 }

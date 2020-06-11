@@ -12,7 +12,7 @@ public class Command {
 
     //array of valid commands
     public static final String[] COMMANDS = {"go", "look", "help", "quit", "up", "down",
-            "N", "S", "E", "W", "inventory", "take"};
+            "N", "S", "E", "W", "inventory", "take", "eat", "toss", "wear", "read"};
 
   /**
      * Create a command object with default values.  

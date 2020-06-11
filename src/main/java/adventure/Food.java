@@ -15,7 +15,7 @@ public class Food extends Item implements Edible {
     @Override
     public String eat() {
 
-        return "Food Item is edible.\n";
+        return "You can eat the item.\n";
     }
 	
 	
