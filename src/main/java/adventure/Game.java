@@ -203,7 +203,7 @@ public class Game implements java.io.Serializable {
         Room lair = new Room("The Wizard's abandoned lair",
                 "You are in the Wizard's old lair. Something is glowing inside the cupboards, it's a potion.");
         Room treasure = new Room("The Treasure Room",
-                "JACKPOT!!! You are in the TREASURE ROOM. "
+                "JACKPOT!!! It is the TREASURE ROOM. "
                         + "Jewellery and gold coins pouring out of treasure chests.");
         Room darkRoom = new Room("A dark room",
                 "You are in a dark small room. "
@@ -334,6 +334,10 @@ public class Game implements java.io.Serializable {
             checkInventory();
         } else if (userCommand.equals("eat")) {
             eatItem(command);
+        } else if (userCommand.equals("wear")) {
+            wearItem(command);
+        } else if (userCommand.equals("toss")) {
+            tossItem(command);
         }
         return finished;
     }
@@ -431,10 +435,45 @@ public class Game implements java.io.Serializable {
             if (food.equals("apple")) {
                 currentItem = currentRoom.getItem(0);
                 System.out.println("You have eaten " + currentItem.getName() + "\n");
-                player.removeItem(currentItem);
+                player.removeItem(currentItem); //removed from inventory
 
             } else {
                 System.out.println("Item cannot be eaten.\n");
+            }
+        }
+    }
+
+    /**
+     * allow user to wear item, if wearable
+     */
+    public void wearItem(Command command) {
+        if (!command.hasSecondWord()) {
+            System.out.println("Wear what?\n");
+            return;
+        } else {
+            String clothes = command.getNoun();
+            if (clothes.equals("cape")) {
+                currentItem = currentRoom.getItem(0);
+                System.out.println("You have worn " +  currentItem.getName() + "\n");
+            } else {
+                System.out.println("Item cannot be worn.\n");
+            }
+        }
+    }
+
+    /**
+     * allow user to toss item, if tossable
+     */
+    public void tossItem(Command command) {
+        if (!command.hasSecondWord()) {
+            System.out.println("Toss what?\n");
+            return;
+        } else {
+            String itemThrow = command.getNoun();
+            if (itemThrow.equals("apple")) {
+
+            } else {
+                System.out.println("Item cannot be tossed.\n");
             }
         }
     }
