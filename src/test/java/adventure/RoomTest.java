@@ -4,16 +4,19 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 import static org.junit.Assert.assertTrue;
 
+import jdk.internal.jline.internal.TestAccessible;
 import org.junit.Test;
 import org.junit.Before;
 
 
 public class RoomTest{
     private Room testRoom;
+    private Item testItem;
 
 @Before
 public void setup(){
     testRoom = new Room();
+    testItem = new Item();
 
 }
 
@@ -26,9 +29,7 @@ public void testSetNameWithValidInput(){
 
 }
 
-/* test cases for GetConnectedRoom method
-in Room class
- */
+// test cases for GetConnectedRoom method in Room class
 
 @Test
 public void testValidDirect() {
@@ -68,6 +69,38 @@ public void testCorrectDirect() {
         result = true;
         assertEquals(expected, result);
     }
+}
+
+
+//new test cases for A3
+
+@Test
+public void testInvalidExit() {
+    System.out.println("Testing invalid exits of rooms");
+
+}
+
+@Test
+public void testInvalidItem() {
+    System.out.println("Testing items in inventory that don't exist in room");
+
+
+}
+
+
+@Test
+public void testInvalidID() {
+    System.out.println("Testing exits to a room ID that doesn't exist in room");
+
+
+}
+
+@Test
+public void testNoExits() {
+    System.out.println("Testing rooms with no exits");
+
+
+
 }
 
 

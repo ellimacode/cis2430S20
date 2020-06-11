@@ -13,8 +13,8 @@ public class Gui extends JFrame {
     public static final int HEIGHT = 500;
 
 
-    public static final String[] choices = {
-            "Rename Player Name", "Load JSON", "Load Saved Game", "Save"
+    public static final String[] options = {
+            "Change Player Name", "Load JSON file", "Load Saved Game", "Save"
     };
 
     private Container contentPane;
@@ -41,7 +41,6 @@ public class Gui extends JFrame {
         setLayout(layout);
 
         label = new JLabel("LABEL");
-        label.setToolTipText("This is gonna show up on hover");
         add(label);
 
         menuBox = createMenu();
@@ -71,7 +70,7 @@ public class Gui extends JFrame {
 
     //create single menu
     private JComboBox<String> createMenu() {
-        menuBox = new JComboBox<String>(choices);
+        menuBox = new JComboBox<String>(options);
         menuBox.setMaximumSize(menuBox.getPreferredSize());
         return menuBox;
     }
