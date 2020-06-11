@@ -68,6 +68,14 @@ public class Player implements java.io.Serializable {
     }
 
     /**
+     * remove item from inventory
+     * @param item
+     */
+    public void removeItem(Item item) {
+        inventory.remove(item);
+    }
+
+    /**
      * set the player's location
      * @param place
      */

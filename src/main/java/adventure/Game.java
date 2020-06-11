@@ -267,22 +267,18 @@ public class Game implements java.io.Serializable {
             done = true;
         } else if (userInput.equals("help")) {
             adventure.helpPlayer();
-            done = false;
         } else if (userInput.equals("go")) {
             adventure.goPlayer(command);
-            done = false;
         } else if (userInput.equals("look")) {
             if (command.hasSecondWord()) {
                 adventure.lookItem(command);
             } else {
                 adventure.lookPlayer();
             }
-            done = false;
         } else if (userInput.equals("inventory")) {
             System.out.println("--------INVENTORY--------\n");
             System.out.println(player.getInventory());
             System.out.println("Total # of items: " + player.numItems() + "\n");
-            done = false;
         }
 
         return done;
@@ -324,27 +320,20 @@ public class Game implements java.io.Serializable {
             finished = saveGame();
         } else if (userCommand.equals("help")) {
             helpGame();
-            finished = false;
         } else if (userCommand.contains("go")) {
             enterRoom(command);
-            finished = false;
         } else if (userCommand.equals("look")) {
             if (!command.hasSecondWord()) {
                 System.out.println(currentRoom.getLongDescription());
             } else if (command.hasSecondWord()) {
                 lookItem(command);
             }
-            finished = false;
         } else if (userCommand.contains("take")) {
             takeItem(command);
-            finished = false;
         } else if (userCommand.equals("inventory")) {
             checkInventory();
-            finished = false;
-        } else if (userCommand.equals("eat") | userCommand.equals("toss") |
-                userCommand.equals("wear")) {
-            actionItem(command);
-            finished = false;
+        } else if (userCommand.equals("eat")) {
+            eatItem(command);
         }
         return finished;
     }
@@ -396,29 +385,7 @@ public class Game implements java.io.Serializable {
         }
     }
 
-    /**
-     * allow user to do one of three actions: wear,
-     * throw and eat item
-     */
-    public void actionItem(Command command) {
-        String action = command.getActionWord();
 
-        if (!command.hasSecondWord()) {
-            System.out.println("Do what?\n");
-            return;
-        } else if (command.hasSecondWord()) {
-            String thing = command.getNoun();
-            currentItem = validItem(thing);
-            if (action.equals("eat")) {
-
-            } else if (action.equals("throw")) {
-
-            } else if (action.equals("wear")) {
-
-            }
-
-        }
-    }
 
     /**
      * allows user to look at an item's description
@@ -450,6 +417,26 @@ public class Game implements java.io.Serializable {
         System.out.println("--------INVENTORY--------\n");
         System.out.println(player.getInventory());
         System.out.println("Total # of items: " + player.numItems() + "\n");
+    }
+
+    /**
+     * allow user to eat item, if edible
+     */
+    public void eatItem(Command command) {
+        if (!command.hasSecondWord()) {
+            System.out.println("Eat what?\n");
+            return;
+        } else {
+            String food = command.getNoun();
+            if (food.equals("apple")) {
+                currentItem = currentRoom.getItem(0);
+                System.out.println("You have eaten " + currentItem.getName() + "\n");
+                player.removeItem(currentItem);
+
+            } else {
+                System.out.println("Item cannot be eaten.\n");
+            }
+        }
     }
 
     /**
@@ -518,6 +505,7 @@ public class Game implements java.io.Serializable {
         }
         return currentItem;
     }
+
 
 
     /**
