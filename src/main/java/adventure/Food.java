@@ -4,12 +4,12 @@ public class Food extends Item implements Edible {
 
     /**
      * constructor, passes params to super class Item
-     * @param food
-     * @param type
+     * @param name
+     * @param description
      */
-    public Food(String food, String type) {
+    public Food(String name, String description) {
 
-        super(food, type);
+        super(name, description);
     }
 
     @Override

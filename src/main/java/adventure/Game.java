@@ -318,7 +318,7 @@ public class Game implements java.io.Serializable {
         String userCommand = command.getActionWord();
 
         if (!command.isValid(userCommand)) {
-            System.out.println("Invalid Command.");
+            System.out.println("Invalid Command.\n");
         }
         if (userCommand.equals("quit")) {
             finished = saveGame();

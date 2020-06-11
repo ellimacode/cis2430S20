@@ -2,9 +2,15 @@ package adventure;
 
 public class Clothing extends Item implements Wearable {
 
-    public Clothing(String clothes, String desc) {
+    /**
+     * constructor, passes name and description
+     * to super class, Item
+     * @param name
+     * @param description
+     */
+    public Clothing(String name, String description) {
 
-        super(clothes, desc);
+        super(name, description);
     }
 
     @Override

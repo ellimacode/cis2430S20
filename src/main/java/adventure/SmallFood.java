@@ -4,12 +4,12 @@ public class SmallFood extends Food implements Tossable {
 
     /**
      * constructor, passes params to super class Food
-     * @param smallFood
-     * @param type
+     * @param name
+     * @param description
      */
-    public SmallFood(String smallFood, String type) {
+    public SmallFood(String name, String description) {
 
-        super(smallFood, type);
+        super(name, description);
     }
 
     @Override

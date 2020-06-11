@@ -2,15 +2,22 @@ package adventure;
 
 public class BrandedClothing extends Clothing implements Readable {
 
-    public BrandedClothing(String brand, String label) {
+    private String brand;
 
-        super(brand, label);
+    /**
+     * constructor, passes name and description
+     * to Item (super class)
+     * @param name
+     * @param description
+     */
+    public BrandedClothing(String name, String description) {
+
+        super(name, description);
     }
 
     @Override
     public String read() {
-
-        return "BrandedClothing is readable.\n";
+        return brand;
     }
 
 }
