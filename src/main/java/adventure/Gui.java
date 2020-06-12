@@ -17,13 +17,17 @@ public class Gui extends JFrame {
             "Change Player Name", "Load JSON file", "Load Saved Game", "Save"
     };
 
-    private Container contentPane;
-    private BorderLayout layout;
-    private JLabel label;
-
-    private JComboBox<String> menuBox;
     private JTextArea textArea;
     private JTextField commandLine;
+    private JList<String> list;
+    private JComboBox<String> menuBox;
+    private JLabel inventory;
+    private JLabel player;
+
+    private JPanel southPanel;
+    private JPanel westPanel;
+    private JPanel eastPanel;
+    private JPanel center;
 
 
     /**
@@ -34,27 +38,59 @@ public class Gui extends JFrame {
         super("ADVENTURE GAME");
         setupSize();
 
-        layout = new BorderLayout();
-        layout.setHgap(10);
-        layout.setVgap(10);
 
-        setLayout(layout);
 
-        label = new JLabel("LABEL");
-        add(label);
-
+        player = new JLabel("PLAYER NAME", JLabel.LEFT);
         menuBox = createMenu();
-        add(menuBox, BorderLayout.LINE_START);
+        menuBox.addActionListener(e-> {
+            Object choice = menuBox.getSelectedItem();
+            if (choice.toString().equals(options[0])) {
+                textArea.setText("You have chosen " + options[0]);
+
+            } else if (choice.toString().equals(options[1])) {
+                textArea.setText("You have chosen " + options[1]);
+
+            } else if (choice.toString().equals(options[2])) {
+                textArea.setText("You have chosen " + options[2]);
+
+            } else if (choice.toString().equals(options[3])) {
+                textArea.setText("You have chosen " + options[3]);
+
+            }
+        });
+
+        westPanel = new JPanel();
+        westPanel.setPreferredSize(new Dimension(200,600));
+        westPanel.setBackground(Color.lightGray);
+        westPanel.add(player, BorderLayout.NORTH);
+        westPanel.add(menuBox, BorderLayout.CENTER);
+        add(westPanel, BorderLayout.WEST);
+
 
         textArea = new JTextArea("Description is here...");
-        textArea.setSize(100,50);
-        add(textArea, BorderLayout.CENTER);
-        menuBox.addActionListener(e->JOptionPane.showMessageDialog(null, "Handled Lambda Listener!"));
+        textArea.setSize(400,600);
+        center = new JPanel();
+        center.setPreferredSize(new Dimension(200,600));
+        center.add(textArea,BorderLayout.CENTER);
+        add(center, BorderLayout.CENTER);
+
+        inventory = new JLabel("INVENTORY", JLabel.CENTER);
+        String[] listItems = { "item1", "item2"};
+        list = new JList<String>(listItems);
+        eastPanel = new JPanel();
+        eastPanel.setPreferredSize(new Dimension(200,600));
+        eastPanel.setBackground(Color.LIGHT_GRAY);
+        eastPanel.add(inventory,BorderLayout.NORTH);
+        eastPanel.add(list,BorderLayout.SOUTH);
+        add(eastPanel,BorderLayout.EAST);
 
 
         commandLine = createCommand();
-        add(commandLine, BorderLayout.SOUTH);
-
+        southPanel = new JPanel();
+        southPanel.setPreferredSize(new Dimension(800,50));
+        southPanel.setBackground(Color.LIGHT_GRAY);
+        southPanel.add(commandLine, BorderLayout.SOUTH);
+        add(southPanel, BorderLayout.SOUTH);
 
     }
 
@@ -64,6 +100,7 @@ public class Gui extends JFrame {
     private JTextField createCommand() {
         commandLine = new JTextField("Type commands here...");
         commandLine.setEditable(true);
+        commandLine.setPreferredSize(new Dimension(700,40));
         return commandLine;
     }
 
@@ -71,6 +108,7 @@ public class Gui extends JFrame {
     //create single menu
     private JComboBox<String> createMenu() {
         menuBox = new JComboBox<String>(options);
+        menuBox.setEditable(false);
         menuBox.setMaximumSize(menuBox.getPreferredSize());
         return menuBox;
     }
@@ -78,7 +116,9 @@ public class Gui extends JFrame {
     //set up size of window
     private void setupSize() {
         setSize(WIDTH, HEIGHT);
+        setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(new BorderLayout());
     }
 
 
