@@ -471,6 +471,9 @@ public class Game implements java.io.Serializable {
         } else {
             String itemThrow = command.getNoun();
             if (itemThrow.equals("apple")) {
+                currentItem = validItem(itemThrow);
+                System.out.println("You have tossed " + currentItem.getName() + "\n");
+                player.removeItem(currentItem);
 
             } else {
                 System.out.println("Item cannot be tossed.\n");
