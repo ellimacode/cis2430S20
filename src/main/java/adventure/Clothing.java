@@ -16,7 +16,7 @@ public class Clothing extends Item implements Wearable {
     @Override
     public String wear() {
 
-        return "You can wear the item.\n";
+        return "You are wearing the item.\n";
     }
 
 }

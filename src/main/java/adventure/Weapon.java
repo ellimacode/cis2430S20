@@ -16,7 +16,7 @@ public class Weapon extends Item implements Tossable {
     
     @Override
     public String toss() {
-        return "You can toss the weapon.\n";
+        return "You have tossed the weapon.\n";
     }
 
 }

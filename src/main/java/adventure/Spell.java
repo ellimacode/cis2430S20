@@ -16,7 +16,7 @@ public class Spell extends Item implements Readable {
     @Override
     public String read() {
 
-        return "You can read the spell.\n";
+        return "You have read the spell.\n";
     }
 
 }
