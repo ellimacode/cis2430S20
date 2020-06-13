@@ -6,12 +6,11 @@ import java.awt.*;
 
 public class Gui extends JFrame {
 
-    private Game game;
+    private Game myGame;
 
     //dimensions
     public static final int WIDTH = 600;
     public static final int HEIGHT = 500;
-
 
     public static final String[] options = {
             "Change Player Name", "Load JSON file", "Load Saved Game", "Save"
@@ -37,7 +36,6 @@ public class Gui extends JFrame {
     public Gui(Game myGame) {
         super("ADVENTURE GAME");
         setupSize();
-
 
 
         player = new JLabel("PLAYER NAME", JLabel.LEFT);
@@ -124,8 +122,7 @@ public class Gui extends JFrame {
 
     //launcher
     public static void main(String[] args) {
-        Game game = new Game();
-        Gui gui = new Gui(game);
+        Gui gui = new Gui(new Game());
         gui.setVisible(true);
     }
 

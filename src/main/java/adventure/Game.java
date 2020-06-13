@@ -222,9 +222,9 @@ public class Game implements java.io.Serializable {
 
         Item lamp = new Item("Lamp", "A working gas lamp, bright enough to see what's ahead.");
         Item wand = new Item("Wizard Wand", "It's a glowing wand, probably from the abandoned lair.");
-        Item potion = new Item("Potion Bottle", "A bottle of glowing green potion, labelled 'do not drink'.");
-        Item apple = new Item("Apple", "A shiny, red apple. It's okay to eat it.");
-        Item cape = new Item("Red Cape", "A red velvety cape, probably worn by the King.");
+        Item potion = new Spell("Potion Bottle", "A bottle of glowing green potion, labelled 'do not drink'.");
+        Item apple = new Food("Apple", "A shiny, red apple. It's okay to eat it.");
+        Item cape = new Clothing("Red Cape", "A red velvety cape, probably worn by the King.");
         main.addItem(lamp);
         underground.addItem(wand);
         lair.addItem(potion);
@@ -435,7 +435,7 @@ public class Game implements java.io.Serializable {
             if (food.equals("apple")) {
                 currentItem = currentRoom.getItem(0);
                 System.out.println("You have eaten " + currentItem.getName() + "\n");
-                player.removeItem(currentItem); //removed from inventory
+                player.removeItem(currentItem);
 
             } else {
                 System.out.println("Item cannot be eaten.\n");
@@ -487,14 +487,13 @@ public class Game implements java.io.Serializable {
     public void helpGame() {
         System.out.println("\n-------HELPFUL COMMANDS-------\n");
         System.out.println("go (direction) - to go in the direction (N/S/E/W/up/down)");
-        System.out.println("look (item) - to see description of item");
-        System.out.println("look - to see description of current room");
-        System.out.println("take (item) - to pick up item");
+        System.out.println("look - to see description of current room/item");
+        System.out.println("take - to pick up item");
         System.out.println("inventory - to see current inventory");
-        System.out.println("eat (item) - to eat edible item");
-        System.out.println("wear (item) - to wear clothing item");
-        System.out.println("toss (item) - to throw item");
-        System.out.println("read (item) - to read labelled item");
+        System.out.println("eat - to eat edible item");
+        System.out.println("wear - to wear clothing item");
+        System.out.println("toss - to throw item");
+        System.out.println("read - to read labelled item");
         System.out.println("quit - quit game\n");
     }
 

@@ -4,19 +4,16 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 import static org.junit.Assert.assertTrue;
 
-import jdk.internal.jline.internal.TestAccessible;
 import org.junit.Test;
 import org.junit.Before;
 
 
 public class RoomTest{
     private Room testRoom;
-    private Item testItem;
 
 @Before
 public void setup(){
     testRoom = new Room();
-    testItem = new Item();
 
 }
 

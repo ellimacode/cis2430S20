@@ -88,7 +88,7 @@ to run your executable jar: java -jar <pathtoexecutablejar> <flags>
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>adventure.Game</mainClass>
+                            <mainClass>adventure.Gui</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
