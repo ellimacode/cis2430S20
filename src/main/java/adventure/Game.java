@@ -431,12 +431,12 @@ public class Game implements java.io.Serializable {
             System.out.println("Eat what?\n");
             return;
         } else {
-            String food = command.getNoun();
-            if (food.equals("apple")) {
+            if (command.getNoun().equals("apple")) {
                 currentItem = currentRoom.getItem(0);
-                System.out.println("You have eaten " + currentItem.getName() + "\n");
-                player.removeItem(currentItem);
-
+                if (currentItem instanceof Edible) {
+                    System.out.println(((Edible)currentItem).eat());
+                    player.removeItem(currentItem);
+                }
             } else {
                 System.out.println("Item cannot be eaten.\n");
             }
@@ -451,10 +451,11 @@ public class Game implements java.io.Serializable {
             System.out.println("Wear what?\n");
             return;
         } else {
-            String clothes = command.getNoun();
-            if (clothes.equals("cape")) {
+            if (command.getNoun().equals("cape")) {
                 currentItem = currentRoom.getItem(0);
-                System.out.println("You have worn " +  currentItem.getName() + "\n");
+                if (currentItem instanceof Wearable) {
+                    System.out.println(((Wearable)currentItem).wear());
+                }
             } else {
                 System.out.println("Item cannot be worn.\n");
             }
@@ -469,12 +470,12 @@ public class Game implements java.io.Serializable {
             System.out.println("Toss what?\n");
             return;
         } else {
-            String itemThrow = command.getNoun();
-            if (itemThrow.equals("apple")) {
-                currentItem = validItem(itemThrow);
-                System.out.println("You have tossed " + currentItem.getName() + "\n");
-                player.removeItem(currentItem);
-
+            if (command.getNoun().equals("apple")) {
+                currentItem = validItem(command.getNoun());
+                if (currentItem instanceof Tossable) {
+                    System.out.println(((Tossable)currentItem).toss());
+                    player.removeItem(currentItem);
+                }
             } else {
                 System.out.println("Item cannot be tossed.\n");
             }
