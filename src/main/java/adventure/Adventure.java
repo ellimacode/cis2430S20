@@ -72,7 +72,7 @@ public class Adventure implements java.io.Serializable {
      * process quit command
      * @param toQuit
      */
-    public void quitPlayer(Command toQuit) {
+    public void quitPlayer() {
 
         System.out.println("You are quitting the game.");
     }
@@ -100,19 +100,14 @@ public class Adventure implements java.io.Serializable {
             return;
         } else {
             String direct = toGo.getNoun();
-
             if (toGo.isValid(direct)) {
                 Room nextRoom = currentRoom.getConnectedRoom(direct);
-
                 if (nextRoom != null) {
                     currentRoom = nextRoom;
                     System.out.println(currentRoom.getLongDescription());
                 } else {
                     System.out.println("No Exit.\n");
                 }
-            } else {
-                System.out.println("Go where?\n");
-                return;
             }
         }
     }
@@ -123,7 +118,6 @@ public class Adventure implements java.io.Serializable {
      */
     public void lookItem(Command lookThing) {
         String thing = lookThing.getNoun();
-
         if (thing.equals("lamp")) {
             currentItem = currentRoom.getItem(0);
         } else if (thing.equals("wand")) {
@@ -133,9 +127,7 @@ public class Adventure implements java.io.Serializable {
         } else {
             System.out.println("No item exist.\n");
         }
-
         System.out.println(currentItem.getLongDescription() + "\n");
-
     }
 
 

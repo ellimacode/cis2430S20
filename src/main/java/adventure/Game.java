@@ -263,7 +263,7 @@ public class Game implements java.io.Serializable {
         if (!command.isValid(userInput)) {
             System.out.println("Invalid Command.");
         } else if (userInput.equals("quit")) {
-            adventure.quitPlayer(command);
+            adventure.quitPlayer();
             done = true;
         } else if (userInput.equals("help")) {
             adventure.helpPlayer();
