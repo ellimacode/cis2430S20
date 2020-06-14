@@ -336,7 +336,9 @@ public class Game implements java.io.Serializable {
             wearItem(command);
         } else if (command.getActionWord().equals("toss")) {
             tossItem(command);
-        }
+        } else if (command.getActionWord().equals("read")) {
+			readItem(command);
+		}
         return finished;
     }
 
@@ -475,6 +477,27 @@ public class Game implements java.io.Serializable {
             }
         }
     }
+    
+    /**
+     * allow user to read item, if readable
+     */
+     public void readItem(Command command) {
+		 if (!command.hasSecondWord()) {
+			 System.out.println("Read what?\n");
+			 return;
+		 } else {
+			 if (command.getNoun().equals("potion")) {
+				 currentItem = validItem(command.getNoun());
+				 if (currentItem instanceof Readable) {
+					 System.out.println(((Readable)currentItem).read());
+				 } 
+				 
+			 } else {
+				System.out.println("Item cannot be read.\n");
+			 }
+		 }
+		 
+	 } 
 
     /**
      * prints out helpful commands to user
