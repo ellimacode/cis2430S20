@@ -13,10 +13,16 @@ public class Weapon extends Item implements Tossable {
         super(name, description);
     }
 
-    
+
+    /**
+     * implements Tossable interface method toss()
+     * @return String 
+     */
     @Override
     public String toss() {
+
         return "You have tossed the weapon.\n";
     }
 
 }
+

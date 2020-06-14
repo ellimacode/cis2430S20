@@ -70,7 +70,6 @@ public class Adventure implements java.io.Serializable {
 
     /**
      * process quit command
-     * @param toQuit
      */
     public void quitPlayer() {
 
@@ -99,9 +98,8 @@ public class Adventure implements java.io.Serializable {
             System.out.println("Go where?\n");
             return;
         } else {
-            String direct = toGo.getNoun();
-            if (toGo.isValid(direct)) {
-                Room nextRoom = currentRoom.getConnectedRoom(direct);
+            if (toGo.isValid(toGo.getNoun())) {
+                Room nextRoom = currentRoom.getConnectedRoom(toGo.getNoun());
                 if (nextRoom != null) {
                     currentRoom = nextRoom;
                     System.out.println(currentRoom.getLongDescription());
@@ -117,12 +115,11 @@ public class Adventure implements java.io.Serializable {
      * @param lookThing
      */
     public void lookItem(Command lookThing) {
-        String thing = lookThing.getNoun();
-        if (thing.equals("lamp")) {
+        if (lookThing.getNoun().equals("lamp")) {
             currentItem = currentRoom.getItem(0);
-        } else if (thing.equals("wand")) {
+        } else if (lookThing.getNoun().equals("wand")) {
             currentItem = currentRoom.getItem(0);
-        } else if (thing.equals("potion")) {
+        } else if (lookThing.getNoun().equals("potion")) {
             currentItem = currentRoom.getItem(0);
         } else {
             System.out.println("No item exist.\n");
@@ -135,7 +132,6 @@ public class Adventure implements java.io.Serializable {
      * allows player to look at room description
      */
     public void lookPlayer() {
-
         System.out.println(currentRoom.getLongDescription() + "\n");
     }
 

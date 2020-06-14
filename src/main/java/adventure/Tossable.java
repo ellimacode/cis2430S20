@@ -1,6 +1,6 @@
-package adventure; 
+package adventure;
 
 public interface Tossable {
-	
-	String toss();
+String toss();
 }
+

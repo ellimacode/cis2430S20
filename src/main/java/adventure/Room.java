@@ -77,6 +77,7 @@ public class Room implements java.io.Serializable {
      * @param num
      */
     public void setId(Integer num) {
+
         id = num;
     }
 
@@ -85,6 +86,7 @@ public class Room implements java.io.Serializable {
      * @return id
      */
     public Integer getId() {
+
         return id;
     }
 
@@ -94,6 +96,7 @@ public class Room implements java.io.Serializable {
      * @param info
      */
     public void setLongDescription(String info) {
+
         longDescription = info;
     }
 
@@ -113,6 +116,7 @@ public class Room implements java.io.Serializable {
      * @return the room in the given direction
      */
     public Room getConnectedRoom(String direction) {
+
         return rooms.get(direction);
     }
 
@@ -122,6 +126,7 @@ public class Room implements java.io.Serializable {
      * @param tag
      */
     public void addConnectedRoom(String direction, Integer tag) {
+
         jsonRooms.put(direction, tag);
     }
 
@@ -158,6 +163,8 @@ public class Room implements java.io.Serializable {
         }
 
     }
+
+    
 
     /**
      * adds items to list of items

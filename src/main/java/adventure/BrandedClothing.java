@@ -15,9 +15,15 @@ public class BrandedClothing extends Clothing implements Readable {
         super(name, description);
     }
 
+    /**
+     * implements Readable interface method
+     * @return String 
+     */
     @Override
     public String read() {
+
         return brand;
     }
 
 }
+

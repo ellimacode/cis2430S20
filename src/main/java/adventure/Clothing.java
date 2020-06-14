@@ -13,9 +13,14 @@ public class Clothing extends Item implements Wearable {
         super(name, description);
     }
 
+    /**
+     * implements Wearable interface method wear()
+     * @return String
+     */
     @Override
     public String wear() {
         return "Worn.\n";
     }
 
 }
+

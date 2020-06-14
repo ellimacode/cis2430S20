@@ -93,12 +93,10 @@ public class Game implements java.io.Serializable {
      */
     public JSONObject loadAdventureJson(InputStream inputStream){
         JSONObject advJson1 = null;
-
         try {
             JSONParser parser1 = new JSONParser();
             Object obj = parser1.parse(new InputStreamReader(inputStream));
             advJson1 = (JSONObject) obj;
-
         } catch (IOException e) {
             System.out.println(e);
         } catch (ParseException e) {
@@ -198,8 +196,8 @@ public class Game implements java.io.Serializable {
         Room main = new Room("The Cave's main floor",
                 "You are in the cave's main floor. A lamp on the floor allows you to see.");
         Room closet = new Room("A weapon closet",
-                "It's a storage room for armor and weapons. A cape fell on the floor." +
-                        " There's a tiny door behind the swords.");
+                "It's a storage room for armor and weapons. A cape fell on the floor."
+                        + " There's a tiny door behind the swords.");
         Room lair = new Room("The Wizard's abandoned lair",
                 "You are in the Wizard's old lair. Something is glowing inside the cupboards, it's a potion.");
         Room treasure = new Room("The Treasure Room",
@@ -246,9 +244,7 @@ public class Game implements java.io.Serializable {
             } catch (InvalidCommandException ex) {
                 System.out.println(ex.getMessage());
             }
-
         } while (!gameOver);
-
         System.out.println("Thanks for playing.");
     }
 
@@ -299,9 +295,7 @@ public class Game implements java.io.Serializable {
                 System.out.println(ex.getMessage());
             }
         } while (!gameOver);
-
         System.out.println("Thanks for playing.");
-
     }
 
     /**
@@ -337,8 +331,8 @@ public class Game implements java.io.Serializable {
         } else if (command.getActionWord().equals("toss")) {
             tossItem(command);
         } else if (command.getActionWord().equals("read")) {
-			readItem(command);
-		}
+            readItem(command);
+        }
         return finished;
     }
 
@@ -421,6 +415,7 @@ public class Game implements java.io.Serializable {
 
     /**
      * allow user to eat item, if edible
+     * @param command
      */
     public void eatItem(Command command) {
         if (!command.hasSecondWord()) {
@@ -441,6 +436,7 @@ public class Game implements java.io.Serializable {
 
     /**
      * allow user to wear item, if wearable
+     * @param command
      */
     public void wearItem(Command command) {
         if (!command.hasSecondWord()) {
@@ -460,6 +456,7 @@ public class Game implements java.io.Serializable {
 
     /**
      * allow user to toss item, if tossable
+     * @param command
      */
     public void tossItem(Command command) {
         if (!command.hasSecondWord()) {
@@ -480,24 +477,23 @@ public class Game implements java.io.Serializable {
     
     /**
      * allow user to read item, if readable
+     * @param command
      */
      public void readItem(Command command) {
-		 if (!command.hasSecondWord()) {
-			 System.out.println("Read what?\n");
-			 return;
-		 } else {
-			 if (command.getNoun().equals("potion")) {
-				 currentItem = validItem(command.getNoun());
-				 if (currentItem instanceof Readable) {
-					 System.out.println(((Readable)currentItem).read());
-				 } 
-				 
-			 } else {
-				System.out.println("Item cannot be read.\n");
-			 }
-		 }
-		 
-	 } 
+         if (!command.hasSecondWord()) {
+             System.out.println("Read what?\n");
+             return;
+         } else {
+             if (command.getNoun().equals("potion")) {
+                 currentItem = validItem(command.getNoun());
+                 if (currentItem instanceof Readable) {
+                     System.out.println(((Readable)currentItem).read());
+                 }
+             } else {
+                 System.out.println("Item cannot be read.\n");
+             }
+         }
+     }
 
     /**
      * prints out helpful commands to user

@@ -1,3 +1,4 @@
+
 package adventure;
 
 public class Spell extends Item implements Readable {
@@ -13,10 +14,15 @@ public class Spell extends Item implements Readable {
         super(name, description);
     }
 
+    /**
+     * implements Readable interface method read()
+     * @return String 
+     */
     @Override
     public String read() {
 
-        return "You have read the spell.\n";
+        return "Labelled 'DO NOT DRINK'.\n";
     }
 
 }
+

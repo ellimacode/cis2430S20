@@ -20,8 +20,7 @@ public class Parser {
             Scanner tokenizer = new Scanner(userCommand);
             if (tokenizer.hasNext()) {
                 first = tokenizer.next();
-            }
-            if (tokenizer.hasNext()) {
+            } else if (tokenizer.hasNext()) {
                 second = tokenizer.next();
             }
             if (command.isValid(first)) {

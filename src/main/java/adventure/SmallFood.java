@@ -12,6 +12,10 @@ public class SmallFood extends Food implements Tossable {
         super(name, description);
     }
 
+    /**
+     * implements Tossable interface method toss()
+     * @return String 
+     */
     @Override
     public String toss() {
 
@@ -19,3 +23,5 @@ public class SmallFood extends Food implements Tossable {
     }
 
 }
+
+

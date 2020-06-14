@@ -12,11 +12,13 @@ public class Food extends Item implements Edible {
         super(name, description);
     }
 
+    /**
+     * implements Edible interface method
+     * @return String 
+     */
     @Override
     public String eat() {
 
         return "That was delicious!\n";
     }
-	
-	
 }
