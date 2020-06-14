@@ -12,8 +12,9 @@
 
 ### Running from the command line (without maven)
 * To compile: javac *.java
-* To execute: java -jar target/2430_A2-1.0-jar-with-dependencies.jar 
-(COMMAND LINE ARGUMENTS)
+* To execute: java -cp target/2430_A2-1.0-jar-with-dependencies.jar 
+adventure.Gui (to run Gui) OR
+adventure.Game (to run text-based Game)
 
 ### Instructions for using the program
 The user must input command line arguments to either load a saved game/

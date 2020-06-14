@@ -1,6 +1,5 @@
 | method sig | responsibility | instance vars used | other class methods called | objects used with method calls | lines of code |
 |:----------:|:--------------:|:------------------:|:--------------------------:|:------------------------------:|:-------------:|
-|Room()| initialize |list here|probably your setters|do you use objects of other classes?| lines of code not counting whitespace or comment lines|
 |Room(Integer tag, String name, String shortDesc, String longDesc)|initialize instance variables, based on parameters passed in|id, roomName, shortDescription, longDescription| - | - | 6 |
 |Room(String name, String info)|initialize, set Room name and long description|roomName, longDescription| - | - | 4 |
 |listItems()|accessor/getter, return arraylist of items|contents| - | - | 1 |

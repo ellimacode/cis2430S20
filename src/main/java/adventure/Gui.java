@@ -9,8 +9,8 @@ public class Gui extends JFrame {
     private Game myGame;
 
     //dimensions
-    public static final int WIDTH = 600;
-    public static final int HEIGHT = 500;
+    public static final int WIDTH = 800;
+    public static final int HEIGHT = 600;
 
     public static final String[] options = {
             "Change Player Name", "Load JSON file", "Load Saved Game", "Save"
@@ -33,9 +33,13 @@ public class Gui extends JFrame {
      * constructor
      * @param g
      */
-    public Gui(Game myGame) {
-        super("ADVENTURE GAME");
+    public Gui(Game g) {
+        super();
+        setTitle("ADVENTURE GAME");
         setupSize();
+        
+        myGame = g; 
+
 
 
         player = new JLabel("PLAYER NAME", JLabel.LEFT);
@@ -58,7 +62,7 @@ public class Gui extends JFrame {
         });
 
         westPanel = new JPanel();
-        westPanel.setPreferredSize(new Dimension(200,600));
+        westPanel.setPreferredSize(new Dimension(200,500));
         westPanel.setBackground(Color.lightGray);
         westPanel.add(player, BorderLayout.NORTH);
         westPanel.add(menuBox, BorderLayout.CENTER);
@@ -72,14 +76,14 @@ public class Gui extends JFrame {
         center.add(textArea,BorderLayout.CENTER);
         add(center, BorderLayout.CENTER);
 
-        inventory = new JLabel("INVENTORY", JLabel.CENTER);
-        String[] listItems = { "item1", "item2"};
+        inventory = new JLabel("INVENTORY", JLabel.RIGHT);
+        String[] listItems = { "item1", "item2", "item3", "item4"};
         list = new JList<String>(listItems);
         eastPanel = new JPanel();
-        eastPanel.setPreferredSize(new Dimension(200,600));
+        eastPanel.setPreferredSize(new Dimension(200,500));
         eastPanel.setBackground(Color.LIGHT_GRAY);
         eastPanel.add(inventory,BorderLayout.NORTH);
-        eastPanel.add(list,BorderLayout.SOUTH);
+        eastPanel.add(list,BorderLayout.CENTER);
         add(eastPanel,BorderLayout.EAST);
 
 
@@ -89,12 +93,15 @@ public class Gui extends JFrame {
         southPanel.setBackground(Color.LIGHT_GRAY);
         southPanel.add(commandLine, BorderLayout.SOUTH);
         add(southPanel, BorderLayout.SOUTH);
+     
 
     }
 
 
 
-    //create command line for user input
+    /** 
+     * create command line for user input 
+     */ 
     private JTextField createCommand() {
         commandLine = new JTextField("Type commands here...");
         commandLine.setEditable(true);
@@ -103,7 +110,9 @@ public class Gui extends JFrame {
     }
 
 
-    //create single menu
+    /** 
+     * create single menu
+     */ 
     private JComboBox<String> createMenu() {
         menuBox = new JComboBox<String>(options);
         menuBox.setEditable(false);
@@ -111,7 +120,9 @@ public class Gui extends JFrame {
         return menuBox;
     }
 
-    //set up size of window
+    /**
+     * set up window of GUI
+     */
     private void setupSize() {
         setSize(WIDTH, HEIGHT);
         setResizable(false);
@@ -120,9 +131,9 @@ public class Gui extends JFrame {
     }
 
 
-    //launcher
     public static void main(String[] args) {
-        Gui gui = new Gui(new Game());
+		Game g = new Game();
+        Gui gui = new Gui(g);
         gui.setVisible(true);
     }
 

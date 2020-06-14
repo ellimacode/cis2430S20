@@ -311,32 +311,30 @@ public class Game implements java.io.Serializable {
      */
     public boolean processCommand(Command command) {
         boolean finished = false;
-        String userCommand = command.getActionWord();
-
-        if (!command.isValid(userCommand)) {
+        if (!command.isValid(command.getActionWord())) {
             System.out.println("Invalid Command.\n");
         }
-        if (userCommand.equals("quit")) {
+        if (command.getActionWord().equals("quit")) {
             finished = saveGame();
-        } else if (userCommand.equals("help")) {
+        } else if (command.getActionWord().equals("help")) {
             helpGame();
-        } else if (userCommand.contains("go")) {
+        } else if (command.getActionWord().contains("go")) {
             enterRoom(command);
-        } else if (userCommand.equals("look")) {
+        } else if (command.getActionWord().equals("look")) {
             if (!command.hasSecondWord()) {
                 System.out.println(currentRoom.getLongDescription());
             } else if (command.hasSecondWord()) {
                 lookItem(command);
             }
-        } else if (userCommand.contains("take")) {
+        } else if (command.getActionWord().contains("take")) {
             takeItem(command);
-        } else if (userCommand.equals("inventory")) {
+        } else if (command.getActionWord().equals("inventory")) {
             checkInventory();
-        } else if (userCommand.equals("eat")) {
+        } else if (command.getActionWord().equals("eat")) {
             eatItem(command);
-        } else if (userCommand.equals("wear")) {
+        } else if (command.getActionWord().equals("wear")) {
             wearItem(command);
-        } else if (userCommand.equals("toss")) {
+        } else if (command.getActionWord().equals("toss")) {
             tossItem(command);
         }
         return finished;
@@ -347,7 +345,6 @@ public class Game implements java.io.Serializable {
      * @param command
      */
     public void enterRoom(Command command) {
-        //get direction (second word)
         if (!command.hasSecondWord()) {
             System.out.println("Go where?\n");
             return;
@@ -378,8 +375,7 @@ public class Game implements java.io.Serializable {
             System.out.println("Take what?\n");
             return;
         } else if (command.hasSecondWord()) {
-            String temp = command.getNoun();
-            currentItem = validItem(temp);
+            currentItem = validItem(command.getNoun());
             if (currentRoom.containsItem(currentItem)) {
                 player.addInventory(currentItem);
                 System.out.println("You have taken " + currentItem.getName() + "\n");
@@ -396,21 +392,19 @@ public class Game implements java.io.Serializable {
      * @param command
      */
     public void lookItem(Command command) {
-        String thingName = command.getNoun();
-        if (thingName.equals("lamp")) {
+        if (command.getNoun().equals("lamp")) {
             currentItem = currentRoom.getItem(0);
-        } else if (thingName.equals("wand")) {
+        } else if (command.getNoun().equals("wand")) {
             currentItem = currentRoom.getItem(0);
-        } else if (thingName.equals("potion")) {
+        } else if (command.getNoun().equals("potion")) {
             currentItem = currentRoom.getItem(0);
-        } else if (thingName.equals("cape")) {
+        } else if (command.getNoun().equals("cape")) {
             currentItem = currentRoom.getItem(0);
-        } else if (thingName.equals("apple")) {
+        } else if (command.getNoun().equals("apple")) {
             currentItem = currentRoom.getItem(0);
         } else {
             System.out.println("No item exist.\n");
         }
-
         System.out.println(currentItem.getLongDescription() + "\n");
     }
 
