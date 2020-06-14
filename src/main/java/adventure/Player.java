@@ -60,7 +60,7 @@ public class Player implements java.io.Serializable {
 
     /**
      * get the player's inventory
-     * @return inventory
+     * @return inventor2y
      */
     public ArrayList<Item> getInventory() {
 
@@ -72,6 +72,7 @@ public class Player implements java.io.Serializable {
      * @param item
      */
     public void removeItem(Item item) {
+
         inventory.remove(item);
     }
 
@@ -115,7 +116,7 @@ public class Player implements java.io.Serializable {
      * set the saved name as save game name
      * @param save
      */
-    public void setSaveGameName(String save) {
+    public void setSaveName(String save) {
 
         saveName = save;
     }
@@ -124,7 +125,7 @@ public class Player implements java.io.Serializable {
      * get the name saved under the game
      * @return saveName
      */
-    public String getSaveGameName() {
+    public String getSaveName() {
 
         return saveName;
     }
