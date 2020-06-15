@@ -10,10 +10,12 @@ import org.junit.Before;
 
 public class RoomTest{
     private Room testRoom;
+    private Item testItem;
 
 @Before
 public void setup(){
     testRoom = new Room();
+    testItem = new Item();
 
 }
 
@@ -80,23 +82,30 @@ public void testInvalidExit() {
 @Test
 public void testInvalidItem() {
     System.out.println("Testing items in inventory that don't exist in room");
+    //EACH ROOM ONLY HAS ONE ITEM
+    boolean expected = true;
+    boolean result = false;
+    boolean hasItem = testRoom.containsItem(testItem);
+    if (hasItem == false) {
+        result = true;
+        assertEquals(expected, result);
+    }
 
 
 }
 
-
-@Test
-public void testInvalidID() {
-    System.out.println("Testing exits to a room ID that doesn't exist in room");
-
-
-}
 
 @Test
 public void testNoExits() {
     System.out.println("Testing rooms with no exits");
-
-
+    String noExit = "E";
+    testRoom.getConnectedRoom(noExit);
+    boolean expected = true;
+    boolean result = false;
+    if (testRoom == null) {
+        result = true;
+        assertEquals(expected, result);
+    }
 
 }
 

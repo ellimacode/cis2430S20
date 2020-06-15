@@ -1,5 +1,6 @@
 | method sig | responsibility | instance vars used | other class methods called | objects used with method calls | lines of code |
 |:----------:|:--------------:|:------------------:|:--------------------------:|:------------------------------:|:-------------:|
+|Item()|initialize room that has item|Room room| - | - | 1 |
 |Item(String name, String info)|initialize name and description of item|itemName, description| - | - | 2 |
 |Item(Integer tag, String name, String info)|initialize id, namd description of item|itemName, description, id| - | - | 3 |
 |setItemName(String name)|mutator/setter, set the item's name|itemName| - | - | 1 |

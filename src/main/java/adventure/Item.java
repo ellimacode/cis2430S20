@@ -12,6 +12,13 @@ public class Item implements java.io.Serializable {
     private static final long serialVersionUID = -3788086098781612036L;
 
     /**
+     * initialize connected room
+     */
+    public Item() {
+        room = new Room();
+    }
+
+    /**
      * constructor, initialize name and description
      * @param name
      * @param info
