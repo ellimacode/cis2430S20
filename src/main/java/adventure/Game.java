@@ -312,9 +312,12 @@ public class Game implements java.io.Serializable {
             finished = saveGame();
         } else if (command.getActionWord().equals("help")) {
             helpGame();
+            finished = false;
         } else if (command.getActionWord().contains("go")) {
             enterRoom(command);
+            finished = false;
         } else if (command.getActionWord().equals("look")) {
+            finished = false;
             if (!command.hasSecondWord()) {
                 System.out.println(currentRoom.getLongDescription());
             } else if (command.hasSecondWord()) {
@@ -322,16 +325,22 @@ public class Game implements java.io.Serializable {
             }
         } else if (command.getActionWord().contains("take")) {
             takeItem(command);
+            finished = false;
         } else if (command.getActionWord().equals("inventory")) {
             checkInventory();
+            finished = false;
         } else if (command.getActionWord().equals("eat")) {
             eatItem(command);
+            finished = false;
         } else if (command.getActionWord().equals("wear")) {
             wearItem(command);
+            finished = false;
         } else if (command.getActionWord().equals("toss")) {
             tossItem(command);
+            finished = false;
         } else if (command.getActionWord().equals("read")) {
             readItem(command);
+            finished = false;
         }
         return finished;
     }
@@ -354,9 +363,6 @@ public class Game implements java.io.Serializable {
                 } else {
                     System.out.println("No Exit.\n");
                 }
-            } else {
-                System.out.println("Go where?\n");
-                return;
             }
         }
     }
